@@ -232,6 +232,7 @@ def init_db() -> None:
                 slug TEXT UNIQUE NOT NULL,
                 name TEXT NOT NULL,
                 repo_url TEXT NOT NULL,
+                kind TEXT NOT NULL DEFAULT 'skill',
                 category TEXT NOT NULL DEFAULT 'Generale',
                 tagline TEXT NOT NULL,
                 simple_explanation TEXT NOT NULL,
@@ -246,6 +247,10 @@ def init_db() -> None:
             );
             """
         )
+
+        cols = [r[1] for r in conn.execute("PRAGMA table_info(skills)").fetchall()]
+        if "kind" not in cols:
+            conn.execute("ALTER TABLE skills ADD COLUMN kind TEXT NOT NULL DEFAULT 'skill'")
 
         count = conn.execute("SELECT COUNT(*) FROM skills").fetchone()[0]
         if count == 0:
@@ -279,11 +284,13 @@ def init_db() -> None:
 
 
 def _row_to_skill(row: sqlite3.Row) -> dict:
+    keys = row.keys()
     return {
         "id": row["id"],
         "slug": row["slug"],
         "name": row["name"],
         "repo_url": row["repo_url"],
+        "kind": row["kind"] if "kind" in keys and row["kind"] else "skill",
         "category": row["category"],
         "tagline": row["tagline"],
         "simple_explanation": row["simple_explanation"],
@@ -298,10 +305,13 @@ def _row_to_skill(row: sqlite3.Row) -> dict:
     }
 
 
-def list_skills(query: str = "", category: str = "") -> list[dict]:
+def list_skills(query: str = "", category: str = "", kind: str = "") -> list[dict]:
     conn = get_connection()
     sql = "SELECT * FROM skills WHERE 1=1"
     params: list = []
+    if kind in ("skill", "tool"):
+        sql += " AND LOWER(kind) = LOWER(?)"
+        params.append(kind)
     if category and category.lower() != "tutte":
         sql += " AND LOWER(category) = LOWER(?)"
         params.append(category)
@@ -340,6 +350,7 @@ def add_or_update_skill(data: dict) -> dict:
         raise ValueError("Nome e link del repository sono obbligatori.")
 
     slug = slugify(data.get("slug") or name)
+    kind = "tool" if (data.get("kind") or "").strip().lower() == "tool" else "skill"
     category = (data.get("category") or "Generale").strip()
     tagline = (data.get("tagline") or name).strip()
     simple_explanation = (data.get("simple_explanation") or tagline).strip()
@@ -359,13 +370,13 @@ def add_or_update_skill(data: dict) -> dict:
             conn.execute(
                 """
                 UPDATE skills SET
-                    name=?, repo_url=?, category=?, tagline=?, simple_explanation=?,
+                    name=?, repo_url=?, kind=?, category=?, tagline=?, simple_explanation=?,
                     specs_json=?, compatible_apps_json=?, tech_keywords_json=?,
                     cost_saving=?, honest_tradeoffs=?, install_guide=?, stars=?
                 WHERE slug=?
                 """,
                 (
-                    name, repo_url, category, tagline, simple_explanation,
+                    name, repo_url, kind, category, tagline, simple_explanation,
                     json.dumps(specs, ensure_ascii=False),
                     json.dumps(compatible_apps, ensure_ascii=False),
                     json.dumps(tech_keywords, ensure_ascii=False),
@@ -376,13 +387,13 @@ def add_or_update_skill(data: dict) -> dict:
             conn.execute(
                 """
                 INSERT INTO skills (
-                    slug, name, repo_url, category, tagline, simple_explanation,
+                    slug, name, repo_url, kind, category, tagline, simple_explanation,
                     specs_json, compatible_apps_json, tech_keywords_json,
                     cost_saving, honest_tradeoffs, install_guide, stars, created_at
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 (
-                    slug, name, repo_url, category, tagline, simple_explanation,
+                    slug, name, repo_url, kind, category, tagline, simple_explanation,
                     json.dumps(specs, ensure_ascii=False),
                     json.dumps(compatible_apps, ensure_ascii=False),
                     json.dumps(tech_keywords, ensure_ascii=False),

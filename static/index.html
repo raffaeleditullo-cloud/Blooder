@@ -71,22 +71,25 @@
       </div>
       <div class="brand-line" aria-hidden="true"><div class="drips"><i></i><i></i></div></div>
 
-      <button class="btn btn-primary btn-new" onclick="openAddModal()">
-        <svg class="ico"><use href="#i-plus"/></svg> Aggiungi skill
+      <button class="btn btn-primary btn-new" id="btn-add-main" type="button" onclick="openAddModal()">
+        <svg class="ico"><use href="#i-plus"/></svg> <span id="btn-add-label">Aggiungi skill</span>
       </button>
 
       <nav class="tabs" aria-label="Sezioni">
-        <button class="tab-btn active" id="tab-library" type="button">
+        <button class="tab-btn active" id="tab-skill" type="button" onclick="switchSection('skill')">
           <svg class="ico"><use href="#i-library"/></svg> Libreria skill
+        </button>
+        <button class="tab-btn" id="tab-tool" type="button" onclick="switchSection('tool')">
+          <svg class="ico"><use href="#i-wrench"/></svg> Strumenti
         </button>
       </nav>
 
-      <p class="sidebar-foot">La tua libreria ordinata di skill — pronte da copiare e incollare quando ti servono</p>
+      <p class="sidebar-foot">La tua libreria ordinata di skill e strumenti — pronti da copiare e incollare quando ti servono</p>
     </aside>
 
     <main class="container">
-      <!-- LIBRARY -->
-      <section id="view-library">
+      <!-- SEZIONE 1: LIBRERIA SKILL -->
+      <section id="view-skill">
         <div class="hero">
           <h2>Che skill ti serve?</h2>
           <div class="toolbar">
@@ -97,7 +100,7 @@
                 id="search-input"
                 class="search-input"
                 placeholder="Cerca una skill, un problema o un tipo di app (es. iPhone, scraping, sicurezza, API...)"
-                aria-label="Cerca nella libreria"
+                aria-label="Cerca nella libreria skill"
                 oninput="renderLibrary()"
               />
             </label>
@@ -106,6 +109,29 @@
         </div>
 
         <div id="skills-grid" class="skills-grid"></div>
+      </section>
+
+      <!-- SEZIONE 2: STRUMENTI -->
+      <section id="view-tool" class="hidden">
+        <div class="hero">
+          <h2>Che strumento ti serve?</h2>
+          <div class="toolbar">
+            <label class="search-wrap">
+              <svg class="ico"><use href="#i-search"/></svg>
+              <input
+                type="search"
+                id="tools-search-input"
+                class="search-input"
+                placeholder="Cerca uno strumento, un sistema o un'automazione (es. desktop, terminale, Windows...)"
+                aria-label="Cerca negli strumenti"
+                oninput="renderTools()"
+              />
+            </label>
+            <div class="pills" id="tools-category-pills"></div>
+          </div>
+        </div>
+
+        <div id="tools-grid" class="skills-grid"></div>
       </section>
     </main>
   </div>
@@ -136,7 +162,7 @@
         <div class="step-panel">
           <div class="panel">
             <div class="field field-flush">
-              <label for="f-repo">Incolla il link GitHub della skill</label>
+              <label for="f-repo" id="f-repo-label">Incolla il link GitHub della skill</label>
               <div class="github-row">
                 <input type="url" id="f-repo" placeholder="https://github.com/utente/nome-skill" />
                 <button class="btn btn-primary" type="button" id="btn-fetch-gh" onclick="autoFillFromGitHub()">
@@ -156,9 +182,16 @@
               <input type="text" id="f-name" placeholder="Es. Agent-Reach" />
             </div>
             <div class="field">
-              <label for="f-category">Categoria</label>
-              <input type="text" id="f-category" placeholder="Es. Dati Web & Ricerca" />
+              <label for="f-kind">Sezione</label>
+              <select id="f-kind">
+                <option value="skill">Libreria skill</option>
+                <option value="tool">Strumenti</option>
+              </select>
             </div>
+          </div>
+          <div class="field">
+            <label for="f-category">Categoria</label>
+            <input type="text" id="f-category" placeholder="Es. Dati Web & Ricerca" />
           </div>
           <div class="field">
             <label for="f-tagline">In una riga</label>

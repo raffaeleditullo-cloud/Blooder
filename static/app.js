@@ -1,5 +1,7 @@
 let allSkills = [];
+let currentSection = 'skill';
 let activeCategory = 'Tutte';
+let activeToolCategory = 'Tutte';
 let editingSlug = null;
 
 function esc(str) {
@@ -21,16 +23,34 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 2600);
 }
 
+function itemsByKind(kind) {
+  return allSkills.filter(s => (s.kind || 'skill') === kind);
+}
+
+function switchSection(kind) {
+  currentSection = kind === 'tool' ? 'tool' : 'skill';
+  document.getElementById('view-skill').classList.toggle('hidden', currentSection !== 'skill');
+  document.getElementById('view-tool').classList.toggle('hidden', currentSection !== 'tool');
+  document.getElementById('tab-skill').classList.toggle('active', currentSection === 'skill');
+  document.getElementById('tab-tool').classList.toggle('active', currentSection === 'tool');
+  document.getElementById('btn-add-label').textContent =
+    currentSection === 'tool' ? 'Aggiungi strumento' : 'Aggiungi skill';
+}
+
 async function loadSkills() {
   const res = await fetch('/api/skills');
   const data = await res.json();
   allSkills = data.skills || [];
   renderCategories();
   renderLibrary();
+  renderToolCategories();
+  renderTools();
 }
 
 function renderCategories() {
-  const cats = ['Tutte', ...new Set(allSkills.map(s => s.category).filter(Boolean))];
+  const items = itemsByKind('skill');
+  const cats = ['Tutte', ...new Set(items.map(s => s.category).filter(Boolean))];
+  if (!cats.includes(activeCategory)) activeCategory = 'Tutte';
   const box = document.getElementById('category-pills');
   box.innerHTML = cats.map(c => `
     <button class="pill ${c === activeCategory ? 'active' : ''}" onclick="setCategory('${esc(c)}')">
@@ -45,10 +65,28 @@ function setCategory(cat) {
   renderLibrary();
 }
 
-function renderLibrary() {
-  const q = (document.getElementById('search-input').value || '').toLowerCase().trim();
-  const filtered = allSkills.filter(s => {
-    if (activeCategory !== 'Tutte' && s.category !== activeCategory) return false;
+function renderToolCategories() {
+  const items = itemsByKind('tool');
+  const cats = ['Tutte', ...new Set(items.map(s => s.category).filter(Boolean))];
+  if (!cats.includes(activeToolCategory)) activeToolCategory = 'Tutte';
+  const box = document.getElementById('tools-category-pills');
+  box.innerHTML = cats.map(c => `
+    <button class="pill ${c === activeToolCategory ? 'active' : ''}" onclick="setToolCategory('${esc(c)}')">
+      ${esc(c)}
+    </button>
+  `).join('');
+}
+
+function setToolCategory(cat) {
+  activeToolCategory = cat;
+  renderToolCategories();
+  renderTools();
+}
+
+function renderCardsGrid(items, queryText, selectedCat, gridId, emptyMessage) {
+  const q = (queryText || '').toLowerCase().trim();
+  const filtered = items.filter(s => {
+    if (selectedCat !== 'Tutte' && s.category !== selectedCat) return false;
     if (!q) return true;
     const hay = [
       s.name, s.category, s.tagline, s.simple_explanation,
@@ -57,11 +95,9 @@ function renderLibrary() {
     return hay.includes(q);
   });
 
-  const grid = document.getElementById('skills-grid');
+  const grid = document.getElementById(gridId);
   if (!filtered.length) {
-    grid.innerHTML = `<div class="section-block empty">
-      Nessuna skill trovata. Clicca su <strong>Aggiungi skill</strong> per salvarne una nuova!
-    </div>`;
+    grid.innerHTML = `<div class="section-block empty">${emptyMessage}</div>`;
     return;
   }
 
@@ -83,6 +119,26 @@ function renderLibrary() {
       </article>
     `;
   }).join('');
+}
+
+function renderLibrary() {
+  renderCardsGrid(
+    itemsByKind('skill'),
+    document.getElementById('search-input').value,
+    activeCategory,
+    'skills-grid',
+    'Nessuna skill trovata. Clicca su <strong>Aggiungi skill</strong> per salvarne una nuova!'
+  );
+}
+
+function renderTools() {
+  renderCardsGrid(
+    itemsByKind('tool'),
+    document.getElementById('tools-search-input').value,
+    activeToolCategory,
+    'tools-grid',
+    'Nessuno strumento trovato. Clicca su <strong>Aggiungi strumento</strong> per salvarne uno nuovo!'
+  );
 }
 
 function buildPlainTextCard(s) {
@@ -184,7 +240,7 @@ function openDetail(id) {
           </details>
         ` : ''}
         <div class="danger-row">
-          <button class="btn btn-sm btn-danger" onclick="removeSkill(${s.id})">${ico('trash')} Elimina dalla libreria</button>
+          <button class="btn btn-sm btn-danger" onclick="removeSkill(${s.id})">${ico('trash')} ${s.kind === 'tool' ? 'Elimina dagli strumenti' : 'Elimina dalla libreria'}</button>
         </div>
       </div>
 
@@ -203,10 +259,15 @@ function openDetail(id) {
 
 function openAddModal() {
   editingSlug = null;
-  document.getElementById('form-modal-title').textContent = 'Aggiungi skill';
+  const isTool = currentSection === 'tool';
+  document.getElementById('form-modal-title').textContent = isTool ? 'Aggiungi strumento' : 'Aggiungi skill';
+  document.getElementById('f-repo-label').textContent = isTool
+    ? 'Incolla il link GitHub dello strumento'
+    : 'Incolla il link GitHub della skill';
   setStep(document.getElementById('add-steps'), 0);
   ['f-repo', 'f-name', 'f-category', 'f-tagline', 'f-explanation', 'f-lang', 'f-os', 'f-compat', 'f-saving', 'f-tradeoffs', 'f-guide']
     .forEach(id => { document.getElementById(id).value = ''; });
+  document.getElementById('f-kind').value = isTool ? 'tool' : 'skill';
   document.getElementById('f-os').value = 'Windows, macOS, Linux — 100% Gratuito';
   document.getElementById('add-modal').classList.add('open');
 }
@@ -219,6 +280,7 @@ function openEditModal(id) {
   setStep(document.getElementById('add-steps'), 1);
   document.getElementById('f-repo').value = s.repo_url || '';
   document.getElementById('f-name').value = s.name || '';
+  document.getElementById('f-kind').value = s.kind === 'tool' ? 'tool' : 'skill';
   document.getElementById('f-category').value = s.category || '';
   document.getElementById('f-tagline').value = s.tagline || '';
   document.getElementById('f-explanation').value = s.simple_explanation || '';
@@ -272,8 +334,10 @@ async function autoFillFromGitHub() {
 async function saveSkillForm() {
   const osRaw = document.getElementById('f-os').value.trim();
   const [osPart, costPart] = osRaw.split('—').map(x => x.trim());
+  const selectedKind = document.getElementById('f-kind').value === 'tool' ? 'tool' : 'skill';
   const payload = {
     slug: editingSlug || undefined,
+    kind: selectedKind,
     repo_url: document.getElementById('f-repo').value.trim(),
     name: document.getElementById('f-name').value.trim(),
     category: document.getElementById('f-category').value.trim() || 'Generale',
@@ -302,15 +366,22 @@ async function saveSkillForm() {
     return;
   }
   closeModal('add-modal');
-  showToast(`Skill "${data.name}" salvata nella libreria!`);
+  switchSection(selectedKind);
+  showToast(
+    selectedKind === 'tool'
+      ? `Strumento "${data.name}" salvato in Strumenti!`
+      : `Skill "${data.name}" salvata nella libreria!`
+  );
   await loadSkills();
 }
 
 async function removeSkill(id) {
-  if (!confirm('Vuoi davvero rimuovere questa skill dalla libreria Blooder?')) return;
+  const s = allSkills.find(x => x.id === id);
+  const label = s && s.kind === 'tool' ? 'questo strumento' : 'questa skill';
+  if (!confirm(`Vuoi davvero rimuovere ${label} da Blooder?`)) return;
   await fetch(`/api/skills/${id}`, { method: 'DELETE' });
   closeModal('detail-modal');
-  showToast('Skill rimossa.');
+  showToast('Voce rimossa.');
   await loadSkills();
 }
 

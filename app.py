@@ -51,7 +51,8 @@ class BlooderHandler(BaseHTTPRequestHandler):
         if path == "/api/skills":
             q = (qs.get("q") or [""])[0]
             cat = (qs.get("category") or [""])[0]
-            self._send_json({"skills": list_skills(q, cat)})
+            kind = (qs.get("kind") or [""])[0]
+            self._send_json({"skills": list_skills(q, cat, kind)})
             return
 
         if path.startswith("/api/skills/"):
