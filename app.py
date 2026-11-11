@@ -8,12 +8,17 @@ from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
 from blooder_db import (
+    add_or_update_blooderskill,
     add_or_update_skill,
+    delete_blooderskill,
     delete_skill,
     fetch_github_metadata,
+    get_blooderskill_by_id_or_slug,
     get_skill_by_id_or_slug,
     init_db,
+    list_blooderskills,
     list_skills,
+    sync_blooderskills_disk,
 )
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -64,6 +69,21 @@ class BlooderHandler(BaseHTTPRequestHandler):
                 self._send_json(sk)
             return
 
+        if path == "/api/blooderskills":
+            q = (qs.get("q") or [""])[0]
+            sec = (qs.get("sector") or [""])[0]
+            self._send_json({"blooderskills": list_blooderskills(q, sec)})
+            return
+
+        if path.startswith("/api/blooderskills/"):
+            ident = path.removeprefix("/api/blooderskills/").strip("/")
+            bs = get_blooderskill_by_id_or_slug(ident)
+            if not bs:
+                self._send_json({"error": "Blooderskill non trovata"}, HTTPStatus.NOT_FOUND)
+            else:
+                self._send_json(bs)
+            return
+
         # File statici della libreria (inclusi font .woff2, icone .svg, stili)
         rel = "index.html" if path in ("/", "") else path.lstrip("/")
         file_path = (STATIC_DIR / rel).resolve()
@@ -92,6 +112,9 @@ class BlooderHandler(BaseHTTPRequestHandler):
             if path == "/api/skills":
                 saved = add_or_update_skill(payload)
                 self._send_json(saved, HTTPStatus.CREATED)
+            elif path == "/api/blooderskills":
+                saved = add_or_update_blooderskill(payload)
+                self._send_json(saved, HTTPStatus.CREATED)
             elif path == "/api/github-preview":
                 preview = fetch_github_metadata(payload.get("repo_url", ""))
                 self._send_json(preview)
@@ -106,6 +129,10 @@ class BlooderHandler(BaseHTTPRequestHandler):
             sid = int(path.removeprefix("/api/skills/").strip("/"))
             ok = delete_skill(sid)
             self._send_json({"deleted": ok})
+        elif path.startswith("/api/blooderskills/"):
+            bid = int(path.removeprefix("/api/blooderskills/").strip("/"))
+            ok = delete_blooderskill(bid)
+            self._send_json({"deleted": ok})
         else:
             self._send_json({"error": "Endpoint sconosciuto"}, HTTPStatus.NOT_FOUND)
 
@@ -114,6 +141,7 @@ def main() -> None:
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     init_db()
+    sync_blooderskills_disk()
     no_browser = "--no-browser" in sys.argv
     server = ThreadingHTTPServer(("127.0.0.1", PORT), BlooderHandler)
     url = f"http://127.0.0.1:{PORT}"

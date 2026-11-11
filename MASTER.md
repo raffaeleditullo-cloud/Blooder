@@ -7,11 +7,12 @@
 ## 1. Architettura e Regole Fisse di Blooder
 
 - **Avvio rapido:** doppio click su `avvia_blooder.bat` (`http://127.0.0.1:8765`).
-- **Salvataggio rapido:** doppio click su `salva_progetto.bat` (verifica integrità DB SQLite, aggiorna `backup_libreria.json` in chiaro e salva uno snapshot Git locale).
-- **Base grafica unica ("Red Matrix"):** definita in `static/` (`index.html`, `styles.css`, `app.js`, `fx.js`, `logo.svg`, font locali `Barlow` / `Barlow Condensed`). Non va mai rigenerata da zero né alterata con colori fuori tema o stili `style=""` inline.
-- **Due sezioni distinte nella barra laterale:**
-  1. **Libreria skill (`kind = 'skill'`):** Skill per agenti AI, framework e moduli integrabili per costruire/migliorare piattaforme.
+- **Salvataggio e pubblicazione rapida:** doppio click su `salva_progetto.bat` (esegue `sync_libreria.py`: verifica integrità DB SQLite, scansiona i file contro chiavi/segreti, esporta `backup_libreria.json`, genera il `README.md` vetrina con loghi e tabelle, esporta le Blooderskills in `skills/<nome>/SKILL.md` e sincronizza su GitHub `raffaeleditullo-cloud/Blooder`).
+- **Base grafica unica ("Red Matrix"):** definita in `static/` (`index.html`, `styles.css`, `app.js`, `fx.js`, `logo.svg`, `logo-full.svg`, `hero-banner.svg`, font locali `Barlow` / `Barlow Condensed`). Non va mai rigenerata da zero né alterata con colori fuori tema o stili `style=""` inline.
+- **Tre sezioni distinte nella barra laterale:**
+  1. **Libreria skill (`kind = 'skill'`):** Skill per agenti AI, framework e moduli integrabili selezionati dall'ecosistema open-source.
   2. **Strumenti (`kind = 'tool'`):** Programmi standalone e utility CLI di sistema che gli agenti possono comandare dall'esterno.
+  3. **Blooderskills (tabella `blooderskills` + cartella `skills/`):** Le nostre skill originali verticali per settore piattaforma (*"il pezzo in più al muratore"*), testate in chat e installabili a nostro nome con `npx skills add raffaeleditullo-cloud/Blooder --skill <nome>`.
 
 ---
 

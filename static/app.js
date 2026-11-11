@@ -1,8 +1,12 @@
 let allSkills = [];
+let allBlooderskills = [];
 let currentSection = 'skill';
 let activeCategory = 'Tutte';
 let activeToolCategory = 'Tutte';
+let activeBsSector = 'Tutti';
 let editingSlug = null;
+let editingBsSlug = null;
+let selectedBaseSkills = [];
 
 function esc(str) {
   return String(str ?? '')
@@ -27,24 +31,51 @@ function itemsByKind(kind) {
   return allSkills.filter(s => (s.kind || 'skill') === kind);
 }
 
+function handleMainAction() {
+  if (currentSection === 'blooderskill') {
+    openBsModal();
+  } else {
+    openAddModal();
+  }
+}
+
 function switchSection(kind) {
-  currentSection = kind === 'tool' ? 'tool' : 'skill';
+  if (kind === 'tool') currentSection = 'tool';
+  else if (kind === 'blooderskill') currentSection = 'blooderskill';
+  else currentSection = 'skill';
+
   document.getElementById('view-skill').classList.toggle('hidden', currentSection !== 'skill');
   document.getElementById('view-tool').classList.toggle('hidden', currentSection !== 'tool');
+  document.getElementById('view-blooderskill').classList.toggle('hidden', currentSection !== 'blooderskill');
+
   document.getElementById('tab-skill').classList.toggle('active', currentSection === 'skill');
   document.getElementById('tab-tool').classList.toggle('active', currentSection === 'tool');
-  document.getElementById('btn-add-label').textContent =
-    currentSection === 'tool' ? 'Aggiungi strumento' : 'Aggiungi skill';
+  document.getElementById('tab-blooderskill').classList.toggle('active', currentSection === 'blooderskill');
+
+  const labels = {
+    skill: 'Aggiungi skill',
+    tool: 'Aggiungi strumento',
+    blooderskill: 'Crea Blooderskill'
+  };
+  document.getElementById('btn-add-label').textContent = labels[currentSection];
 }
 
 async function loadSkills() {
-  const res = await fetch('/api/skills');
-  const data = await res.json();
-  allSkills = data.skills || [];
+  const [resSkills, resBs] = await Promise.all([
+    fetch('/api/skills'),
+    fetch('/api/blooderskills')
+  ]);
+  const dataSkills = await resSkills.json();
+  const dataBs = await resBs.json();
+  allSkills = dataSkills.skills || [];
+  allBlooderskills = dataBs.blooderskills || [];
+
   renderCategories();
   renderLibrary();
   renderToolCategories();
   renderTools();
+  renderBsSectors();
+  renderBlooderskills();
 }
 
 function renderCategories() {
@@ -81,6 +112,23 @@ function setToolCategory(cat) {
   activeToolCategory = cat;
   renderToolCategories();
   renderTools();
+}
+
+function renderBsSectors() {
+  const sectors = ['Tutti', ...new Set(allBlooderskills.map(b => b.sector).filter(Boolean))];
+  if (!sectors.includes(activeBsSector)) activeBsSector = 'Tutti';
+  const box = document.getElementById('bs-sector-pills');
+  box.innerHTML = sectors.map(s => `
+    <button class="pill ${s === activeBsSector ? 'active' : ''}" onclick="setBsSector('${esc(s)}')">
+      ${esc(s)}
+    </button>
+  `).join('');
+}
+
+function setBsSector(sec) {
+  activeBsSector = sec;
+  renderBsSectors();
+  renderBlooderskills();
 }
 
 function renderCardsGrid(items, queryText, selectedCat, gridId, emptyMessage) {
@@ -139,6 +187,54 @@ function renderTools() {
     'tools-grid',
     'Nessuno strumento trovato. Clicca su <strong>Aggiungi strumento</strong> per salvarne uno nuovo!'
   );
+}
+
+function renderBlooderskills() {
+  const q = (document.getElementById('bs-search-input').value || '').toLowerCase().trim();
+  const filtered = allBlooderskills.filter(b => {
+    if (activeBsSector !== 'Tutti' && b.sector !== activeBsSector) return false;
+    if (!q) return true;
+    const hay = [
+      b.name, b.sector, b.tagline, b.missing_piece,
+      ...(b.base_skills || []), ...(b.use_cases || [])
+    ].join(' ').toLowerCase();
+    return hay.includes(q);
+  });
+
+  const grid = document.getElementById('bs-grid');
+  if (!filtered.length) {
+    grid.innerHTML = `
+      <div class="section-block empty">
+        Nessuna Blooderskill ancora pubblicata in questo filtro.<br/>
+        Testiamo insieme i pezzi mancanti in chat e clicca su <strong>Crea Blooderskill</strong> per salvarli e pubblicarli a tuo nome!
+      </div>
+    `;
+    return;
+  }
+
+  grid.innerHTML = filtered.map((b, i) => {
+    const isReady = b.status === 'collaudata';
+    const baseText = (b.base_skills && b.base_skills.length)
+      ? `Potenzia: ${b.base_skills.join(', ')}`
+      : 'Modulo originale Blooder';
+    return `
+      <article class="skill-card" tabindex="0" role="button" aria-label="Apri Blooderskill ${esc(b.name)}"
+        onclick="openBsDetail(${b.id})"
+        onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openBsDetail(${b.id}); }">
+        <span class="card-index" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>
+        <div class="badge-row">
+          <span class="badge">${esc(b.sector)}</span>
+          <span class="badge ${isReady ? 'badge-ready' : 'badge-draft'}">${isReady ? 'Collaudata' : 'In test'}</span>
+        </div>
+        <h3 class="skill-title">${esc(b.name)}</h3>
+        <p class="skill-tagline">${esc(b.tagline)}</p>
+        <div class="card-foot">
+          <span class="card-meta">${ico('layers')} <span>${esc(baseText)}</span></span>
+          <span class="card-go" aria-hidden="true">${ico('arrow-right')}</span>
+        </div>
+      </article>
+    `;
+  }).join('');
 }
 
 function buildPlainTextCard(s) {
@@ -255,6 +351,239 @@ function openDetail(id) {
   `;
   initSteps(box);
   document.getElementById('detail-modal').classList.add('open');
+}
+
+function openBsDetail(id) {
+  const b = allBlooderskills.find(x => x.id === id);
+  if (!b) return;
+  const isReady = b.status === 'collaudata';
+  const bases = b.base_skills || [];
+  const uses = b.use_cases || [];
+  const box = document.getElementById('detail-content');
+
+  box.innerHTML = `
+    <div class="modal-header">
+      <div>
+        <div class="badge-row">
+          <span class="badge">${esc(b.sector)}</span>
+          <span class="badge ${isReady ? 'badge-ready' : 'badge-draft'}">${isReady ? 'Collaudata' : 'In test'}</span>
+        </div>
+        <h2>${esc(b.name)}</h2>
+        <p class="modal-sub">${esc(b.tagline)}</p>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-icon" onclick="closeModal('detail-modal'); openEditBsModal(${b.id})" title="Modifica" aria-label="Modifica">${ico('pencil')}</button>
+        <button class="btn btn-icon" onclick="closeModal('detail-modal')" title="Chiudi" aria-label="Chiudi">${ico('x')}</button>
+      </div>
+    </div>
+
+    <div class="steps" data-steps>
+      <div class="steps-nav">
+        <button class="step-tab" data-go="0"><b>1</b><span>Il pezzo in più</span></button>
+        <button class="step-tab" data-go="1"><b>2</b><span>SKILL.md</span></button>
+        <button class="step-tab" data-go="2"><b>3</b><span>Usa a tuo nome</span></button>
+      </div>
+
+      <div class="step-panel">
+        <div class="panel panel-blood">
+          <h4>${ico('layers')} Cosa aggiunge che mancava</h4>
+          <p>${esc(b.missing_piece)}</p>
+        </div>
+        ${bases.length ? `
+          <div class="mini-label">Potenzia queste skill della libreria</div>
+          <div class="chips">${bases.map(n => `<span class="chip">${esc(n)}</span>`).join('')}</div>
+        ` : ''}
+        ${uses.length ? `
+          <div class="mini-label">Dove si usa nel settore ${esc(b.sector)}</div>
+          <div class="chips">${uses.map(u => `<span class="chip">${esc(u)}</span>`).join('')}</div>
+        ` : ''}
+      </div>
+
+      <div class="step-panel">
+        <div class="panel">
+          <div class="panel-head">
+            <h4>${ico('code')} Contenuto completo (${esc(b.skill_path)})</h4>
+            <button class="btn btn-sm" onclick="copyTextById('bs-detail-md', 'SKILL.md copiato negli appunti!')">${ico('copy')} Copia SKILL.md</button>
+          </div>
+          <pre class="code-box" id="bs-detail-md">${esc(b.skill_markdown)}</pre>
+        </div>
+      </div>
+
+      <div class="step-panel">
+        <div class="panel panel-blood">
+          <div class="panel-head">
+            <h4>${ico('zap')} Comando firmato a tuo nome</h4>
+            <button class="btn btn-sm" onclick="copyTextById('bs-detail-cmd', 'Comando copiato!')">${ico('copy')} Copia comando</button>
+          </div>
+          <pre class="code-box" id="bs-detail-cmd">${esc(b.install_cmd)}</pre>
+        </div>
+        <div class="panel">
+          <h4>${ico('folder')} Percorso nella libreria pubblica</h4>
+          <p>Salvata automaticamente in <code>${esc(b.skill_path)}</code>. Quando avvii <code>salva_progetto.bat</code> viene aggiornata su GitHub.</p>
+        </div>
+        <div class="danger-row">
+          <button class="btn btn-sm btn-danger" onclick="removeBlooderskill(${b.id})">${ico('trash')} Elimina da Blooderskills</button>
+        </div>
+      </div>
+
+      <div class="steps-foot">
+        <button class="btn" data-prev>${ico('arrow-left')} Indietro</button>
+        <span class="spacer"></span>
+        <button class="btn" onclick="copyBsCard(${b.id})">${ico('copy')} Copia pacchetto</button>
+        <button class="btn btn-primary" data-next>Avanti ${ico('arrow-right')}</button>
+        <a class="btn btn-primary" data-last href="${esc(b.repo_url)}" target="_blank" rel="noopener">Vedi su GitHub ${ico('external')}</a>
+      </div>
+    </div>
+  `;
+  initSteps(box);
+  document.getElementById('detail-modal').classList.add('open');
+}
+
+async function copyBsCard(id) {
+  const b = allBlooderskills.find(x => x.id === id);
+  if (!b) return;
+  const text = [
+    `🩸 BLOODERSKILL: ${b.name.toUpperCase()} (${b.sector})`,
+    `Comando installazione: ${b.install_cmd}`,
+    b.base_skills?.length ? `Potenzia: ${b.base_skills.join(', ')}` : '',
+    ``,
+    `IL PEZZO IN PIÙ:`,
+    b.missing_piece,
+    ``,
+    `--- FILE SKILL.md ---`,
+    b.skill_markdown
+  ].filter(Boolean).join('\n');
+  await navigator.clipboard.writeText(text);
+  showToast(`Blooderskill "${b.name}" copiata! Pronta da girare o incollare.`);
+}
+
+function renderBaseSkillChips() {
+  const box = document.getElementById('bs-base-chips');
+  if (!allSkills.length) {
+    box.innerHTML = '<span class="hint">Nessuna skill base ancora presente.</span>';
+    return;
+  }
+  box.innerHTML = allSkills.map(s => {
+    const active = selectedBaseSkills.includes(s.name);
+    return `
+      <button type="button" class="chip chip-btn ${active ? 'selected' : ''}" onclick="toggleBaseSkill('${esc(s.name)}')">
+        ${esc(s.name)}
+      </button>
+    `;
+  }).join('');
+}
+
+function toggleBaseSkill(name) {
+  if (selectedBaseSkills.includes(name)) {
+    selectedBaseSkills = selectedBaseSkills.filter(n => n !== name);
+  } else {
+    selectedBaseSkills.push(name);
+  }
+  renderBaseSkillChips();
+}
+
+function openBsModal() {
+  editingBsSlug = null;
+  selectedBaseSkills = [];
+  document.getElementById('bs-modal-title').textContent = 'Crea Blooderskill';
+  setStep(document.getElementById('bs-steps'), 0);
+  ['bs-name', 'bs-sector', 'bs-tagline', 'bs-missing', 'bs-usecases', 'bs-markdown']
+    .forEach(id => { document.getElementById(id).value = ''; });
+  document.getElementById('bs-status').value = 'collaudata';
+  renderBaseSkillChips();
+  document.getElementById('bs-modal').classList.add('open');
+}
+
+function openEditBsModal(id) {
+  const b = allBlooderskills.find(x => x.id === id);
+  if (!b) return;
+  editingBsSlug = b.slug;
+  selectedBaseSkills = [...(b.base_skills || [])];
+  document.getElementById('bs-modal-title').textContent = `Modifica: ${b.name}`;
+  setStep(document.getElementById('bs-steps'), 0);
+  document.getElementById('bs-name').value = b.name || '';
+  document.getElementById('bs-sector').value = b.sector || '';
+  document.getElementById('bs-status').value = b.status === 'in_test' ? 'in_test' : 'collaudata';
+  document.getElementById('bs-tagline').value = b.tagline || '';
+  document.getElementById('bs-missing').value = b.missing_piece || '';
+  document.getElementById('bs-usecases').value = (b.use_cases || []).join('\n');
+  document.getElementById('bs-markdown').value = b.skill_markdown || '';
+  renderBaseSkillChips();
+  document.getElementById('bs-modal').classList.add('open');
+}
+
+function generateBsTemplate() {
+  const name = document.getElementById('bs-name').value.trim() || 'Nuova Blooderskill';
+  const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'blooderskill';
+  const sector = document.getElementById('bs-sector').value.trim() || 'Generale';
+  const tagline = document.getElementById('bs-tagline').value.trim() || name;
+  const missing = document.getElementById('bs-missing').value.trim() || 'Descrivi qui il pezzo specialistico aggiunto.';
+  const uses = document.getElementById('bs-usecases').value.split('\n').map(x => x.trim()).filter(Boolean);
+
+  const lines = [
+    '---',
+    `name: ${slug}`,
+    `description: "${tagline.replace(/"/g, "'")}"`,
+    '---',
+    '',
+    `# ${name}`,
+    '',
+    `> **Settore piattaforma:** ${sector}`,
+    selectedBaseSkills.length ? `> **Potenzia:** ${selectedBaseSkills.join(', ')}` : '> **Tipo:** Modulo originale Blooder',
+    '',
+    '## Obiettivo (Il pezzo in più)',
+    missing,
+    '',
+    '## Regole operative per l\'Agente AI',
+    '1. Analizza il contesto specifico del settore prima di generare codice o risposte.',
+    '2. Applica controlli concreti, zero supposizioni e dati verificabili.',
+    '3. Restituisci output chiari, azionabili e pronti per la produzione.',
+    ''
+  ];
+  if (uses.length) {
+    lines.push('## Casi d\'uso principali');
+    uses.forEach(u => lines.push(`- ${u}`));
+    lines.push('');
+  }
+  document.getElementById('bs-markdown').value = lines.join('\n');
+  showToast('Struttura SKILL.md generata! Puoi rifinirla e pubblicare.');
+}
+
+async function saveBlooderskillForm() {
+  const payload = {
+    slug: editingBsSlug || undefined,
+    name: document.getElementById('bs-name').value.trim(),
+    sector: document.getElementById('bs-sector').value.trim() || 'Generale',
+    status: document.getElementById('bs-status').value,
+    base_skills: selectedBaseSkills,
+    tagline: document.getElementById('bs-tagline').value.trim(),
+    missing_piece: document.getElementById('bs-missing').value.trim(),
+    use_cases: document.getElementById('bs-usecases').value.split('\n').map(x => x.trim()).filter(Boolean),
+    skill_markdown: document.getElementById('bs-markdown').value.trim()
+  };
+
+  const res = await fetch('/api/blooderskills', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    showToast(data.error || 'Inserisci almeno il nome della Blooderskill.');
+    return;
+  }
+  closeModal('bs-modal');
+  switchSection('blooderskill');
+  showToast(`Blooderskill "${data.name}" pubblicata ed esportata in ${data.skill_path}!`);
+  await loadSkills();
+}
+
+async function removeBlooderskill(id) {
+  if (!confirm('Vuoi davvero rimuovere questa Blooderskill da Blooder?')) return;
+  await fetch(`/api/blooderskills/${id}`, { method: 'DELETE' });
+  closeModal('detail-modal');
+  showToast('Blooderskill rimossa.');
+  await loadSkills();
 }
 
 function openAddModal() {

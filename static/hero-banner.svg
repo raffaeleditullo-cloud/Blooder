@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 240" role="img" aria-label="Blooder — Libreria Aperta Skill, Strumenti &amp; Blooderskills">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#190408"/>
+      <stop offset="0.52" stop-color="#0b0204"/>
+      <stop offset="1" stop-color="#050001"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.22" cy="0.35" r="0.6">
+      <stop offset="0" stop-color="#ff1236" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#ff1236" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="blood" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff4d63"/>
+      <stop offset="0.45" stop-color="#ff1236"/>
+      <stop offset="1" stop-color="#7d0016"/>
+    </linearGradient>
+    <linearGradient id="lineRed" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ff1236"/>
+      <stop offset="0.65" stop-color="#a80020"/>
+      <stop offset="1" stop-color="#2e0a11" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">
+      <path d="M 28 0 L 0 0 0 28" fill="none" stroke="#ff1236" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+    <g id="drop">
+      <path d="M32 3 C32 3 12 27 12 40 A20 20 0 0 0 52 40 C52 27 32 3 32 3 Z" fill="url(#blood)"/>
+      <path d="M26 29 V51 M26 29 H34 a5.5 5.5 0 0 1 0 11 H26 M34 40 a5.5 5.5 0 0 1 0 11 H26"
+            fill="none" stroke="#080002" stroke-width="4" stroke-linejoin="miter" stroke-linecap="square"/>
+      <path d="M19 37 C19 31 23 25 27 20" fill="none" stroke="#ffd5da" stroke-opacity="0.55" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    <clipPath id="cTop"><rect x="0" y="0" width="64" height="33"/></clipPath>
+    <clipPath id="cMid"><rect x="0" y="33" width="64" height="5"/></clipPath>
+    <clipPath id="cBot"><rect x="0" y="38" width="64" height="26"/></clipPath>
+  </defs>
+
+  <rect width="960" height="240" rx="22" fill="url(#bgGrad)"/>
+  <rect width="960" height="240" rx="22" fill="url(#grid)"/>
+  <rect width="960" height="240" rx="22" fill="url(#glow)"/>
+  <rect x="1" y="1" width="958" height="238" rx="21" fill="none" stroke="#4d0f1b" stroke-width="1.5"/>
+
+  <!-- Marchio Goccia Glitch Red Matrix -->
+  <g transform="translate(54 44) scale(2.35)">
+    <g clip-path="url(#cTop)"><use href="#drop"/></g>
+    <g clip-path="url(#cMid)"><use href="#drop" x="5"/></g>
+    <g clip-path="url(#cBot)"><use href="#drop"/></g>
+    <rect x="7" y="33" width="5" height="2" fill="#ff1236"/>
+    <rect x="3" y="36" width="3" height="2" fill="#ff1236" opacity="0.6"/>
+    <rect x="58" y="34" width="4" height="2" fill="#ff4d63" opacity="0.8"/>
+  </g>
+
+  <!-- Titolo & Tagline -->
+  <text x="232" y="114" font-family="'Barlow Condensed','Arial Narrow','Segoe UI',sans-serif"
+        font-size="74" font-style="italic" font-weight="800" letter-spacing="4" fill="#ffffff">BLOODER</text>
+
+  <rect x="234" y="130" width="640" height="3" rx="1.5" fill="url(#lineRed)"/>
+
+  <text x="234" y="160" font-family="'Cascadia Code','Cascadia Mono',Consolas,monospace"
+        font-size="14" font-weight="700" letter-spacing="3.2" fill="#ff6b80">LIBRERIA SKILL  ·  STRUMENTI  ·  BLOODERSKILLS</text>
+
+  <text x="234" y="188" font-family="'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,sans-serif"
+        font-size="15.5" fill="#d9bfc3">Arsenale curato di skill per agenti AI, strumenti operativi e moduli originali su misura per settore.</text>
+</svg>

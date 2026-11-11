@@ -37,6 +37,7 @@
     <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
     <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></symbol>
     <symbol id="i-undo" viewBox="0 0 24 24"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></symbol>
   </svg>
 
   <div class="app">
@@ -71,7 +72,7 @@
       </div>
       <div class="brand-line" aria-hidden="true"><div class="drips"><i></i><i></i></div></div>
 
-      <button class="btn btn-primary btn-new" id="btn-add-main" type="button" onclick="openAddModal()">
+      <button class="btn btn-primary btn-new" id="btn-add-main" type="button" onclick="handleMainAction()">
         <svg class="ico"><use href="#i-plus"/></svg> <span id="btn-add-label">Aggiungi skill</span>
       </button>
 
@@ -82,9 +83,12 @@
         <button class="tab-btn" id="tab-tool" type="button" onclick="switchSection('tool')">
           <svg class="ico"><use href="#i-wrench"/></svg> Strumenti
         </button>
+        <button class="tab-btn" id="tab-blooderskill" type="button" onclick="switchSection('blooderskill')">
+          <svg class="ico"><use href="#i-layers"/></svg> Blooderskills
+        </button>
       </nav>
 
-      <p class="sidebar-foot">La tua libreria ordinata di skill e strumenti — pronti da copiare e incollare quando ti servono</p>
+      <p class="sidebar-foot">Libreria aperta di skill selezionate, strumenti forti e moduli originali firmati Blooder</p>
     </aside>
 
     <main class="container">
@@ -132,6 +136,30 @@
         </div>
 
         <div id="tools-grid" class="skills-grid"></div>
+      </section>
+
+      <!-- SEZIONE 3: BLOODERSKILLS (NOSTRI MODULI ORIGINALI PER SETTORE) -->
+      <section id="view-blooderskill" class="hidden">
+        <div class="hero">
+          <h2>Blooderskills</h2>
+          <p class="hero-sub">I pezzi in più creati e testati da noi per dare alle piattaforme di ogni settore ciò che manca alle skill standard.</p>
+          <div class="toolbar">
+            <label class="search-wrap">
+              <svg class="ico"><use href="#i-search"/></svg>
+              <input
+                type="search"
+                id="bs-search-input"
+                class="search-input"
+                placeholder="Cerca per settore piattaforma, skill potenziata o problema (es. Fatturazione, XML, Vendita...)"
+                aria-label="Cerca nelle Blooderskills"
+                oninput="renderBlooderskills()"
+              />
+            </label>
+            <div class="pills" id="bs-sector-pills"></div>
+          </div>
+        </div>
+
+        <div id="bs-grid" class="skills-grid"></div>
       </section>
     </main>
   </div>
@@ -241,6 +269,101 @@
           <button class="btn btn-primary" type="button" data-next>Avanti <svg class="ico"><use href="#i-arrow-right"/></svg></button>
           <button class="btn btn-primary" type="button" data-last onclick="saveSkillForm()">
             <svg class="ico"><use href="#i-save"/></svg> Salva nella libreria
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL CREA / MODIFICA BLOODERSKILL -->
+  <div class="modal-backdrop" id="bs-modal" onclick="closeOnBackdrop(event, 'bs-modal')">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="bs-modal-title">Crea Blooderskill</h2>
+        <button class="btn btn-icon" onclick="closeModal('bs-modal')" aria-label="Chiudi" title="Chiudi">
+          <svg class="ico"><use href="#i-x"/></svg>
+        </button>
+      </div>
+
+      <div class="steps" data-steps id="bs-steps">
+        <div class="steps-nav">
+          <button class="step-tab" type="button" data-go="0"><b>1</b><span>Settore &amp; Base</span></button>
+          <button class="step-tab" type="button" data-go="1"><b>2</b><span>Il pezzo in più</span></button>
+          <button class="step-tab" type="button" data-go="2"><b>3</b><span>SKILL.md</span></button>
+        </div>
+
+        <!-- Passo 1 -->
+        <div class="step-panel">
+          <div class="field">
+            <label for="bs-name">Nome della tua Blooderskill</label>
+            <input type="text" id="bs-name" placeholder="Es. Raggi X Fatture XML &amp; Rincari Fornitori" />
+          </div>
+          <div class="grid-2">
+            <div class="field">
+              <label for="bs-sector">Settore piattaforma</label>
+              <input type="text" id="bs-sector" list="bs-sector-list" placeholder="Es. Fatturazione &amp; Fisco" />
+              <datalist id="bs-sector-list">
+                <option value="Fatturazione &amp; Fisco"></option>
+                <option value="Vendita &amp; CRM"></option>
+                <option value="Guide &amp; Lancio"></option>
+                <option value="Automazione &amp; Dati"></option>
+                <option value="Sicurezza &amp; Audit"></option>
+                <option value="Mobile &amp; Desktop"></option>
+              </datalist>
+            </div>
+            <div class="field">
+              <label for="bs-status">Stato</label>
+              <select id="bs-status">
+                <option value="collaudata">Collaudata (pronta all'uso)</option>
+                <option value="in_test">In test (bozza da rifinire)</option>
+              </select>
+            </div>
+          </div>
+          <div class="field field-flush">
+            <label>A quali skill della libreria dà il pezzo in più? (opzionale)</label>
+            <div class="chips" id="bs-base-chips"></div>
+            <p class="hint">Clicca sulle skill che questo modulo potenzia, oppure lascialo vuoto se è una skill autonoma.</p>
+          </div>
+        </div>
+
+        <!-- Passo 2 -->
+        <div class="step-panel">
+          <div class="field">
+            <label for="bs-tagline">In una riga</label>
+            <input type="text" id="bs-tagline" placeholder="Cosa fa in una frase chiara e immediata" />
+          </div>
+          <div class="field">
+            <label for="bs-missing">Il pezzo mancante che aggiunge (spiegato semplice)</label>
+            <textarea id="bs-missing" rows="4" placeholder="Spiega cosa mancava al 'muratore' standard e quale vantaggio concreto porta nel settore scelto..."></textarea>
+          </div>
+          <div class="field field-flush">
+            <label for="bs-usecases">Dove si usa nel concreto (una voce per riga)</label>
+            <textarea id="bs-usecases" rows="3" placeholder="Programmi di fatturazione elettronica italiana&#10;Controllo automatico aumenti listino fornitori&#10;Scadenziario IVA e ritenute d'acconto"></textarea>
+          </div>
+        </div>
+
+        <!-- Passo 3 -->
+        <div class="step-panel">
+          <div class="panel">
+            <div class="panel-head">
+              <h4><svg class="ico"><use href="#i-code"/></svg> Istruzioni SKILL.md</h4>
+              <button class="btn btn-sm" type="button" onclick="generateBsTemplate()">
+                <svg class="ico"><use href="#i-zap"/></svg> Genera base dai campi
+              </button>
+            </div>
+            <div class="field field-flush">
+              <textarea id="bs-markdown" rows="8" placeholder="Incolla qui la skill testata in chat oppure clicca 'Genera base dai campi'. Verrà salvata anche in skills/&lt;nome&gt;/SKILL.md pronta per GitHub."></textarea>
+            </div>
+            <p class="hint">Al salvataggio Blooder esporta il file in <code>skills/&lt;nome&gt;/SKILL.md</code> così puoi installarla a tuo nome.</p>
+          </div>
+        </div>
+
+        <div class="steps-foot">
+          <button class="btn" type="button" data-prev><svg class="ico"><use href="#i-arrow-left"/></svg> Indietro</button>
+          <span class="spacer"></span>
+          <button class="btn btn-primary" type="button" data-next>Avanti <svg class="ico"><use href="#i-arrow-right"/></svg></button>
+          <button class="btn btn-primary" type="button" data-last onclick="saveBlooderskillForm()">
+            <svg class="ico"><use href="#i-save"/></svg> Pubblica in Blooderskills
           </button>
         </div>
       </div>

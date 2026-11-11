@@ -1,2 +1,12 @@
 __pycache__/
 *.pyc
+_privato/
+.env
+.env.*
+*.env
+*.key
+*.pem
+*.pfx
+*.p12
+*secret*
+*credentials*

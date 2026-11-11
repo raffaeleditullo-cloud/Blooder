@@ -1,6 +1,7 @@
 import json
 import os
 import re
+import shutil
 import sqlite3
 import urllib.error
 import urllib.request
@@ -9,6 +10,8 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
 DB_PATH = BASE_DIR / "blooder.db"
+SKILLS_EXPORT_DIR = BASE_DIR / "skills"
+GITHUB_REPO = "raffaeleditullo-cloud/Blooder"
 
 
 def get_connection() -> sqlite3.Connection:
@@ -245,6 +248,20 @@ def init_db() -> None:
                 stars INTEGER DEFAULT 0,
                 created_at TEXT NOT NULL
             );
+
+            CREATE TABLE IF NOT EXISTS blooderskills (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                slug TEXT UNIQUE NOT NULL,
+                name TEXT NOT NULL,
+                sector TEXT NOT NULL DEFAULT 'Generale',
+                base_skills_json TEXT NOT NULL DEFAULT '[]',
+                status TEXT NOT NULL DEFAULT 'in_test',
+                tagline TEXT NOT NULL,
+                missing_piece TEXT NOT NULL,
+                use_cases_json TEXT NOT NULL DEFAULT '[]',
+                skill_markdown TEXT NOT NULL DEFAULT '',
+                created_at TEXT NOT NULL
+            );
             """
         )
 
@@ -478,4 +495,229 @@ def fetch_github_metadata(repo_url: str) -> dict:
         "install_guide": install_default,
         "stars": int(meta.get("stargazers_count") or 0),
     }
+
+
+# ==========================================================
+# BLOODERSKILLS — Skill originali create e firmate da Blooder
+# ==========================================================
+
+def _format_skill_markdown(slug: str, name: str, sector: str, tagline: str, missing_piece: str,
+                           base_skills: list[str], use_cases: list[str], raw_md: str) -> str:
+    cleaned = (raw_md or "").strip()
+    if cleaned.startswith("---"):
+        return cleaned + "\n"
+
+    frontmatter = [
+        "---",
+        f"name: {slug}",
+        f'description: "{tagline.replace(chr(34), chr(39))}"',
+        "---",
+        "",
+    ]
+    if cleaned:
+        return "\n".join(frontmatter) + cleaned + "\n"
+
+    body = [
+        f"# {name}",
+        "",
+        f"> **Settore piattaforma:** {sector}",
+    ]
+    if base_skills:
+        body.append(f"> **Potenzia:** {', '.join(base_skills)}")
+    body.extend([
+        "",
+        "## Il pezzo in più (Cosa risolve)",
+        missing_piece or tagline,
+        "",
+    ])
+    if use_cases:
+        body.append("## Quando usarla")
+        for u in use_cases:
+            body.append(f"- {u}")
+        body.append("")
+    return "\n".join(frontmatter + body) + "\n"
+
+
+def export_blooderskill_to_disk(item: dict) -> str:
+    slug = item["slug"]
+    skill_dir = SKILLS_EXPORT_DIR / slug
+    skill_dir.mkdir(parents=True, exist_ok=True)
+    md_path = skill_dir / "SKILL.md"
+    md_text = _format_skill_markdown(
+        slug=slug,
+        name=item["name"],
+        sector=item["sector"],
+        tagline=item["tagline"],
+        missing_piece=item["missing_piece"],
+        base_skills=item.get("base_skills") or [],
+        use_cases=item.get("use_cases") or [],
+        raw_md=item.get("skill_markdown") or "",
+    )
+    md_path.write_text(md_text, encoding="utf-8")
+    return f"skills/{slug}/SKILL.md"
+
+
+def _row_to_blooderskill(row: sqlite3.Row) -> dict:
+    slug = row["slug"]
+    base_skills = json.loads(row["base_skills_json"] or "[]")
+    use_cases = json.loads(row["use_cases_json"] or "[]")
+    md_full = _format_skill_markdown(
+        slug=slug,
+        name=row["name"],
+        sector=row["sector"],
+        tagline=row["tagline"],
+        missing_piece=row["missing_piece"],
+        base_skills=base_skills,
+        use_cases=use_cases,
+        raw_md=row["skill_markdown"] or "",
+    )
+    return {
+        "id": row["id"],
+        "slug": slug,
+        "name": row["name"],
+        "sector": row["sector"],
+        "base_skills": base_skills,
+        "status": row["status"] if row["status"] in ("collaudata", "in_test") else "in_test",
+        "tagline": row["tagline"],
+        "missing_piece": row["missing_piece"],
+        "use_cases": use_cases,
+        "skill_markdown": md_full.strip(),
+        "skill_path": f"skills/{slug}/SKILL.md",
+        "install_cmd": f"npx skills add {GITHUB_REPO} --skill {slug}",
+        "repo_url": f"https://github.com/{GITHUB_REPO}/tree/main/skills/{slug}",
+        "created_at": row["created_at"],
+    }
+
+
+def list_blooderskills(query: str = "", sector: str = "") -> list[dict]:
+    conn = get_connection()
+    sql = "SELECT * FROM blooderskills WHERE 1=1"
+    params: list = []
+    if sector and sector.lower() != "tutti":
+        sql += " AND LOWER(sector) = LOWER(?)"
+        params.append(sector)
+    if query:
+        q = f"%{query.strip()}%"
+        sql += """ AND (
+            name LIKE ? OR sector LIKE ? OR tagline LIKE ?
+            OR missing_piece LIKE ? OR base_skills_json LIKE ? OR use_cases_json LIKE ?
+        )"""
+        params.extend([q, q, q, q, q, q])
+    sql += " ORDER BY id DESC"
+    rows = conn.execute(sql, params).fetchall()
+    conn.close()
+    return [_row_to_blooderskill(r) for r in rows]
+
+
+def get_blooderskill_by_id_or_slug(identifier: str | int) -> dict | None:
+    conn = get_connection()
+    if str(identifier).isdigit():
+        row = conn.execute("SELECT * FROM blooderskills WHERE id = ?", (int(identifier),)).fetchone()
+    else:
+        row = conn.execute("SELECT * FROM blooderskills WHERE LOWER(slug) = LOWER(?)", (str(identifier),)).fetchone()
+    conn.close()
+    return _row_to_blooderskill(row) if row else None
+
+
+def add_or_update_blooderskill(data: dict) -> dict:
+    name = (data.get("name") or "").strip()
+    if not name:
+        raise ValueError("Il nome della Blooderskill è obbligatorio.")
+
+    slug = slugify(data.get("slug") or name)
+    sector = (data.get("sector") or "Generale").strip()
+    base_skills = [str(x).strip() for x in (data.get("base_skills") or []) if str(x).strip()]
+    status = "collaudata" if (data.get("status") or "").strip().lower() == "collaudata" else "in_test"
+    tagline = (data.get("tagline") or name).strip()
+    missing_piece = (data.get("missing_piece") or tagline).strip()
+    use_cases = [str(x).strip() for x in (data.get("use_cases") or []) if str(x).strip()]
+    raw_md = (data.get("skill_markdown") or "").strip()
+    formatted_md = _format_skill_markdown(
+        slug=slug,
+        name=name,
+        sector=sector,
+        tagline=tagline,
+        missing_piece=missing_piece,
+        base_skills=base_skills,
+        use_cases=use_cases,
+        raw_md=raw_md,
+    ).strip()
+    now = datetime.now(timezone.utc).isoformat()
+
+    conn = get_connection()
+    with conn:
+        existing = conn.execute("SELECT id FROM blooderskills WHERE slug = ?", (slug,)).fetchone()
+        if existing:
+            conn.execute(
+                """
+                UPDATE blooderskills SET
+                    name=?, sector=?, base_skills_json=?, status=?, tagline=?,
+                    missing_piece=?, use_cases_json=?, skill_markdown=?
+                WHERE slug=?
+                """,
+                (
+                    name, sector, json.dumps(base_skills, ensure_ascii=False),
+                    status, tagline, missing_piece,
+                    json.dumps(use_cases, ensure_ascii=False),
+                    formatted_md, slug,
+                ),
+            )
+        else:
+            conn.execute(
+                """
+                INSERT INTO blooderskills (
+                    slug, name, sector, base_skills_json, status, tagline,
+                    missing_piece, use_cases_json, skill_markdown, created_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    slug, name, sector, json.dumps(base_skills, ensure_ascii=False),
+                    status, tagline, missing_piece,
+                    json.dumps(use_cases, ensure_ascii=False),
+                    formatted_md, now,
+                ),
+            )
+    conn.close()
+    saved = get_blooderskill_by_id_or_slug(slug)  # type: ignore
+    export_blooderskill_to_disk(saved)
+    return saved
+
+
+def delete_blooderskill(bs_id: int) -> bool:
+    conn = get_connection()
+    row = conn.execute("SELECT slug FROM blooderskills WHERE id = ?", (bs_id,)).fetchone()
+    with conn:
+        cur = conn.execute("DELETE FROM blooderskills WHERE id = ?", (bs_id,))
+    conn.close()
+    if row and row["slug"]:
+        target_dir = (SKILLS_EXPORT_DIR / row["slug"]).resolve()
+        if str(target_dir).startswith(str(SKILLS_EXPORT_DIR.resolve())) and target_dir.is_dir():
+            shutil.rmtree(target_dir, ignore_errors=True)
+    return cur.rowcount > 0
+
+
+def sync_blooderskills_disk() -> list[str]:
+    SKILLS_EXPORT_DIR.mkdir(parents=True, exist_ok=True)
+    items = list_blooderskills()
+    valid_slugs = {item["slug"] for item in items}
+    written = [export_blooderskill_to_disk(item) for item in items]
+    for child in SKILLS_EXPORT_DIR.iterdir():
+        if child.is_dir() and child.name not in valid_slugs:
+            shutil.rmtree(child, ignore_errors=True)
+    readme_in_skills = SKILLS_EXPORT_DIR / "README.md"
+    if not items:
+        readme_in_skills.write_text(
+            "# Blooderskills — Moduli Originali\n\n"
+            "In questa cartella vengono pubblicate automaticamente tutte le **Blooderskills** (`skills/<nome-skill>/SKILL.md`) "
+            "create e collaudate all'interno di **Blooder**.\n\n"
+            "Installazione rapida:\n"
+            "```bash\n"
+            f"npx skills add {GITHUB_REPO} --skill <nome-skill>\n"
+            "```\n",
+            encoding="utf-8",
+        )
+    elif readme_in_skills.exists():
+        readme_in_skills.unlink()
+    return written
+
 

@@ -1,9 +1,9 @@
 @echo off
 cd /d "%~dp0"
-echo [Blooder] Verifica database ed esportazione backup JSON...
-python -c "import json; from blooder_db import init_db, list_skills, get_connection; init_db(); c = get_connection(); ok = c.execute('PRAGMA integrity_check').fetchone()[0]; c.close(); assert ok == 'ok', ok; data = {'skills': list_skills(kind='skill'), 'tools': list_skills(kind='tool')}; open('backup_libreria.json', 'w', encoding='utf-8').write(json.dumps(data, ensure_ascii=False, indent=2)); print(f'Integrita DB: {ok} | Salvate {len(data[\"skills\"])} skill e {len(data[\"tools\"])} strumenti in backup_libreria.json')"
+echo [Blooder] Verifica database, controllo anti-chiavi ed esportazione catalogo...
+python sync_libreria.py
 if errorlevel 1 (
-    echo [ERRORE] Verifica database fallita!
+    echo [ERRORE] Controllo fallito o chiave privata rilevata! Salvataggio bloccato per sicurezza.
     if not "%1"=="--auto" pause
     exit /b 1
 )
@@ -11,11 +11,21 @@ if errorlevel 1 (
 git add -A
 git diff --cached --quiet
 if errorlevel 1 (
-    for /f "tokens=1-3 delims=/ " %%a in ("%date%") do set TODAY=%%c-%%b-%%a
-    git commit -m "Salvataggio progetto Blooder (%date% %time%)"
-    echo [Blooder] Nuovo punto di salvataggio Git creato con successo!
+    git commit -m "Aggiornamento libreria Blooder (%date% %time%)"
+    echo [Blooder] Punto di salvataggio locale creato.
 ) else (
-    echo [Blooder] Tutto gia allineato, nessuna nuova modifica da salvare in Git.
+    echo [Blooder] Nessuna nuova modifica locale da registrare.
+)
+
+git remote get-url origin >nul 2>&1
+if not errorlevel 1 (
+    echo [Blooder] Sincronizzazione con GitHub (ramo main)...
+    git push -u origin HEAD:main
+    if errorlevel 1 (
+        echo [AVVISO] Salvataggio locale riuscito, ma invio a GitHub non completato. Controlla la connessione.
+    ) else (
+        echo [Blooder] Libreria pubblicata e allineata su GitHub con successo!
+    )
 )
 
 if not "%1"=="--auto" pause
