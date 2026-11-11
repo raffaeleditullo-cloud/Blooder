@@ -1,0 +1,351 @@
+{
+  "skills": [
+    {
+      "id": 10,
+      "slug": "anatomy",
+      "name": "Anatomy",
+      "repo_url": "https://github.com/wheresryan22/anatomy",
+      "kind": "skill",
+      "category": "Guide & Documentazione",
+      "tagline": "Costruisce illustrazioni tecniche interattive e diagrammi animati (in SVG e WebGL) per far capire visivamente come funziona un sistema.",
+      "simple_explanation": "Quando devi spiegare a un utente cosa fa il tuo software dentro una guida o una landing page, un disegno interattivo vale più di mille righe di testo. Anatomy fa generare all'agente vere macchine e schemi interattivi in stile premium (isometrici, con indicatori e controlli funzionanti, zero dipendenze esterne) pronti da inserire nelle pagine web o esportare in PDF.",
+      "specs": {
+        "linguaggio": "TypeScript / JS -> genera SVG, HTML e WebGL",
+        "sistemi_operativi": "Windows, macOS, Linux (nativo per Claude Code e Antigravity)",
+        "costo": "100% Gratuito (MIT License)",
+        "difficolta": "Media (richiede Node.js 20.10+)"
+      },
+      "compatible_apps": [
+        "Guide interattive e documentazione visiva di piattaforme software",
+        "Landing page ad alto impatto (stile Linear / Stripe)",
+        "Spiegazioni visive di flussi complessi per clienti non tecnici",
+        "Schede tecniche esportabili anche in PDF A4"
+      ],
+      "tech_keywords": [
+        "svg",
+        "interactive",
+        "docs",
+        "diagram",
+        "webgl",
+        "landing-page",
+        "visual",
+        "explainer"
+      ],
+      "cost_saving": "Sostituisce illustrazioni custom e animazioni interattive che da uno studio grafico costerebbero migliaia di euro.",
+      "honest_tradeoffs": "Generare disegni isometrici complessi richiede qualche minuto di calcolo e verifica visiva in Chrome/Chromium per rifinire i dettagli.",
+      "install_guide": "1. Assicurati di avere Node.js 20.10+ installato sul PC.\n2. Aggiungi la skill al tuo ambiente agente:\n   npx skills add wheresryan22/anatomy\n\n3. Chiedi all'agente di costruire uno schema interattivo per una funzione della tua piattaforma o per una guida utente.",
+      "stars": 26638,
+      "created_at": "2026-11-11T12:16:41.243405+00:00"
+    },
+    {
+      "id": 9,
+      "slug": "teach",
+      "name": "Teach",
+      "repo_url": "https://github.com/mattpocock/skills",
+      "kind": "skill",
+      "category": "Guide & Documentazione",
+      "tagline": "Genera mini-lezioni HTML interattive e schede pratiche riassuntive per spiegare un concetto o una piattaforma un passo alla volta.",
+      "simple_explanation": "Invece di scrivere manuali infiniti e noiosi che nessuno legge, questa skill (parte della raccolta di Matt Pocock) struttura la spiegazione in singole pagine HTML autonome (lessons/*.html) e schede rapide di consultazione (reference/*.html). Possiamo usarla con Claude Code o Antigravity per creare guide utente e percorsi di apprendimento intuitivi della nostra futura piattaforma.",
+      "specs": {
+        "linguaggio": "Markdown + Generazione HTML (SKILL.md)",
+        "sistemi_operativi": "Windows, macOS, Linux (Claude Code, Antigravity, Cursor)",
+        "costo": "100% Gratuito (Open Source)",
+        "difficolta": "Facile (1 comando npx)"
+      },
+      "compatible_apps": [
+        "Centri assistenza, tutorial interattivi e guide passo-passo per piattaforme",
+        "Onboarding guidato per nuovi utenti di un software",
+        "Schede rapide stampabili (cheat-sheet) e documentazione prodotto",
+        "Percorsi formativi strutturati su misura"
+      ],
+      "tech_keywords": [
+        "docs",
+        "documentation",
+        "tutorial",
+        "html",
+        "onboarding",
+        "education",
+        "guide",
+        "teach"
+      ],
+      "cost_saving": "Evita piattaforme esterne di onboarding/documentazione a pagamento e ore di impaginazione manuale delle guide.",
+      "honest_tradeoffs": "Nasce per creare cartelle di lezioni dedicate: va usata in una cartella separata di documentazione (docs/ o guides/) e non lanciata alla cieca in mezzo ai file di backend.",
+      "install_guide": "1. Installa la raccolta di skill tramite npx:\n   npx skills@latest add mattpocock/skills\n\n2. Oppure importa solo la cartella della skill teach:\n   https://github.com/mattpocock/skills/tree/main/skills/productivity/teach\n\n3. Avviala in una cartella dedicata alle guide (es. /guides) per generare lezioni HTML pulite.",
+      "stars": 321481,
+      "created_at": "2026-11-11T12:16:41.238553+00:00"
+    },
+    {
+      "id": 8,
+      "slug": "marketing-psychology",
+      "name": "Marketing Psychology",
+      "repo_url": "https://github.com/coreyhaines31/marketingskills",
+      "kind": "skill",
+      "category": "Marketing & Conversioni",
+      "tagline": "Applica oltre 70 modelli psicologici reali e playbook di conversione per far fidare gli utenti e migliorare landing page, prezzi e SEO.",
+      "simple_explanation": "Costruire un buon software non basta se chi apre la pagina non capisce subito il valore o non si fida. Questa raccolta di skill (creata da Corey Haines) insegna al tuo agente AI oltre 70 principi di psicologia dell'acquisto, copywriting, SEO e struttura prezzi: legge le pagine della tua piattaforma e ti dice cosa cambiare per aumentare iscrizioni e fiducia senza sprecare budget pubblicitario.",
+      "specs": {
+        "linguaggio": "Markdown (SKILL.md universale)",
+        "sistemi_operativi": "Windows, macOS, Linux (Claude Code, Antigravity, Cursor, Codex)",
+        "costo": "100% Gratuito (MIT License)",
+        "difficolta": "Facile (1 comando npx)"
+      },
+      "compatible_apps": [
+        "Landing page e siti di presentazione per SaaS e piattaforme",
+        "Pagine prezzi, onboarding utenti e riduzione abbandoni",
+        "Audit psicologico di testi, titoli e chiamate all'azione",
+        "Ottimizzazione SEO tradizionale e per motori AI (ChatGPT, Perplexity)"
+      ],
+      "tech_keywords": [
+        "marketing",
+        "psychology",
+        "cro",
+        "landing-page",
+        "copywriting",
+        "seo",
+        "pricing",
+        "saas",
+        "conversion"
+      ],
+      "cost_saving": "Risparmia consulenze di marketing, copywriter e audit CRO da centinaia o migliaia di euro nella fase di lancio.",
+      "honest_tradeoffs": "Ti dà struttura, leve psicologiche e testi molto solidi, ma i numeri veri di conversione vanno comunque verificati sul campo con utenti reali del tuo settore.",
+      "install_guide": "1. Installa il pacchetto di skill nel tuo ambiente agente con un solo comando:\n   npx skills add coreyhaines31/marketingskills\n\n2. Richiama la skill nella cartella del tuo progetto (es. su Claude Code o Antigravity):\n   Chiedi un audit psicologico della tua landing page, dei prezzi o del flusso di registrazione.",
+      "stars": 59673,
+      "created_at": "2026-11-11T12:12:49.484096+00:00"
+    },
+    {
+      "id": 5,
+      "slug": "ruflo",
+      "name": "Ruflo",
+      "repo_url": "https://github.com/ruvnet/ruflo",
+      "kind": "skill",
+      "category": "Agenti AI & Automazione",
+      "tagline": "Coordinatore multi-agente con memoria condivisa per far lavorare più agenti AI insieme sullo stesso progetto.",
+      "simple_explanation": "Quando chiedi a un singolo agente AI di fare un lavoro molto lungo e complesso, spesso perde il filo o dimentica cosa aveva deciso prima. Ruflo fa da 'direttore dei lavori': divide un compito grande tra più agenti specializzati, mantiene una memoria comune (così non ripetono gli stessi errori) e imposta regole di sicurezza.",
+      "specs": {
+        "linguaggio": "TypeScript / Node.js",
+        "sistemi_operativi": "Windows, macOS, Linux",
+        "costo": "Gratuito (Open Source - attenzione però al consumo di token AI)",
+        "difficolta": "Media"
+      },
+      "compatible_apps": [
+        "Piattaforme che eseguono flussi di lavoro AI complessi in più passaggi",
+        "Sistemi automatici di generazione/revisione codice o report",
+        "Backend multi-agente con memoria a lungo termine (RAG)",
+        "Automazioni aziendali con regole di controllo rigorose"
+      ],
+      "tech_keywords": [
+        "agent",
+        "swarm",
+        "orchestration",
+        "typescript",
+        "node",
+        "rag",
+        "memory",
+        "workflow",
+        "llm"
+      ],
+      "cost_saving": "Evita di dover programmare da zero code di messaggi, memoria condivisa e coordinamento tra agenti AI.",
+      "honest_tradeoffs": "Far lavorare una squadra di 4-5 agenti in contemporanea consuma molti più crediti/token AI rispetto a un singolo agente normale. Per progetti piccoli o semplici è eccessivo (aggiunge complessità inutile); conviene solo quando hai compiti pesanti divisibili in parallelo.",
+      "install_guide": "1. Assicurati di avere Node.js 20+ installato.\n2. Consulta il repository ufficiale https://github.com/ruvnet/ruflo per installare la CLI:\n   npx ruflo@latest init\n3. Definisci i ruoli degli agenti e i limiti di budget prima di avviare un flusso automatico.",
+      "stars": 0,
+      "created_at": "2026-11-11T09:58:19.140839+00:00"
+    },
+    {
+      "id": 4,
+      "slug": "xtool",
+      "name": "xtool",
+      "repo_url": "https://github.com/xtool-org/xtool",
+      "kind": "skill",
+      "category": "Mobile & iOS",
+      "tagline": "Compila, firma e installa vere app iPhone (iOS in Swift) direttamente da Windows o Linux, senza avere un Mac.",
+      "simple_explanation": "Di solito Apple ti obbliga a comprare un Mac con Xcode anche solo per compilare e provare una semplice app sul tuo iPhone. xtool abbatte questo limite: usando Windows (tramite WSL) o Linux, ti permette di trasformare un progetto Swift in un pacchetto .ipa firmato col tuo account Apple e installarlo via cavo USB sul tuo iPhone.",
+      "specs": {
+        "linguaggio": "Swift",
+        "sistemi_operativi": "Windows (tramite WSL2), Linux, macOS",
+        "costo": "100% Gratuito (Open Source)",
+        "difficolta": "Media (serve WSL2 su Windows)"
+      },
+      "compatible_apps": [
+        "App native iOS / iPhone sviluppate da PC Windows o Linux",
+        "Companion app mobile per piattaforme Web esistenti",
+        "Strumenti personali da installare sul proprio iPhone senza Mac",
+        "Pipeline automatiche di build mobile economiche su server Linux"
+      ],
+      "tech_keywords": [
+        "ios",
+        "iphone",
+        "mobile",
+        "swift",
+        "app",
+        "windows",
+        "linux",
+        "xcode",
+        "ipa"
+      ],
+      "cost_saving": "Evita l'acquisto obbligatorio di un Mac (800-1.500€) o il noleggio di Mac in cloud per sviluppare e testare su iPhone.",
+      "honest_tradeoffs": "Lavora su progetti Swift Package Manager (SwiftPM), non sui vecchi file progetto proprietari di Xcode con interfaccia grafica drag-and-drop, e non include il simulatore grafico dell'iPhone su schermo PC (testi direttamente collegando il tuo vero iPhone via USB).",
+      "install_guide": "1. Su Windows attiva WSL2 (Ubuntu) e installa la toolchain Swift + libimobiledevice/usbmuxd.\n2. Segui la guida ufficiale su https://xtool.sh per importare l'SDK Darwin.\n3. Collega il tuo iPhone via USB e autentica il tuo Apple ID con `xtool auth`.\n4. Compila e installa la tua app con `xtool dev` direttamente nella cartella del progetto Swift.",
+      "stars": 0,
+      "created_at": "2026-11-11T09:58:19.140839+00:00"
+    },
+    {
+      "id": 3,
+      "slug": "pentagi",
+      "name": "PentAGI",
+      "repo_url": "https://github.com/vxcontrol/pentagi",
+      "kind": "skill",
+      "category": "Sicurezza & Audit",
+      "tagline": "Squadra autonoma di agenti per testare la sicurezza della tua app in un ambiente Docker isolato.",
+      "simple_explanation": "Quando costruisci un sito o un'applicazione (soprattutto velocemente con l'AI), è facilissimo lasciare porte aperte senza accorgersene. PentAGI avvia una stanza blindata (Docker) con veri strumenti di controllo sicurezza: tu gli indichi il TUO sito di test, lui cerca falle reali e ti consegna un report chiaro su cosa chiudere prima di andare online.",
+      "specs": {
+        "linguaggio": "Go + Interfaccia React",
+        "sistemi_operativi": "Windows (con Docker Desktop / WSL2), macOS, Linux",
+        "costo": "Gratuito (MIT License - paghi solo il modello AI scelto o usi Ollama gratis)",
+        "difficolta": "Media-Alta (richiede Docker)"
+      },
+      "compatible_apps": [
+        "SaaS e Web App con login utenti e pagamenti",
+        "API Backend (Node, Python, Go, PHP) prima della messa online",
+        "Piattaforme e-commerce e portali con database clienti",
+        "Audit interno di sicurezza pre-rilascio"
+      ],
+      "tech_keywords": [
+        "security",
+        "auth",
+        "login",
+        "jwt",
+        "sql",
+        "docker",
+        "backend",
+        "saas",
+        "api",
+        "vulnerability"
+      ],
+      "cost_saving": "Evita scanner di vulnerabilità commerciali da centinaia di euro al mese per i controlli preliminari.",
+      "honest_tradeoffs": "Richiede Docker installato (occupa diversi GB di spazio per gli strumenti Kali Linux) e va usato SOLO su propri progetti o sistemi autorizzati. Non sostituisce al 100% una certificazione legale firmata da un ente umano se richiesta per legge, ma scova subito gli errori più pericolosi.",
+      "install_guide": "1. Installa e avvia Docker Desktop sul tuo PC.\n2. Scarica il progetto:\n   git clone https://github.com/vxcontrol/pentagi.git\n   cd pentagi\n3. Copia il file .env.example in .env, inserisci la tua chiave LLM (o configura Ollama locale) e avvia:\n   docker compose up -d\n4. Usa la modalità 'Assistant' per approvare a mano ogni singolo controllo sulla tua app.",
+      "stars": 0,
+      "created_at": "2026-11-11T09:58:19.140839+00:00"
+    },
+    {
+      "id": 2,
+      "slug": "reverse-api-engineer",
+      "name": "Reverse API Engineer",
+      "repo_url": "https://github.com/kalil0321/reverse-api-engineer",
+      "kind": "skill",
+      "category": "Integrazioni & API",
+      "tagline": "Osserva il traffico di un sito web nel browser e genera automaticamente il codice pulito per collegarti ai suoi dati.",
+      "simple_explanation": "Molti siti web non offrono una documentazione ufficiale per gli sviluppatori, ma dietro le quinte scambiano dati ordinati col browser. Invece di impazzire a mano negli strumenti per sviluppatori di Chrome, questo tool registra cosa succede mentre navighi una pagina, scarta la spazzatura pubblicitaria e ti scrive da solo uno script pronto (in Python, TypeScript, Go, ecc.) per interrogare quei dati.",
+      "specs": {
+        "linguaggio": "Python (genera codice Python, TS/JS, Go, C#)",
+        "sistemi_operativi": "Windows, macOS, Linux",
+        "costo": "Gratuito (richiede un modello AI per analizzare il file HAR)",
+        "difficolta": "Media"
+      },
+      "compatible_apps": [
+        "Comparatori di prezzi, cataloghi e monitoraggio disponibilità",
+        "Connettori verso portali aziendali o gestionali vecchi senza API",
+        "Automazioni di raccolta dati strutturati",
+        "Backend che devono sincronizzarsi con servizi esterni"
+      ],
+      "tech_keywords": [
+        "api",
+        "sdk",
+        "playwright",
+        "browser",
+        "scraper",
+        "python",
+        "typescript",
+        "fetch",
+        "axios",
+        "har"
+      ],
+      "cost_saving": "Risparmia giorni di lavoro manuale di reverse-engineering o costosi connettori custom.",
+      "honest_tradeoffs": "Il codice generato si basa sulle chiamate interne del sito: se il proprietario del sito aggiorna la struttura o usa protezioni anti-bot molto pesanti (es. CAPTCHA avanzati o token che scadono ogni 2 minuti), dovrai rigenerare il client o gestire il rinnovo sessione. Non sostituisce un contratto API ufficiale per usi bancari.",
+      "install_guide": "1. Installa il tool tramite pip o uv:\n   pip install reverse-api-engineer\n2. Se vuoi guidare tu il browser manualmente, aggiungi Playwright:\n   pip install \"reverse-api-engineer[manual]\" && playwright install chromium\n3. Oppure installalo direttamente come skill per il tuo agente coding:\n   npx skills add kalil0321/reverse-api-engineer",
+      "stars": 0,
+      "created_at": "2026-11-11T09:58:19.140839+00:00"
+    },
+    {
+      "id": 1,
+      "slug": "agent-reach",
+      "name": "Agent-Reach",
+      "repo_url": "https://github.com/Panniantong/agent-reach",
+      "kind": "skill",
+      "category": "Dati Web & Ricerca",
+      "tagline": "Dà ai tuoi agenti AI accesso gratuito a X/Twitter, Reddit, YouTube, GitHub e forum senza pagare API.",
+      "simple_explanation": "Normalmente, se la tua app o il tuo agente AI vuole leggere discussioni su Reddit, post su X (Twitter) o trascrizioni di video YouTube, le piattaforme ti bloccano oppure ti chiedono abbonamenti API costosissimi. Agent-Reach installa in un colpo solo dei piccoli lettori pubblici e gratuiti così il tuo software può cercare e leggere informazioni fresche dal web reale a costo zero.",
+      "specs": {
+        "linguaggio": "Python / CLI",
+        "sistemi_operativi": "Windows, macOS, Linux",
+        "costo": "100% Gratuito (Open Source)",
+        "difficolta": "Facile (1 comando)"
+      },
+      "compatible_apps": [
+        "App di ricerca mercato e analisi trend",
+        "Assistenti AI e Chatbot informati in tempo reale",
+        "Aggregator di notizie, recensioni o social",
+        "Tool SEO e creazione contenuti"
+      ],
+      "tech_keywords": [
+        "python",
+        "scraping",
+        "search",
+        "api",
+        "twitter",
+        "reddit",
+        "youtube",
+        "mcp",
+        "llm",
+        "agent"
+      ],
+      "cost_saving": "Evita abbonamenti a X API (da 100$/mese), Reddit API e servizi di scraping a pagamento (30-100€/mese).",
+      "honest_tradeoffs": "Non hai le stesse garanzie di velocità e stabilità al 100% di un'API ufficiale pagata: se un social cambia pagina o mette limiti temporanei, volumi enormi (decine di migliaia di richieste l'ora) possono rallentare. Perfetto per uso normale, prototipi, agenti e volumi piccoli/medi; meno adatto a sistemi enterprise critici.",
+      "install_guide": "1. Assicurati di avere Python 3.10+ installato sul PC.\n2. Clona o installa il pacchetto dal repository ufficiale:\n   git clone https://github.com/Panniantong/agent-reach.git\n3. Esegui la diagnostica rapida per verificare cosa funziona subito sul tuo PC:\n   agent-reach doctor\n4. Collegalo come server MCP al tuo agente AI oppure richiamalo via riga di comando dal tuo backend.",
+      "stars": 0,
+      "created_at": "2026-11-11T09:58:19.140839+00:00"
+    }
+  ],
+  "tools": [
+    {
+      "id": 7,
+      "slug": "agent-desktop",
+      "name": "Agent Desktop",
+      "repo_url": "https://github.com/vercel-labs/agent-desktop",
+      "kind": "tool",
+      "category": "Automazione Desktop",
+      "tagline": "Permette a Claude Code e agli agenti AI di usare i programmi del tuo PC leggendo pulsanti e campi direttamente dal sistema, senza muovere il mouse.",
+      "simple_explanation": "Di solito, quando un agente AI prova a usare un programma sul computer, deve fare continui screenshot dello schermo e spostare il puntatore tirando a indovinare dove cliccare: è lento, impreciso e consuma tantissimi crediti AI. Agent Desktop (rilasciato gratis da Vercel Labs) legge invece direttamente dal sistema operativo l'elenco esatto di finestre, pulsanti e caselle di testo in formato strutturato, così l'agente apre i programmi, clicca e compila i campi all'istante — anche su vecchi gestionali senza API.",
+      "specs": {
+        "linguaggio": "Rust (CLI + libreria C)",
+        "sistemi_operativi": "Windows, macOS, Linux",
+        "costo": "100% Gratuito (Apache-2.0)",
+        "difficolta": "Facile (1 comando npm)"
+      },
+      "compatible_apps": [
+        "Vecchi programmi e gestionali desktop senza API",
+        "Automazione fatturazione, inserimento dati e moduli su PC",
+        "Flussi di lavoro con Claude Code e agenti da terminale",
+        "Test automatici di applicazioni desktop su Windows, Mac e Linux"
+      ],
+      "tech_keywords": [
+        "rust",
+        "desktop",
+        "cli",
+        "automation",
+        "computer-use",
+        "accessibility",
+        "windows",
+        "macos",
+        "linux",
+        "claude-code",
+        "vercel"
+      ],
+      "cost_saving": "Evita costosi software RPA aziendali (centinaia di euro al mese) e riduce drasticamente il consumo di token AI eliminando gli screenshot continui dello schermo.",
+      "honest_tradeoffs": "Funziona alla perfezione sui programmi che usano finestre, menu e campi standard del sistema operativo; fa invece fatica con videogiochi o software che disegnano tutta la finestra come un'unica immagine grafica personalizzata.",
+      "install_guide": "1. Installa lo strumento globalmente tramite Node.js / npm:\n   npm install -g agent-desktop\n\n2. Verifica che il sistema e i permessi siano pronti:\n   agent-desktop status\n\n3. (Su macOS) Segui la guida rapida per il permesso Accessibilità:\n   agent-desktop permissions --guide\n\n4. (Opzionale) Aggiungilo come skill per il tuo agente coding:\n   npx skills add vercel-labs/agent-desktop",
+      "stars": 21739,
+      "created_at": "2026-11-11T11:37:16.940086+00:00"
+    }
+  ]
+}
