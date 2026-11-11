@@ -11,7 +11,7 @@ if errorlevel 1 (
 git add -A
 git diff --cached --quiet
 if errorlevel 1 (
-    git commit -m "Aggiornamento libreria Blooder (%date% %time%)"
+    git commit -m "Aggiornamento libreria Blooder - %date% %time%"
     echo [Blooder] Punto di salvataggio locale creato.
 ) else (
     echo [Blooder] Nessuna nuova modifica locale da registrare.
@@ -19,7 +19,7 @@ if errorlevel 1 (
 
 git remote get-url origin >nul 2>&1
 if not errorlevel 1 (
-    echo [Blooder] Sincronizzazione con GitHub (ramo main)...
+    echo [Blooder] Sincronizzazione con GitHub sul ramo main...
     git push -u origin HEAD:main
     if errorlevel 1 (
         echo [AVVISO] Salvataggio locale riuscito, ma invio a GitHub non completato. Controlla la connessione.
