@@ -66,3 +66,13 @@ Per mantenere l'arsenale pulito ed evitare confusione, **scartiamo** ciò che du
 - **Combo "Lancio Perfetto senza Budget":** `Marketing Psychology` (testi + leve di fiducia) + `Anatomy` (illustrazioni interattive sulla pagina) + `Teach` (centro guide intuitivo per chi entra la prima volta).
 - **Combo "Automazione Totale Web + PC":** `Agent-Reach` (legge social/web) + `Reverse API Engineer` (estrae API dai siti) + `Agent Desktop` (inserisce o legge dati nei programmi desktop sul PC).
 - **Combo "Prodotto Blindato Web + iPhone da Windows":** Sviluppo piattaforma → audit sicurezza con `PentAGI` → app iOS nativa firmata da Windows con `xtool`.
+
+---
+
+## 5. Stato del Progetto & Prossimi Passi
+
+- **Repository GitHub collegato e allineato (`main`):** `https://github.com/raffaeleditullo-cloud/Blooder` (Licenza MIT, vetrina `README.md` auto-generata con loghi Red Matrix e controllo automatico anti-chiavi attivo in `sync_libreria.py`).
+- **Sezione `Blooderskills` attiva:** pronta nell'interfaccia e nel database con esportazione automatica in `skills/<nome-skill>/SKILL.md`.
+- **Prossima sessione:**
+  1. Creare e pubblicare le prime **Blooderskills** verticali collaudate in chat (es. *Fatturazione Elettronica XML & Controllo Rincari* e *Controllo Margini & Anti-Perdita Listini P.IVA*);
+  2. Continuare la selezione di nuove skill e strumenti forti per arricchire la libreria.
