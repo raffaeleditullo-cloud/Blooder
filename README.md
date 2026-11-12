@@ -3,7 +3,7 @@
 
   <br />
 
-  <img src="https://img.shields.io/badge/Libreria_Skill-9_attive-ff1236?style=for-the-badge&labelColor=140407" alt="Skill attive" />
+  <img src="https://img.shields.io/badge/Libreria_Skill-12_attive-ff1236?style=for-the-badge&labelColor=140407" alt="Skill attive" />
   <img src="https://img.shields.io/badge/Strumenti-1_attivi-ff1236?style=for-the-badge&labelColor=140407" alt="Strumenti attivi" />
   <img src="https://img.shields.io/badge/Blooderskills-0_moduli-10b981?style=for-the-badge&labelColor=140407" alt="Blooderskills" />
   <img src="https://img.shields.io/badge/Licenza-MIT-fbeef0?style=for-the-badge&labelColor=140407" alt="MIT License" />
@@ -33,10 +33,13 @@ L'architettura è divisa in **tre reparti complementari**:
 
 ---
 
-## Libreria Skill (9 selezionate)
+## Libreria Skill (12 selezionate)
 
 | Skill | Categoria | Cosa fa in una riga |
 | :--- | :--- | :--- |
+| **[Founder](https://github.com/Jakeschincariol/founder-skill)** | `Business & Strategia` | 11 skill gratuite che mettono alla prova la tua idea di business con un CFO virtuale e 100 clienti simulati prima di investirci un solo euro. |
+| **[Andrej Karpathy Skills](https://github.com/multica-ai/andrej-karpathy-skills)** | `Qualità Codice & Regole` | Il file di 65 righe con le 4 regole ferree di Andrej Karpathy che impedisce all'AI di complicare il codice o rompere file che non doveva toccare. |
+| **[Sepia](https://github.com/Nanako0129/sepia)** | `Marketing & Conversioni` | Elimina l'effetto 'testo scritto da un robot' correggendo la struttura profonda delle frasi secondo lo studio StoryScope di Google DeepMind. |
 | **[Rune](https://github.com/anomalyco/rune)** | `Desktop & UI Nativa` | Framework Rust + GPU per creare programmi Desktop leggerissimi (Windows, Mac, Linux) che il tuo agente AI può vedere, cliccare e testare da solo. |
 | **[Anatomy](https://github.com/wheresryan22/anatomy)** | `Guide & Documentazione` | Costruisce illustrazioni tecniche interattive e diagrammi animati (in SVG e WebGL) per far capire visivamente come funziona un sistema. |
 | **[Teach](https://github.com/mattpocock/skills)** | `Guide & Documentazione` | Genera mini-lezioni HTML interattive e schede pratiche riassuntive per spiegare un concetto o una piattaforma un passo alla volta. |

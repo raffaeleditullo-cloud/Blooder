@@ -32,42 +32,51 @@
 5. **Rune** (`anomalyco/rune`) — *Skill*
    - **Come la useremo:** Quando vorremo distribuire un nostro software come **vero programma Desktop nativo (`.exe` su Windows, Mac e Linux)** leggerissimo e renderizzato su GPU (senza Electron e senza obbligare il cliente a installare Python), facendo sì che l'agente AI costruisca, fotografi (`--snap`), legga l'albero UI (`--tree`) e testi la finestra da solo in modalità headless.
 
-### C. Reparto Motore AI & Sicurezza (Cervello e Scudo)
-6. **Ruflo** (`ruvnet/ruflo`) — *Skill*
+### C. Reparto Motore AI, Disciplina Codice & Sicurezza (Cervello, Briglie e Scudo)
+6. **Andrej Karpathy Skills** (`multica-ai/andrej-karpathy-skills`) — *Skill*
+   - **Come la useremo:** Come regola fissa nella cartella di ogni progetto che costruiremo per obbligare l'agente AI a rispettare le 4 regole d'oro: chiedere invece di tirare a indovinare, scrivere il minimo codice indispensabile, fare modifiche chirurgiche senza toccare file vicini e verificare tutto prima di dire "fatto".
+7. **Ruflo** (`ruvnet/ruflo`) — *Skill*
    - **Come la useremo:** Solo se la piattaforma finale richiederà più agenti AI che lavorano in parallelo sullo stesso compito complesso mantenendo una memoria condivisa.
-7. **PentAGI** (`vxcontrol/pentagi`) — *Skill*
+8. **PentAGI** (`vxcontrol/pentagi`) — *Skill*
    - **Come la useremo:** **Prima di pubblicare online la piattaforma finale**, la faremo attaccare in privato dentro una stanza Docker isolata da PentAGI per scovare e chiudere porte lasciate aperte su login, API e database.
 
-### D. Reparto Fiducia, Lancio & Guide Utente (Il Ponte verso le Persone)
-8. **Marketing Psychology** (`coreyhaines31/marketingskills`) — *Skill*
-   - **Come la useremo:** Per superare lo scoglio più duro (*far fidare gli utenti senza budget pubblicitario*). La useremo per scrivere e revisionare landing page, struttura prezzi, SEO e testi usando oltre 70 modelli psicologici di conversione.
-9. **Teach** (`mattpocock/skills`) — *Skill*
-   - **Come la useremo:** In una cartella dedicata (`/guides`), la useremo per far generare all'agente **mini-lezioni HTML interattive (`lessons/*.html`) e schede pratiche riassuntive (`reference/*.html`)** che spiegano agli utenti come usare la nostra piattaforma passo dopo passo, con estrema semplicità.
-10. **Anatomy** (`wheresryan22/anatomy`) — *Skill*
-   - **Come la useremo:** In coppia con **Teach** e **Marketing Psychology**! Genera disegni tecnici interattivi e animati (SVG isometrici / WebGL stile *Linear*) da inserire dentro le guide utente e nella home page per far "toccare con mano" visivamente come funziona la piattaforma.
+### D. Reparto Validazione Business, Fiducia & Guide Utente (Strategia e Ponte verso le Persone)
+9. **Founder** (`Jakeschincariol/founder-skill`) — *Skill*
+   - **Come la useremo:** **Prima ancora di iniziare a programmare** una piattaforma! La useremo per far giudicare l'idea dal CFO virtuale (calcolo margini netti reali e prezzi sostenibili) e da **100 clienti simulati** con budget e obiezioni diverse, così scartiamo subito le idee in perdita e partiamo solo su ciò che sta in piedi economicamente.
+10. **Marketing Psychology** (`coreyhaines31/marketingskills`) — *Skill*
+    - **Come la useremo:** Per superare lo scoglio più duro (*far fidare gli utenti senza budget pubblicitario*). La useremo per scrivere e revisionare landing page, struttura prezzi, SEO e testi usando oltre 70 modelli psicologici di conversione.
+11. **Sepia** (`Nanako0129/sepia`) — *Skill*
+    - **Come la useremo:** In coppia fissa con **Marketing Psychology**! Basata sullo studio *StoryScope* di Google DeepMind e Università del Maryland, ripulisce la struttura profonda di email, landing page, post e comunicazioni eliminando ogni traccia di "testo scritto da un robot" (niente elenchi scontati né frasi astratte, solo prosa concreta e umana).
+12. **Teach** (`mattpocock/skills`) — *Skill*
+    - **Come la useremo:** In una cartella dedicata (`/guides`), la useremo per far generare all'agente **mini-lezioni HTML interattive (`lessons/*.html`) e schede pratiche riassuntive (`reference/*.html`)** che spiegano agli utenti come usare la nostra piattaforma passo dopo passo, con estrema semplicità.
+13. **Anatomy** (`wheresryan22/anatomy`) — *Skill*
+    - **Come la useremo:** In coppia con **Teach** e **Marketing Psychology**! Genera disegni tecnici interattivi e animati (SVG isometrici / WebGL stile *Linear*) da inserire dentro le guide utente e nella home page per far "toccare con mano" visivamente come funziona la piattaforma.
 
 ---
 
 ## 3. Criteri di Filtro per i Prossimi Reel / Link (Anti-Doppioni)
 
-Per mantenere l'arsenale pulito ed evitare confusione, **scartiamo** ciò che duplica cose che abbiamo già:
+Per mantenere l'arsenale pulito ed evitare confusione, **scartiamo** ciò che duplica cose che abbiamo già o non gira sul nostro sistema:
 - *Già scartate / ridondanti:*
   - `Last 30 Days` (`mvanhorn/last30days-skill`) → tenuta fuori perché coperta in modo più ampio da **Agent-Reach**.
   - `Chief of Staff` (`mattpocock/skills`) → coperta sul fronte multi-agente da **Ruflo** (ed è comunque già inclusa nello stesso repo di `Teach` se mai servisse).
+  - `Atticus` (`SaarthurR/atticus-mac`) → scartato perché funziona solo ed esclusivamente su Mac (macOS) e sul fronte controllo PC è già superato dal nostro **Agent Desktop** multipiattaforma (Windows/Mac/Linux).
+  - `4 Prompt ASD-STE100` (Karpathy prompts) → scartati come scheda perché sono semplici prompt testuali da chat e tutte le loro funzioni sono già coperte in modo nettamente superiore da **Teach** (pagine HTML didattiche), **Anatomy** (schemi interattivi) e **Sepia** (scrittura pulita e umana).
 
 ### Cosa potrebbe ancora arricchirci se capita nei prossimi Reel:
 - **UI / Design System rapidi o componenti animati web** ad altissima resa visiva;
 - **Pagamenti / Autenticazione zero-costi** (soluzioni open-source pronte per gestire utenti, abbonamenti o licenze senza commissioni pesanti);
-- **Voce / Video / Estrazione Documenti (OCR/PDF)** gratuiti in locale;
+- **Voce / Video / Estrazione Documenti (OCR/PDF)** gratuiti in locale su Windows;
 - **Database / Memoria locale veloce** o deploy gratuito in 1 click.
 
 ---
 
 ## 4. Sinergie Pronte (Note per quando sceglieremo cosa costruire)
 
-- **Combo "Lancio Perfetto senza Budget":** `Marketing Psychology` (testi + leve di fiducia) + `Anatomy` (illustrazioni interattive sulla pagina) + `Teach` (centro guide intuitivo per chi entra la prima volta).
+- **Combo "Prova Generale a Rischio Zero":** `Agent-Reach` (ascolta problemi veri su Reddit/forum) + `Founder` (calcola margini reali col CFO e testa l'offerta su 100 clienti simulati prima di scrivere una riga di codice).
+- **Combo "Lancio Perfetto senza Budget":** `Marketing Psychology` (leve psicologiche di fiducia) + `Sepia` (toglie ogni tono artificiale dai testi) + `Anatomy` (illustrazioni interattive sulla pagina) + `Teach` (centro guide intuitivo per chi entra la prima volta).
 - **Combo "Automazione Totale Web + PC":** `Agent-Reach` (legge social/web) + `Reverse API Engineer` (estrae API dai siti) + `Agent Desktop` (inserisce o legge dati nei programmi desktop sul PC).
-- **Combo "Prodotto Blindato Web + iPhone da Windows":** Sviluppo piattaforma → audit sicurezza con `PentAGI` → app iOS nativa firmata da Windows con `xtool`.
+- **Combo "Prodotto Blindato e Pulito":** Sviluppo disciplinato con `Andrej Karpathy Skills` → audit sicurezza con `PentAGI` → rilascio Desktop nativo con `Rune` o app iOS da Windows con `xtool`.
 
 ---
 

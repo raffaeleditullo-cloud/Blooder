@@ -1,6 +1,123 @@
 {
   "skills": [
     {
+      "id": 14,
+      "slug": "founder-skill",
+      "name": "Founder",
+      "repo_url": "https://github.com/Jakeschincariol/founder-skill",
+      "kind": "skill",
+      "category": "Business & Strategia",
+      "tagline": "11 skill gratuite che mettono alla prova la tua idea di business con un CFO virtuale e 100 clienti simulati prima di investirci un solo euro.",
+      "simple_explanation": "Il rischio più grande quando si crea una piattaforma o un'attività è passare mesi a costruirla per poi scoprire che i margini non reggono o che i clienti non pagano. Founder ti mette a disposizione 11 reparti completi: un consiglio di amministrazione addestrato sui metodi di Hormozi, Thiel e Jobs (/founder-board), un direttore finanziario che calcola quanto ti resta davvero in tasca su ogni vendita (/founder-cfo), uno stratega prezzi (/founder-pricing) e una giuria di 100 clienti simulati con budget, lavori e obiezioni diverse (/founder-consumer) che ti dicono in faccia se comprano o perché rifiutano.",
+      "specs": {
+        "linguaggio": "Markdown + Strumenti Python 3.8+ (zero librerie esterne)",
+        "sistemi_operativi": "Windows, macOS, Linux (Claude Code, Antigravity o qualsiasi chat AI)",
+        "costo": "100% Gratuito (MIT License, nessuna chiave API esterna richiesta)",
+        "supporto_mcp": "11 Skill modulari + sub-agenti acquirenti",
+        "difficolta": "Facile"
+      },
+      "compatible_apps": [
+        "Validazione di nuove idee SaaS, piattaforme web o servizi prima di programmarli",
+        "Calcolo margini reali, punto di pareggio e listini prezzi sostenibili",
+        "Test di offerte commerciali e piani di lancio in 30 giorni senza budget",
+        "Analisi concorrenti e posizionamento per attività digitali o tradizionali"
+      ],
+      "tech_keywords": [
+        "business",
+        "startup",
+        "pricing",
+        "cfo",
+        "validation",
+        "saas",
+        "margins",
+        "market-research",
+        "strategy"
+      ],
+      "cost_saving": "Evita di bruciare mesi di sviluppo e migliaia di euro su idee o listini non profittevoli, sostituendo costosi software di business plan.",
+      "honest_tradeoffs": "I 100 clienti simulati sono eccellenti per scovare subito obiezioni, buchi nei prezzi e punti deboli dell'offerta, ma restano una simulazione AI: vanno usati per scremare e migliorare l'idea prima del lancio, non come sostituto assoluto delle prime vere vendite sul mercato.",
+      "install_guide": "1. Clona il repository gratuito sul PC:\n   git clone https://github.com/Jakeschincariol/founder-skill.git\n\n2. Copia le 11 cartelle skill nella tua cartella skill agente (es. Claude Code o Antigravity):\n   cp -r founder-skill/skills/founder-* ~/.claude/skills/\n\n3. Oppure in Claude Code installalo direttamente come plugin:\n   /plugin marketplace add Jakeschincariol/founder-skill\n   /plugin install founder-skill@founder-skill",
+      "stars": 3327,
+      "created_at": "2026-11-12T09:02:04.421212+00:00"
+    },
+    {
+      "id": 13,
+      "slug": "andrej-karpathy-skills",
+      "name": "Andrej Karpathy Skills",
+      "repo_url": "https://github.com/multica-ai/andrej-karpathy-skills",
+      "kind": "skill",
+      "category": "Qualità Codice & Regole",
+      "tagline": "Il file di 65 righe con le 4 regole ferree di Andrej Karpathy che impedisce all'AI di complicare il codice o rompere file che non doveva toccare.",
+      "simple_explanation": "Quando lasci programmare un agente AI senza briglie, spesso cade in 4 difetti classici: tira a indovinare invece di chiedere, scrive 1.000 righe complicate quando ne bastavano 50, modifica file vicini che funzionavano benissimo e dice 'ho finito' senza aver provato nulla. Questa skill racchiude in sole 65 righe le 4 regole d'oro di Andrej Karpathy (co-fondatore di OpenAI): 1) Pensa e chiedi prima di scrivere; 2) Semplicità assoluta; 3) Modifiche chirurgiche solo dove richiesto; 4) Verifica reale prima di chiudere.",
+      "specs": {
+        "linguaggio": "Markdown (CLAUDE.md / Regole Agente / Cursor Rules)",
+        "sistemi_operativi": "Windows, macOS, Linux (Claude Code, Antigravity, Cursor, Codex)",
+        "costo": "100% Gratuito (MIT License)",
+        "supporto_mcp": "Regola sempre attiva nella cartella di progetto o plugin globale",
+        "difficolta": "Facilissima (copia 1 file o 1 comando)"
+      },
+      "compatible_apps": [
+        "Qualsiasi progetto software Web, Desktop o Mobile sviluppato con agenti AI",
+        "Manutenzione di progetti esistenti dove è vietato rompere funzioni già attive",
+        "Sviluppo rapido ('vibe coding') mantenendo codice pulito, corto e leggibile",
+        "Team o sviluppatori singoli che vogliono evitare riscritture e bug collaterali"
+      ],
+      "tech_keywords": [
+        "coding",
+        "rules",
+        "karpathy",
+        "claude-md",
+        "clean-code",
+        "cursor",
+        "agent",
+        "guardrails",
+        "refactoring"
+      ],
+      "cost_saving": "Risparmia ore perse a riparare danni collaterali dell'AI e riduce il consumo di token evitando codice gonfiato inutilmente.",
+      "honest_tradeoffs": "Privilegia la prudenza rispetto alla fretta: l'agente ti farà qualche domanda di chiarimento in più prima di partire invece di buttarsi subito a scrivere codice a caso (che nei progetti seri è un enorme vantaggio, mentre per micro-modifiche banali da 1 riga è superfluo).",
+      "install_guide": "1. Per usarla in un progetto specifico, scarica il file di regole nella cartella principale:\n   curl -o CLAUDE.md https://raw.githubusercontent.com/multica-ai/andrej-karpathy-skills/main/CLAUDE.md\n\n2. Oppure installala come plugin globale in Claude Code:\n   /plugin marketplace add forrestchang/andrej-karpathy-skills\n   /plugin install andrej-karpathy-skills@karpathy-skills\n\n3. Su Cursor o Antigravity puoi anche copiare il file tra le regole globali o di workspace.",
+      "stars": 232323,
+      "created_at": "2026-11-12T09:02:04.421212+00:00"
+    },
+    {
+      "id": 12,
+      "slug": "sepia",
+      "name": "Sepia",
+      "repo_url": "https://github.com/Nanako0129/sepia",
+      "kind": "skill",
+      "category": "Marketing & Conversioni",
+      "tagline": "Elimina l'effetto 'testo scritto da un robot' correggendo la struttura profonda delle frasi secondo lo studio StoryScope di Google DeepMind.",
+      "simple_explanation": "Quasi tutti i tool che promettono di rendere umano un testo AI si limitano a cambiare qualche parola difficile, ma il lettore si accorge subito che c'è sotto ChatGPT per via degli elenchi ripetitivi, dei concetti vaghi e dei finali tutti uguali. Sepia nasce dallo studio scientifico StoryScope (Università del Maryland e Google DeepMind su oltre 61.000 testi): prima ripara l'architettura logica del discorso (parole concrete, nessi di causa-effetto veri, zero morale finale da tema scolastico) e poi adatta lo stile al canale reale (email commerciali, landing page, articoli tecnici, note di rilascio).",
+      "specs": {
+        "linguaggio": "Markdown (Standard Agent Skills universale)",
+        "sistemi_operativi": "Windows, macOS, Linux (Antigravity, Claude Code, Codex, Cursor + 77 agenti)",
+        "costo": "100% Gratuito (MIT License)",
+        "supporto_mcp": "Skill nativa (write, review, refactor, recreate)",
+        "difficolta": "Facile (1 comando npx)"
+      },
+      "compatible_apps": [
+        "Testi per landing page, email commerciali e presentazioni clienti",
+        "Articoli blog, post social e documentazione che devono suonare 100% umani",
+        "Revisione di bozze generate dall'AI prima della pubblicazione",
+        "Note di rilascio software, risposte assistenza e comunicazioni aziendali"
+      ],
+      "tech_keywords": [
+        "writing",
+        "copywriting",
+        "humanizer",
+        "storyscope",
+        "deepmind",
+        "content",
+        "marketing",
+        "prose",
+        "antigravity"
+      ],
+      "cost_saving": "Evita tool 'AI Humanizer' in abbonamento (15-40€/mese) e ore di riscrittura manuale per togliere il tono artificiale.",
+      "honest_tradeoffs": "Non va usato per gonfiare testi vuoti: dà il meglio quando gli fornisci fatti, numeri o esempi concreti su cui costruire. Su documenti legali o contratti standard dove servono formule rigide ripetitive non serve usarlo.",
+      "install_guide": "1. Installa la skill globalmente per tutti i tuoi agenti (incluso Antigravity) con un comando:\n   npx skills add Nanako0129/sepia -g\n\n2. Oppure su Claude Code come plugin diretto:\n   claude plugin marketplace add Nanako0129/sepia\n   claude plugin install sepia@sepia --scope user\n\n3. Usala nelle 4 modalità: write (scrivi da zero), review (trova i difetti AI), refactor (ritocco leggero) o recreate (riscrittura completa).",
+      "stars": 3793,
+      "created_at": "2026-11-12T09:02:04.415502+00:00"
+    },
+    {
       "id": 11,
       "slug": "rune",
       "name": "Rune",
