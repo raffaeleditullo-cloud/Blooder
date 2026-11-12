@@ -1,6 +1,46 @@
 {
   "skills": [
     {
+      "id": 11,
+      "slug": "rune",
+      "name": "Rune",
+      "repo_url": "https://github.com/anomalyco/rune",
+      "kind": "skill",
+      "category": "Desktop & UI Nativa",
+      "tagline": "Framework Rust + GPU per creare programmi Desktop leggerissimi (Windows, Mac, Linux) che il tuo agente AI può vedere, cliccare e testare da solo.",
+      "simple_explanation": "Di solito per creare un programma installabile su PC si usano tecnologie pesanti come Electron (che si portano dietro mezzo Chrome e consumano centinaia di MB di RAM) oppure linguaggi nativi dove però l'agente AI lavora alla cieca senza vedere la finestra. Rune disegna l'interfaccia direttamente sulla scheda video (GPU) in modo leggerissimo e include una modalità invisibile (--headless): così il tuo agente AI può scattare foto PNG della finestra, leggere l'albero di tutti i pulsanti, cliccarli via script e correggere i difetti grafici in totale autonomia.",
+      "specs": {
+        "linguaggio": "Rust + GPU nativa",
+        "sistemi_operativi": "Windows, macOS, Linux (Web sperimentale)",
+        "costo": "100% Gratuito (MIT License)",
+        "supporto_mcp": "Nativo per Agenti Coding (headless PNG + element tree + script)",
+        "difficolta": "Media (richiede toolchain Rust)"
+      },
+      "compatible_apps": [
+        "Programmi Desktop nativi (.exe su Windows, Mac, Linux) veloci e leggeri",
+        "Utility locali offline per aziende e professionisti senza installare Python o browser",
+        "Strumenti AI, editor, player e dashboard ad alte prestazioni (120 Hz)",
+        "App multi-piattaforma sviluppate e testate autonomamente da Claude Code / Codex / OpenCode"
+      ],
+      "tech_keywords": [
+        "rust",
+        "desktop",
+        "gpu",
+        "ui",
+        "native",
+        "headless",
+        "windows",
+        "macos",
+        "linux",
+        "agent"
+      ],
+      "cost_saving": "Evita pacchetti Electron pesanti centinaia di MB e ore di test manuali sull'interfaccia grafica desktop.",
+      "honest_tradeoffs": "Progetto appena rilasciato in Pre-release (in rapida evoluzione) e basato su Rust: richiede rustup installato sul PC e tempi di prima compilazione più lunghi rispetto a una semplice pagina web HTML. Ideale per veri software desktop installabili, superfluo per normali siti web.",
+      "install_guide": "1. Installa la toolchain gratuita Rust sul PC da https://rustup.rs\n2. Clona il repository per esplorare esempi e componenti (rune-kit):\n   git clone https://github.com/anomalyco/rune.git\n3. Dai in pasto il repo al tuo agente AI con il prompt consigliato:\n   'Costruisci la mia app con Rune (github.com/anomalyco/rune) partendo da examples/hello e verifica il lavoro in modalità headless.'",
+      "stars": 6745,
+      "created_at": "2026-11-12T08:31:57.671422+00:00"
+    },
+    {
       "id": 10,
       "slug": "anatomy",
       "name": "Anatomy",

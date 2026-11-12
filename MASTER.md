@@ -24,24 +24,26 @@
 2. **Reverse API Engineer** (`kalil0321/reverse-api-engineer`) — *Skill*
    - **Come la useremo:** Quando la nostra piattaforma dovrà leggere dati strutturati da portali web che non offrono API pubbliche ufficiali, catturando il traffico browser (HAR) e generando connettori Python/TypeScript puliti.
 
-### B. Reparto Sistema Operativo & Mobile (Le "Mani")
+### B. Reparto Sistema Operativo, Desktop & Mobile (Le "Mani")
 3. **Agent Desktop** (`vercel-labs/agent-desktop`) — *Strumento*
    - **Come lo useremo:** Per automatizzare programmi installati su PC (Windows/Mac/Linux) — anche vecchi gestionali senza web e senza API — leggendo direttamente pulsanti e campi dal sistema operativo, senza muovere il mouse e senza sprecare token in screenshot.
 4. **xtool** (`xtool-org/xtool`) — *Skill*
    - **Come la useremo:** Se vorremo affiancare alla piattaforma web una vera **app nativa iPhone (`.ipa` in Swift)** compilata, firmata e testata direttamente dal tuo PC Windows (via WSL2), senza dover comprare un Mac.
+5. **Rune** (`anomalyco/rune`) — *Skill*
+   - **Come la useremo:** Quando vorremo distribuire un nostro software come **vero programma Desktop nativo (`.exe` su Windows, Mac e Linux)** leggerissimo e renderizzato su GPU (senza Electron e senza obbligare il cliente a installare Python), facendo sì che l'agente AI costruisca, fotografi (`--snap`), legga l'albero UI (`--tree`) e testi la finestra da solo in modalità headless.
 
 ### C. Reparto Motore AI & Sicurezza (Cervello e Scudo)
-5. **Ruflo** (`ruvnet/ruflo`) — *Skill*
+6. **Ruflo** (`ruvnet/ruflo`) — *Skill*
    - **Come la useremo:** Solo se la piattaforma finale richiederà più agenti AI che lavorano in parallelo sullo stesso compito complesso mantenendo una memoria condivisa.
-6. **PentAGI** (`vxcontrol/pentagi`) — *Skill*
+7. **PentAGI** (`vxcontrol/pentagi`) — *Skill*
    - **Come la useremo:** **Prima di pubblicare online la piattaforma finale**, la faremo attaccare in privato dentro una stanza Docker isolata da PentAGI per scovare e chiudere porte lasciate aperte su login, API e database.
 
 ### D. Reparto Fiducia, Lancio & Guide Utente (Il Ponte verso le Persone)
-7. **Marketing Psychology** (`coreyhaines31/marketingskills`) — *Skill*
+8. **Marketing Psychology** (`coreyhaines31/marketingskills`) — *Skill*
    - **Come la useremo:** Per superare lo scoglio più duro (*far fidare gli utenti senza budget pubblicitario*). La useremo per scrivere e revisionare landing page, struttura prezzi, SEO e testi usando oltre 70 modelli psicologici di conversione.
-8. **Teach** (`mattpocock/skills`) — *Skill*
+9. **Teach** (`mattpocock/skills`) — *Skill*
    - **Come la useremo:** In una cartella dedicata (`/guides`), la useremo per far generare all'agente **mini-lezioni HTML interattive (`lessons/*.html`) e schede pratiche riassuntive (`reference/*.html`)** che spiegano agli utenti come usare la nostra piattaforma passo dopo passo, con estrema semplicità.
-9. **Anatomy** (`wheresryan22/anatomy`) — *Skill*
+10. **Anatomy** (`wheresryan22/anatomy`) — *Skill*
    - **Come la useremo:** In coppia con **Teach** e **Marketing Psychology**! Genera disegni tecnici interattivi e animati (SVG isometrici / WebGL stile *Linear*) da inserire dentro le guide utente e nella home page per far "toccare con mano" visivamente come funziona la piattaforma.
 
 ---

@@ -3,7 +3,7 @@
 
   <br />
 
-  <img src="https://img.shields.io/badge/Libreria_Skill-8_attive-ff1236?style=for-the-badge&labelColor=140407" alt="Skill attive" />
+  <img src="https://img.shields.io/badge/Libreria_Skill-9_attive-ff1236?style=for-the-badge&labelColor=140407" alt="Skill attive" />
   <img src="https://img.shields.io/badge/Strumenti-1_attivi-ff1236?style=for-the-badge&labelColor=140407" alt="Strumenti attivi" />
   <img src="https://img.shields.io/badge/Blooderskills-0_moduli-10b981?style=for-the-badge&labelColor=140407" alt="Blooderskills" />
   <img src="https://img.shields.io/badge/Licenza-MIT-fbeef0?style=for-the-badge&labelColor=140407" alt="MIT License" />
@@ -33,10 +33,11 @@ L'architettura è divisa in **tre reparti complementari**:
 
 ---
 
-## Libreria Skill (8 selezionate)
+## Libreria Skill (9 selezionate)
 
 | Skill | Categoria | Cosa fa in una riga |
 | :--- | :--- | :--- |
+| **[Rune](https://github.com/anomalyco/rune)** | `Desktop & UI Nativa` | Framework Rust + GPU per creare programmi Desktop leggerissimi (Windows, Mac, Linux) che il tuo agente AI può vedere, cliccare e testare da solo. |
 | **[Anatomy](https://github.com/wheresryan22/anatomy)** | `Guide & Documentazione` | Costruisce illustrazioni tecniche interattive e diagrammi animati (in SVG e WebGL) per far capire visivamente come funziona un sistema. |
 | **[Teach](https://github.com/mattpocock/skills)** | `Guide & Documentazione` | Genera mini-lezioni HTML interattive e schede pratiche riassuntive per spiegare un concetto o una piattaforma un passo alla volta. |
 | **[Marketing Psychology](https://github.com/coreyhaines31/marketingskills)** | `Marketing & Conversioni` | Applica oltre 70 modelli psicologici reali e playbook di conversione per far fidare gli utenti e migliorare landing page, prezzi e SEO. |
