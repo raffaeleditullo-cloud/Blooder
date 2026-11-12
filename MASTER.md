@@ -83,7 +83,8 @@ Per mantenere l'arsenale pulito ed evitare confusione, **scartiamo** ciò che du
 ## 5. Stato del Progetto & Prossimi Passi
 
 - **Repository GitHub collegato e allineato (`main`):** `https://github.com/raffaeleditullo-cloud/Blooder` (Licenza MIT, vetrina `README.md` auto-generata con loghi Red Matrix e controllo automatico anti-chiavi attivo in `sync_libreria.py`).
-- **Sezione `Blooderskills` attiva:** pronta nell'interfaccia e nel database con esportazione automatica in `skills/<nome-skill>/SKILL.md`.
-- **Prossima sessione:**
-  1. Creare e pubblicare le prime **Blooderskills** verticali collaudate in chat (es. *Fatturazione Elettronica XML & Controllo Rincari* e *Controllo Margini & Anti-Perdita Listini P.IVA*);
-  2. Continuare la selezione di nuove skill e strumenti forti per arricchire la libreria.
+- **Prima Blooderskill pubblicata e collaudata (`skills/fatturapa-xray/`):**
+  - **`FatturaPA X-Ray`** — motore deterministico Python zero-dipendenze (`scripts/xray_fatture.py`) + guida operativa fiscale italiana (`SKILL.md`) per aprire buste `.xml` e `.xml.p7m`, sottrarre note di credito `TD04`, escludere doppioni, scovare rincari silenziosi dei fornitori, bloccare scarti SdI/bollo e calcolare il netto reale (Forfettario e Ordinario).
+- **Prossimo passo concordato:**
+  1. Costruire il **Laboratorio Visivo & Simulatore Interattivo** (`static/labs/fatturapa-xray.html` collegato con pulsante nella scheda Blooderskill, unendo i principi di **Teach** + **Anatomy** in stile *Red Matrix*) per far capire e simulare dal vivo ogni Blooderskill anche a chi parte da zero;
+  2. Proseguire con nuove Blooderskills verticali e selezione di skill/strumenti open-source.

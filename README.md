@@ -5,7 +5,7 @@
 
   <img src="https://img.shields.io/badge/Libreria_Skill-12_attive-ff1236?style=for-the-badge&labelColor=140407" alt="Skill attive" />
   <img src="https://img.shields.io/badge/Strumenti-1_attivi-ff1236?style=for-the-badge&labelColor=140407" alt="Strumenti attivi" />
-  <img src="https://img.shields.io/badge/Blooderskills-0_moduli-10b981?style=for-the-badge&labelColor=140407" alt="Blooderskills" />
+  <img src="https://img.shields.io/badge/Blooderskills-1_moduli-10b981?style=for-the-badge&labelColor=140407" alt="Blooderskills" />
   <img src="https://img.shields.io/badge/Licenza-MIT-fbeef0?style=for-the-badge&labelColor=140407" alt="MIT License" />
   <img src="https://img.shields.io/badge/Python-3.10+-ff4d63?style=for-the-badge&labelColor=140407" alt="Python 3.10+" />
 </div>
@@ -26,10 +26,15 @@ L'architettura è divisa in **tre reparti complementari**:
 
 ## Blooderskills pubblicate (Moduli originali)
 
-> Nessun modulo verticale ancora pubblicato in [`skills/`](skills/). Ogni nuova **Blooderskill** creata nell'interfaccia comparirà automaticamente in questa tabella e sarà installabile con:
-> ```bash
-> npx skills add raffaeleditullo-cloud/Blooder --skill <nome-skill>
-> ```
+Installa qualsiasi modulo originale **Blooderskill** direttamente nel tuo agente AI con:
+
+```bash
+npx skills add raffaeleditullo-cloud/Blooder --skill <nome-skill>
+```
+
+| Modulo | Settore Piattaforma | Potenzia | Stato | Descrizione |
+| :--- | :--- | :--- | :--- | :--- |
+| **[`FatturaPA X-Ray`](skills/fatturapa-xray/SKILL.md)** | `Fatturazione & Fisco Italia` | Founder, Anatomy, Teach | Collaudata | Raggi X per Fatture Elettroniche Italiane (.xml e .xml.p7m): scova rincari nascosti dei fornitori, blocca gli scarti SdI e calcola il netto vero tolte IVA e tasse. |
 
 ---
 
