@@ -10,15 +10,15 @@ Prima di prendere una decisione tecnica o strategica, giudicare nuovi link/Reel,
 
 ### Mappa Rapida Skill Attive
 - **Regia & Filtro Anti-Doppioni Reel/Tool:** `.agents/skills/blooder-regia/SKILL.md`
-- **Disciplina Codice & Decisioni Chirurgiche:** `.agents/vendor_skills/karpathy-guidelines/SKILL.md`
+- **Disciplina Codice, Controllo Qualità & Decisioni Chirurgiche:** `.agents/vendor_skills/karpathy-guidelines/SKILL.md` e `i-have-adhd/SKILL.md` (formato asciutto per agenti QA/collaudo)
 - **Impatto Modifiche & Architettura Codice:** `.agents/vendor_skills/understand-diff/SKILL.md` e `understand/SKILL.md`
-- **Validazione Economica, Prezzi & Mercato:** `.agents/vendor_skills/founder-board/SKILL.md`, `founder-cfo/SKILL.md`, `founder-pricing/SKILL.md`, `founder-consumer/SKILL.md`
+- **Validazione Economica, Prezzi & Servizi AI Italia:** `.agents/vendor_skills/founder-board/SKILL.md`, `founder-cfo/SKILL.md`, `founder-pricing/SKILL.md`, `founder-consumer/SKILL.md` + `skills/service-as-software-it/SKILL.md`
 - **Scrittura Concreta e Naturale (Zero Tono Robot):** `.agents/vendor_skills/sepia/SKILL.md`
 - **Psicologia Conversioni & Fiducia Utenti:** `.agents/vendor_skills/marketing-psychology/SKILL.md` e `cro/SKILL.md`
-- **Guide Didattiche & Schemi Interattivi:** `.agents/vendor_skills/teach/SKILL.md` e `anatomy/SKILL.md`
+- **Guide Didattiche, Siti Cinema & Motion Video:** `.agents/vendor_skills/teach/SKILL.md`, `anatomy/SKILL.md`, `motionmaxxing/SKILL.md` + `skills/scroll-cinema-web/SKILL.md`
 - **Sicurezza Codice & Patch Vulnerabilità:** `.agents/vendor_skills/find-security-vulnerabilities-in-code/SKILL.md` (*Strix*)
 - **Analisi Video, Ricerca Web & API:** `.agents/vendor_skills/watch/SKILL.md`, `agent-reach/SKILL.md`, `reverse-api-engineer/SKILL.md`
-- **Blooderskills Verticali Originali:** `skills/` (es. `skills/fatturapa-xray/SKILL.md`)
+- **Blooderskills Verticali Originali:** `skills/` (`fatturapa-xray`, `scroll-cinema-web`, `service-as-software-it`)
 
 *(Se la cartella `.agents/vendor_skills/` non è ancora presente su disco, esegui `python attiva_arsenale.py`).*
 

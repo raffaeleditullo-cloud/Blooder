@@ -86,9 +86,19 @@ ARSENAL_SOURCES: list[tuple[str, str, list[tuple[str, str]]]] = [
         "main",
         [("agent_reach/skill", "agent-reach")],
     ),
+    (
+        "Tejashmakwana/motionmaxxing",
+        "main",
+        [("", "motionmaxxing")],
+    ),
+    (
+        "ayghri/i-have-adhd",
+        "main",
+        [("skills/i-have-adhd", "i-have-adhd")],
+    ),
 ]
 
-SKIP_ROOT_DIRS_FOR_FULL_REPO = {".github", "tests", "evals"}
+SKIP_ROOT_DIRS_FOR_FULL_REPO = {".github", "tests", "evals", "docs"}
 
 
 def download_zip(repo: str, branch: str) -> bytes:

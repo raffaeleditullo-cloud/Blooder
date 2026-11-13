@@ -46,18 +46,22 @@
     - **Come lo useremo:** Quando avremo bisogno di far lavorare più agenti in parallelo (*CEO, CTO, Sviluppatori, Marketing* su Claude Code, Codex o Gemini CLI) senza perdere il controllo dei costi: fornisce una dashboard gestionale con **tetto massimo di budget per singolo agente**, **approvazione umana obbligatoria** sulle decisioni chiave e pulsante Stop immediato.
 11. **Strix** (`usestrix/strix`) — *Skill*
     - **Come la useremo:** **Prima di pubblicare online la piattaforma finale** (o gratis in cloud dentro GitHub Actions / GitHub Codespaces senza appesantire il nostro PC): attacca dinamicamente la nostra app per scovare falle vere (`SQLi`, `XSS`, `SSRF`, permessi) senza falsi allarmi e ci consegna direttamente le patch di codice pronte.
+12. **i-have-adhd** (`ayghri/i-have-adhd`) — *Skill*
+    - **Come la useremo:** Specificamente sugli **agenti di Controllo Qualità (QA) e revisione** (anche dentro `Paperclip`): li obbliga a rispondere subito con `file:riga`, passi numerati (max 5) e comando di test, eliminando i preamboli cortesi che sprecano token.
 
-### D. Reparto Validazione Business, Fiducia & Guide Utente (Strategia e Ponte verso le Persone)
-12. **Founder** (`Jakeschincariol/founder-skill`) — *Skill*
-    - **Come la useremo:** **Prima ancora di iniziare a programmare** una piattaforma! La useremo per far giudicare l'idea dal CFO virtuale (calcolo margini netti reali e prezzi sostenibili) e da **100 clienti simulati** con budget e obiezioni diverse, così scartiamo subito le idee in perdita e partiamo solo su ciò che sta in piedi economicamente.
-13. **Marketing Psychology** (`coreyhaines31/marketingskills`) — *Skill*
+### D. Reparto Validazione Business, Video Lancio, Fiducia & Guide Utente (Strategia e Ponte verso le Persone)
+13. **Founder** (`Jakeschincariol/founder-skill`) — *Skill*
+    - **Come la useremo:** **Prima ancora di iniziare a programmare** una piattaforma (in coppia con la nostra Blooderskill `Service-as-a-Software Italia`)! La useremo per far giudicare l'idea dal CFO virtuale e da **100 clienti simulati** con budget e obiezioni diverse.
+14. **Marketing Psychology** (`coreyhaines31/marketingskills`) — *Skill*
     - **Come la useremo:** Per superare lo scoglio più duro (*far fidare gli utenti senza budget pubblicitario*). La useremo per scrivere e revisionare landing page, struttura prezzi, SEO e testi usando oltre 70 modelli psicologici di conversione.
-14. **Sepia** (`Nanako0129/sepia`) — *Skill*
+15. **Sepia** (`Nanako0129/sepia`) — *Skill*
     - **Come la useremo:** In coppia fissa con **Marketing Psychology**! Basata sullo studio *StoryScope* di Google DeepMind e Università del Maryland, ripulisce la struttura profonda di email, landing page, post e comunicazioni eliminando ogni traccia di "testo scritto da un robot" (niente elenchi scontati né frasi astratte, solo prosa concreta e umana).
-15. **Teach** (`mattpocock/skills`) — *Skill*
+16. **Teach** (`mattpocock/skills`) — *Skill*
     - **Come la useremo:** In una cartella dedicata (`/guides`), la useremo per far generare all'agente **mini-lezioni HTML interattive (`lessons/*.html`) e schede pratiche riassuntive (`reference/*.html`)** che spiegano agli utenti come usare la nostra piattaforma passo dopo passo, con estrema semplicità.
-16. **Anatomy** (`wheresryan22/anatomy`) — *Skill*
+17. **Anatomy** (`wheresryan22/anatomy`) — *Skill*
     - **Come la useremo:** In coppia con **Teach** e **Marketing Psychology**! Genera disegni tecnici interattivi e animati (SVG isometrici / WebGL stile *Linear*) da inserire dentro le guide utente e nella home page per far "toccare con mano" visivamente come funziona la piattaforma.
+18. **motionmaxxing** (`Tejashmakwana/motionmaxxing`) — *Skill*
+    - **Come la useremo:** Per creare **spot video animati di lancio prodotto** da vero motion designer in locale (HTML + GSAP + Chrome + FFmpeg), usando curve di movimento misurate su 53 spot reali e controlli automatici anti-piattezza (`G0-G5`).
 
 ---
 
@@ -94,11 +98,13 @@ Per mantenere l'arsenale pulito ed evitare confusione, **scartiamo o sostituiamo
 ## 5. Stato del Progetto & Prossimi Passi
 
 - **Repository GitHub collegato e allineato (`main`):** `https://github.com/raffaeleditullo-cloud/Blooder` (Licenza MIT, vetrina `README.md` auto-generata con loghi Red Matrix e controllo automatico anti-chiavi attivo in `sync_libreria.py`).
-- **Prima Blooderskill pubblicata e collaudata (`skills/fatturapa-xray/`) + Laboratorio Visivo:**
-  - **`FatturaPA X-Ray`** — motore deterministico Python zero-dipendenze (`scripts/xray_fatture.py`) + guida operativa fiscale italiana (`SKILL.md`) + **Laboratorio Visivo Interattivo** (`static/labs/fatturapa-xray.html`, `Teach` + `Anatomy` in stile *Red Matrix*).
+- **Tre Blooderskills pubblicate e collaudate (`skills/`):**
+  1. **`FatturaPA X-Ray`** (`skills/fatturapa-xray/`) — motore deterministico Python zero-dipendenze (`scripts/xray_fatture.py`) + Laboratorio Visivo Interattivo (`static/labs/fatturapa-xray.html`).
+  2. **`Scroll Cinema Web`** (`skills/scroll-cinema-web/`) — trasforma brevi video AI in siti web 60fps controllati dallo scroll su HTML5 Canvas Retina, con taglio automatico WebP Desktop/Mobile e controllo budget MB (`scripts/estrai_sequenza_webp.py`).
+  3. **`Service-as-a-Software Italia`** (`skills/service-as-software-it/`) — applica la tesi Sequoia Capital (*"I servizi sono il nuovo software"*) alla fiscalità italiana reale (`scripts/confronta_saas_servizio.py`, Forfettario 5%/15% + INPS, tetto 85.000€, Ordinario) per confrontare la vendita di abbonamenti SaaS contro l'erogazione di servizi finiti chiavi in mano con AI.
 - **Prossimo passo concordato:**
-  1. Proseguire con la selezione chirurgica di skill e strumenti ad alto impatto per arricchire l'arsenale di Blooder;
-  2. Ideare e sviluppare nuove **Blooderskills** originali sui settori ad alto valore.
+  1. Proseguire con l'analisi dei restanti Reel/skill per completare l'arsenale;
+  2. Usare `Service-as-a-Software Italia` + `Founder` per individuare il primo servizio/piattaforma ad alto margine da costruire.
 
 ---
 
@@ -106,3 +112,5 @@ Per mantenere l'arsenale pulito ed evitare confusione, **scartiamo o sostituiamo
 
 - **Motore Vocale Locale con Recitazione & Blooderskill `voice-forge-director`** *(piano completo salvato in locale in `_privato/PIANO_MOTORE_VOCALE_LOCALE.md`)*:
   - Architettura gratuita in locale per RTX 5060 (8 GB VRAM, `cu128`) progettata per unire **recitazione espressiva italiana** e **timbro vocale identico** senza abbonamenti cloud: test A/B su 1 personaggio pilota tra **Strada A** (`OpenAudio S1-mini` per recitazione a tag + `RVC v2 RMVPE` per maschera vocale) e **Strada B** (`GPT-SoVITS v4` fine-tuned 48 kHz con switch automatico dei campioni emotivi), con verifica automatica `Faster-Whisper` anti-glitch e catena di mastering `FFmpeg` a `-15 LUFS`.
+- **Blooderskill futura: `Audit Legale & Anti-Chargeback Pre-Lancio Italia/UE`:**
+  - Controllo automatico pre-messa online su GDPR, P.IVA obbligatoria, recesso 14 giorni UE, assenza di countdown finti, disdetta immediata anti-chargeback Stripe e verifica licenze commerciali di font e librerie.

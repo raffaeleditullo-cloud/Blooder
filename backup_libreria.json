@@ -1,6 +1,85 @@
 {
   "skills": [
     {
+      "id": 21,
+      "slug": "i-have-adhd",
+      "name": "i-have-adhd (Formato QA Diretto)",
+      "repo_url": "https://github.com/ayghri/i-have-adhd",
+      "kind": "skill",
+      "category": "Qualità Codice & Regole",
+      "tagline": "Impone agli agenti di Controllo Qualità e revisione di andare dritti all’errore, alla riga esatta e al comando di verifica, tagliando zero chiacchiere.",
+      "simple_explanation": "Gli agenti AI sono addestrati per essere gentili e prolissi: quando un agente di Controllo Qualità (QA) trova un bug, spesso lo nasconde in mezzo a 40 righe di preamboli ('Ottima struttura! Ho notato alcune cose...'), bruciando token e facendo perdere dettagli critici a chi deve correggere. Questa skill applica 10 regole secche di output: prima l’azione o il file:riga rotto, passaggi numerati (max 5), zero saluti e un solo prossimo passo verificabile.",
+      "specs": {
+        "linguaggio": "Markdown (SKILL.md - 10 regole rigorose di formato)",
+        "sistemi_operativi": "Windows, macOS, Linux (qualsiasi agente coding o QA)",
+        "costo": "100% Gratuito (MIT License)",
+        "supporto_mcp": "Skill nativa per sub-agenti QA, revisori codice, Paperclip e Claude Code",
+        "difficolta": "Facilissima"
+      },
+      "compatible_apps": [
+        "Agenti dedicati al Controllo Qualità (QA), collaudo test e code review",
+        "Comunicazione asciutta tra agenti diversi dentro Paperclip per risparmiare token",
+        "Report di bug, audit di sicurezza e checklist pre-rilascio leggibili in 5 secondi",
+        "Sessioni operative veloci dove servono solo comandi e righe di codice"
+      ],
+      "tech_keywords": [
+        "qa",
+        "code-review",
+        "concise",
+        "focus",
+        "agent-output",
+        "tokens",
+        "checklist",
+        "claude-code",
+        "rules"
+      ],
+      "cost_saving": "Riduce il consumo di token in uscita nei cicli di controllo qualità multi-agente e azzera il tempo perso a cercare la risposta nel testo.",
+      "honest_tradeoffs": "Va usata sugli agenti tecnici e di Controllo Qualità, MAI sui testi rivolti ai clienti finali (landing page, email o guide utente, dove invece usiamo Sepia e Marketing Psychology per dare calore e fiducia).",
+      "install_guide": "1. Installa la skill con un comando:\n   npx skills add ayghri/i-have-adhd\n\n2. In Blooder viene montata automaticamente da `python attiva_arsenale.py` per essere assegnata agli agenti di Controllo Qualità e revisione.",
+      "stars": 61109,
+      "created_at": "2026-11-13T21:48:47.890186+00:00"
+    },
+    {
+      "id": 20,
+      "slug": "motionmaxxing",
+      "name": "motionmaxxing",
+      "repo_url": "https://github.com/Tejashmakwana/motionmaxxing",
+      "kind": "skill",
+      "category": "Video & Media",
+      "tagline": "Trasforma un sito o un brand in video promozionali animati da vero motion designer in locale (HTML + GSAP + FFmpeg), eliminando le slide piatte da AI.",
+      "simple_explanation": "Quasi tutti i video generati con l’AI sembrano presentazioni PowerPoint che si muovono male, con etichette negli angoli e dissolvenze scontate. motionmaxxing legge i colori, i font e il logo del tuo sito, costruisce una scena su misura e la anima in HTML + GSAP usando curve di movimento misurate fotogramma per fotogramma su 53 veri spot professionali, verificando poi il video renderizzato con controlli automatici (G0-G5) su Chrome e FFmpeg.",
+      "specs": {
+        "linguaggio": "JavaScript (HTML / GSAP) + Script di verifica Python",
+        "sistemi_operativi": "Windows, macOS, Linux (richiede Node 22+, Chrome e FFmpeg)",
+        "costo": "100% Gratuito in locale (Apache-2.0)",
+        "supporto_mcp": "Skill universale (SKILL.md per Claude Code, Antigravity, Codex, Cursor)",
+        "difficolta": "Media"
+      },
+      "compatible_apps": [
+        "Video di lancio prodotto e spot social ad alto impatto per nuove piattaforme",
+        "Presentazioni animate di funzioni software (stile Linear, Stripe, Spotify)",
+        "Animazioni tipografiche e reveal di brand renderizzati in MP4 a 60fps",
+        "Controllo qualità automatico del ritmo visivo prima di pubblicare un reel"
+      ],
+      "tech_keywords": [
+        "motion-graphics",
+        "gsap",
+        "video",
+        "ffmpeg",
+        "animation",
+        "launch-video",
+        "html",
+        "promo",
+        "design",
+        "skill"
+      ],
+      "cost_saving": "Evita abbonamenti a generatori video cloud e centinaia di euro per brevi spot animati di lancio prodotto.",
+      "honest_tradeoffs": "È progettato per motion graphics tipografiche, UI e lanci prodotto in HTML/GSAP, non per generare riprese cinematografiche di attori umani in carne e ossa. Progetto giovane ma già molto solido; richiede Node 22+, Chrome e FFmpeg presenti sul PC.",
+      "install_guide": "1. Assicurati di avere Node.js 22+, Chrome e FFmpeg installati sul PC.\n2. Installa la skill nel tuo ambiente agente:\n   npx skills add Tejashmakwana/motionmaxxing\n\n3. Oppure in Blooder lancia `python attiva_arsenale.py` per montarla automaticamente in `.agents/vendor_skills/motionmaxxing`.",
+      "stars": 1586,
+      "created_at": "2026-11-13T21:48:47.885379+00:00"
+    },
+    {
       "id": 18,
       "slug": "strix",
       "name": "Strix",
@@ -629,6 +708,59 @@
     }
   ],
   "blooderskills": [
+    {
+      "id": 4,
+      "slug": "service-as-software-it",
+      "name": "Service-as-a-Software Italia",
+      "sector": "Strategia Business, Prezzi & Servizi AI (Italia)",
+      "base_skills": [
+        "Founder",
+        "Sepia",
+        "Marketing Psychology"
+      ],
+      "status": "collaudata",
+      "tagline": "Calcola al centesimo (con tasse e INPS reali italiani) quando conviene vendere il Servizio Finito erogato con l'AI invece del classico abbonamento SaaS da 39€/mese.",
+      "missing_piece": "Unisce la tesi Sequoia Capital ('I servizi sono il nuovo software') alla fiscalità italiana vera (Forfettario 5%/15%, INPS, tetto 85.000€, Ordinario): include `scripts/confronta_saas_servizio.py` che confronta clienti necessari, ricambio mensile per abbandoni, ore umane di supervisione e guadagno netto orario reale.",
+      "use_cases": [
+        "Scelta del modello di business prima di scrivere codice: vendere l'accesso al software o vendere il risultato chiavi in mano",
+        "Calcolo di quanti clienti bastano davvero per fare 3.000€-5.000€ netti puliti al mese in Italia da soli",
+        "Trasformazione di skill tecniche di Blooder (es. FatturaPA X-Ray, Scroll Cinema Web, Strix) in servizi ricorrenti ad alto margine per PMI",
+        "Controllo automatico del tetto Forfettario (85.000€/anno) e della capacità massima mensile di 1 singolo operatore"
+      ],
+      "skill_markdown": "---\nname: service-as-software-it\ndescription: \"Applica il modello Sequoia Capital ('I servizi sono il nuovo software') alla realtà fiscale e alle PMI italiane: confronta al centesimo con script Python deterministico la vendita di un abbonamento SaaS fai-da-te contro la vendita di un Servizio Finito Chiavi in Mano erogato internamente con l'AI (calcolando Forfettario 5%/15% + INPS, Ordinario, tetto 85.000€, abbandono clienti e guadagno netto orario reale). Usa sempre questa skill quando valuti come monetizzare un'idea, un flusso AI o una piattaforma per aziende italiane.\"\n---\n\n# Service-as-a-Software Italia — Motore Sequoia & Netto Reale\n\n> **Modulo Originale Blooderskill** | Potenzia: `Founder` (`founder-board`, `founder-cfo`, `founder-offer`, `founder-pricing`), `Sepia` | Zero dipendenze esterne (Python 3.10+ `Decimal`).\n\n## Il Pezzo in Più (Perché in Italia il \"Servizio AI\" batte il SaaS 9 volte su 10)\nSecondo l'analisi di **Sequoia Capital**, per ogni `1 €` speso dalle aziende in software, `6 €` vengono spesi in servizi finiti. In Italia questo divario è ancora più forte: l'artigiano, l'agenzia, lo studio o la PMI **non vuole pagare 39€/mese per studiare l'ennesimo pannello software**, ma paga subito **300€–1.200€/mese** chi gli toglie il problema consegnandogli il risultato già pronto e verificato.\nInoltre il modulo americano `founder-cfo` ignora una trappola cruciale italiana: nel **Regime Forfettario** le spese API/server **non si scaricano dalle tasse** (escono dritte dal netto!), esiste il tetto rigido di **`85.000 €/anno`** (`7.083 €/mese`) e i contributi INPS incidono in modo diretto.\n\n---\n\n## 1. Esecuzione Obbligatoria dello Script (`scripts/confronta_saas_servizio.py`)\n\nNon stimare mai a occhio se conviene vendere un abbonamento software o il servizio chiavi in mano. Lancia sempre il calcolatore deterministico incluso:\n\n```bash\n# Confronto standard per arrivare a 3.000 € netti puliti in tasca al mese in Forfettario start-up (5%)\npython skills/service-as-software-it/scripts/confronta_saas_servizio.py --target-netto 3000 --saas-prezzo 39 --servizio-prezzo 390 --minuti-manuali-prima 240 --minuti-umani-con-ai 25 --regime forfettario --ateco servizi_imprese --imposta-forf-pct 5\n\n# Confronto in Forfettario standard (15%) o Regime Ordinario / SRL\npython skills/service-as-software-it/scripts/confronta_saas_servizio.py --target-netto 5000 --saas-prezzo 49 --servizio-prezzo 600 --regime ordinario\n\n# Output JSON strutturato per report o dashboard\npython skills/service-as-software-it/scripts/confronta_saas_servizio.py --target-netto 3000 --format json\n```\n\n---\n\n## 2. Il Protocollo in 4 Mosse per Costruire un'Offerta \"Service-as-a-Software\"\nQuando un progetto mostra nello script un vantaggio netto del **Modello B (Servizio Finito)** rispetto al SaaS fai-da-te:\n1. **Individua un lavoro ripetitivo pagato a caro prezzo oggi fatto a mano** (es. controllo fatture/listini fornitori, preparazione pratiche/preventivi tecnici, pulizia cataloghi, audit siti/campagne, report mensili per clienti).\n2. **Nascondi la complessità dietro le quinte:** il cliente non vede prompt, modelli né configurazioni; ti invia i file grezzi (via email, cartella condivisa o un modulo con 1 solo pulsante) e riceve il lavoro finito.\n3. **Usa Blooder come \"Fabbrica Interna\" (90% AI + 10% Regia Umana):** gli script deterministici e gli agenti fanno il lavoro pesante in 2 minuti; tu fai 15–20 minuti di controllo qualità umano garantendo **zero allucinazioni**.\n4. ** Prezza sul risultato, mai sulle ore impiegate (`founder-offer`):** se al cliente risparmi 8 ore di studio/impiegato o gli fai recuperare 1.000€ di errori, il servizio vale `350€–800€/mese` anche se a te col motore AI richiede 20 minuti.",
+      "skill_path": "skills/service-as-software-it/SKILL.md",
+      "install_cmd": "npx skills add raffaeleditullo-cloud/Blooder --skill service-as-software-it",
+      "repo_url": "https://github.com/raffaeleditullo-cloud/Blooder/tree/main/skills/service-as-software-it",
+      "lab_url": "",
+      "created_at": "2026-11-13T21:48:47.898678+00:00"
+    },
+    {
+      "id": 3,
+      "slug": "scroll-cinema-web",
+      "name": "Scroll Cinema Web",
+      "sector": "Web Design & Landing Page Cinematografiche",
+      "base_skills": [
+        "motionmaxxing",
+        "Anatomy",
+        "Marketing Psychology",
+        "Sepia"
+      ],
+      "status": "collaudata",
+      "tagline": "Trasforma un breve video AI in un sito web interattivo a 60fps controllato dallo scroll del mouse (stile Apple) con taglio automatico WebP Desktop/Mobile.",
+      "missing_piece": "Sostituisce sia i pesantissimi modelli 3D WebGL sia il tag <video> che scatta sui telefoni: include `scripts/estrai_sequenza_webp.py` (FFmpeg -> doppia sequenza WebP leggera Desktop/Mobile con controllo MB) e genera automaticamente il motore HTML5 Canvas Retina a 60fps con inerzia morbida e testi sincronizzati allo scroll.",
+      "use_cases": [
+        "Landing page 'effetto cinema' per studi auto/moto, immobiliare, moda, ristorazione premium e prodotti fisici",
+        "Home page di presentazione piattaforme SaaS dove lo scroll svela il prodotto pezzo per pezzo",
+        "Conversione rapida di clip Google Veo 3 / Kling AI in siti web fluidi anche su smartphone",
+        "Servizio ad alto valore vendibile ad aziende locali (siti vetrina scenografici pronti in 1 giorno)"
+      ],
+      "skill_markdown": "---\nname: scroll-cinema-web\ndescription: \"Costruisce siti web e landing page cinematografiche a 60fps controllate dallo scorrimento del mouse (stile Apple AirPods e studi automotive di lusso) partendo da due immagini AI e un video di transizione, estraendo sequenze leggere .webp con FFmpeg su HTML5 Canvas Retina. Usa questa skill ogni volta che devi progettare o programmare un sito scenografico ad altissimo impatto visivo senza modelli 3D WebGL pesanti.\"\n---\n\n# Scroll Cinema Web — Motore Siti Cinematografici su Canvas\n\n> **Modulo Originale Blooderskill** | Potenzia: `motionmaxxing`, `Anatomy`, `Marketing Psychology`, `Sepia` | Zero dipendenze Python esterne + `FFmpeg`.\n\n## Il Pezzo in Più (Perché i normali siti AI scattano)\nQuando chiedi a un modello AI generico di fare un sito animato allo scroll usando un file `<video>` e cambiando `video.currentTime`, su Chrome e Safari mobile il sito **va a scatti** perché i codec MP4 comprimono i fotogrammi per differenze (*inter-frame*) e non riescono a riavvolgere fluidamente a 60fps.\n**Scroll Cinema Web** risolve il problema alla radice con la stessa tecnica ingegneristica delle pagine prodotto Apple:\n1. **Generazione AI furba senza modellazione 3D:** 2 sole immagini coerenti (*Start Frame* + *End Frame*) trasformate in un video fluido di `4–6 secondi` (con Veo 3, Kling o Runway);\n2. **Taglio deterministico in `.webp` leggeri (`scripts/estrai_sequenza_webp.py`):** doppia sequenza automatica Desktop (`<= 1600px`) e Mobile (`<= 860px`) con controllo severo del peso in MB;\n3. **Motore HTML5 `<canvas>` Retina a 60fps:** fisica morbida di scorrimento (*Lerp `0.12`*), caricamento progressivo istantaneo del primo frame, testi sincronizzati alle percentuali di scroll e rispetto automatico di `prefers-reduced-motion`.\n\n---\n\n## 1. Uso dello Script Deterministico (`scripts/estrai_sequenza_webp.py`)\n\nPrima di scrivere la pagina web, converti **sempre** il video di transizione con lo script incluso nella skill:\n\n```bash\n# Estrae sequenza Desktop + Mobile, controlla il peso in MB e genera index.html + frames.json pronti\npython skills/scroll-cinema-web/scripts/estrai_sequenza_webp.py \"<percorso-video.mp4>\" --out \"./sito_cinema\" --fps 24 --max-frames 150 --generate-html --title \"Nome Brand\"\n```\n\n### Regole Ferree di Peso e Fluidità (Controllate dallo Script)\n- **Numero ideale di fotogrammi:** tra **`90` e `160` fotogrammi** (es. `5 secondi` a `24–30 fps`). Sotto i 30 frame sembra a scatti; sopra i 220 spreca RAM sui telefoni.\n- **Budget massimo di peso:** **`< 9 MB`** totali su Desktop e **`< 4 MB`** totali su Smartphone (`frames_mobile/`). Se lo script segnala superamento soglia, rilancialo con `--quality 72` o `--max-frames 120`.\n\n---\n\n## 2. Le 4 Regole per Generare il Video Sorgente Perfetto (Veo 3 / Kling / Runway)\n1. **Stessa lente e stessa scala tra Immagine A e Immagine B:** genera prima l'immagine iniziale (es. oggetto spento nel buio/fumo) e usa un riferimento visivo coerente per l'immagine finale (luci accese / dettaglio aperto) evitando salti assurdi di proporzioni.\n2. **Un solo movimento di camera continuo:** chiedi nel prompt video *un lento dolly-in frontale o un'orbita morbida di 30 gradi*, **mai** tagli di montaggio o cambi scena bruschi a metà clip.\n3. **Sfondo scuro o atmosferico consigliato:** fumo, controluce e superfici metalliche/lucide comprimono benissimo in `.webp` pesando la metà rispetto a prati o fogliame caotico, e fanno risaltare subito i titoli chiari in sovrimpressione.\n4. **3 Battute di Testo al Massimo durante la Pista (`400vh`):**\n   - `0% – 30%` scroll → Promessa forte + Bottone azione primario (`Marketing Psychology`);\n   - `36% – 68%` scroll → Prova tecnica / beneficio concreto in 2 righe (`Sepia`);\n   - `74% – 100%` scroll → Chiusura e invito diretto al contatto/prenotazione.",
+      "skill_path": "skills/scroll-cinema-web/SKILL.md",
+      "install_cmd": "npx skills add raffaeleditullo-cloud/Blooder --skill scroll-cinema-web",
+      "repo_url": "https://github.com/raffaeleditullo-cloud/Blooder/tree/main/skills/scroll-cinema-web",
+      "lab_url": "",
+      "created_at": "2026-11-13T21:48:47.894316+00:00"
+    },
     {
       "id": 2,
       "slug": "fatturapa-xray",

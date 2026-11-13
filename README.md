@@ -3,9 +3,9 @@
 
   <br />
 
-  <img src="https://img.shields.io/badge/Libreria_Skill-14_attive-ff1236?style=for-the-badge&labelColor=140407" alt="Skill attive" />
+  <img src="https://img.shields.io/badge/Libreria_Skill-16_attive-ff1236?style=for-the-badge&labelColor=140407" alt="Skill attive" />
   <img src="https://img.shields.io/badge/Strumenti-2_attivi-ff1236?style=for-the-badge&labelColor=140407" alt="Strumenti attivi" />
-  <img src="https://img.shields.io/badge/Blooderskills-1_moduli-10b981?style=for-the-badge&labelColor=140407" alt="Blooderskills" />
+  <img src="https://img.shields.io/badge/Blooderskills-3_moduli-10b981?style=for-the-badge&labelColor=140407" alt="Blooderskills" />
   <img src="https://img.shields.io/badge/Licenza-MIT-fbeef0?style=for-the-badge&labelColor=140407" alt="MIT License" />
   <img src="https://img.shields.io/badge/Python-3.10+-ff4d63?style=for-the-badge&labelColor=140407" alt="Python 3.10+" />
 </div>
@@ -34,14 +34,18 @@ npx skills add raffaeleditullo-cloud/Blooder --skill <nome-skill>
 
 | Modulo | Settore Piattaforma | Potenzia | Stato | Descrizione |
 | :--- | :--- | :--- | :--- | :--- |
+| **[`Service-as-a-Software Italia`](skills/service-as-software-it/SKILL.md)** | `Strategia Business, Prezzi & Servizi AI (Italia)` | Founder, Sepia, Marketing Psychology | Collaudata | Calcola al centesimo (con tasse e INPS reali italiani) quando conviene vendere il Servizio Finito erogato con l'AI invece del classico abbonamento SaaS da 39€/mese. |
+| **[`Scroll Cinema Web`](skills/scroll-cinema-web/SKILL.md)** | `Web Design & Landing Page Cinematografiche` | motionmaxxing, Anatomy, Marketing Psychology, Sepia | Collaudata | Trasforma un breve video AI in un sito web interattivo a 60fps controllato dallo scroll del mouse (stile Apple) con taglio automatico WebP Desktop/Mobile. |
 | **[`FatturaPA X-Ray`](skills/fatturapa-xray/SKILL.md)** | `Fatturazione & Fisco Italia` | Founder, Anatomy, Teach | Collaudata | Raggi X per Fatture Elettroniche Italiane (.xml e .xml.p7m): scova rincari nascosti dei fornitori, blocca gli scarti SdI e calcola il netto vero tolte IVA e tasse. |
 
 ---
 
-## Libreria Skill (14 selezionate)
+## Libreria Skill (16 selezionate)
 
 | Skill | Categoria | Cosa fa in una riga |
 | :--- | :--- | :--- |
+| **[i-have-adhd (Formato QA Diretto)](https://github.com/ayghri/i-have-adhd)** | `Qualità Codice & Regole` | Impone agli agenti di Controllo Qualità e revisione di andare dritti all’errore, alla riga esatta e al comando di verifica, tagliando zero chiacchiere. |
+| **[motionmaxxing](https://github.com/Tejashmakwana/motionmaxxing)** | `Video & Media` | Trasforma un sito o un brand in video promozionali animati da vero motion designer in locale (HTML + GSAP + FFmpeg), eliminando le slide piatte da AI. |
 | **[Strix](https://github.com/usestrix/strix)** | `Sicurezza & Audit` | Hacker etico AI autonomo che attacca dinamicamente la tua app, scarta i falsi allarmi con prove reali e scrive già la patch di codice. |
 | **[Understand Anything](https://github.com/Egonex-AI/Understand-Anything)** | `Qualità Codice & Regole` | Trasforma qualsiasi codebase (anche da 200.000 righe senza documentazione) in una mappa visiva interattiva con analisi d’impatto modifiche. |
 | **[Billion Context](https://github.com/ranxianglei/billion-context)** | `Agenti AI & Automazione` | Comprime la memoria delle sessioni di coding riducendo di 5 volte i token, così l’agente lavora per giorni senza perdere il filo. |
