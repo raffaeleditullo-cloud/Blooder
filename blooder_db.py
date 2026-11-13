@@ -585,6 +585,7 @@ def _row_to_blooderskill(row: sqlite3.Row) -> dict:
         "skill_path": f"skills/{slug}/SKILL.md",
         "install_cmd": f"npx skills add {GITHUB_REPO} --skill {slug}",
         "repo_url": f"https://github.com/{GITHUB_REPO}/tree/main/skills/{slug}",
+        "lab_url": f"/labs/{slug}.html" if (BASE_DIR / "static" / "labs" / f"{slug}.html").is_file() else "",
         "created_at": row["created_at"],
     }
 

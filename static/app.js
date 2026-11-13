@@ -225,6 +225,7 @@ function renderBlooderskills() {
         <div class="badge-row">
           <span class="badge">${esc(b.sector)}</span>
           <span class="badge ${isReady ? 'badge-ready' : 'badge-draft'}">${isReady ? 'Collaudata' : 'In test'}</span>
+          ${b.lab_url ? `<span class="badge badge-lab">${ico('play')} Simulatore Visivo</span>` : ''}
         </div>
         <h3 class="skill-title">${esc(b.name)}</h3>
         <p class="skill-tagline">${esc(b.tagline)}</p>
@@ -367,6 +368,7 @@ function openBsDetail(id) {
         <div class="badge-row">
           <span class="badge">${esc(b.sector)}</span>
           <span class="badge ${isReady ? 'badge-ready' : 'badge-draft'}">${isReady ? 'Collaudata' : 'In test'}</span>
+          ${b.lab_url ? `<span class="badge badge-lab">${ico('play')} Simulatore Visivo</span>` : ''}
         </div>
         <h2>${esc(b.name)}</h2>
         <p class="modal-sub">${esc(b.tagline)}</p>
@@ -376,6 +378,16 @@ function openBsDetail(id) {
         <button class="btn btn-icon" onclick="closeModal('detail-modal')" title="Chiudi" aria-label="Chiudi">${ico('x')}</button>
       </div>
     </div>
+
+    ${b.lab_url ? `
+      <div class="lab-cta-banner">
+        <div>
+          <h4>Laboratorio Visivo &amp; Simulatore Calcolatore</h4>
+          <p>Non serve sapere nulla di fisco: scopri passo passo come funziona con animazioni e simula i tuoi conti reali.</p>
+        </div>
+        <a class="btn btn-primary" href="${esc(b.lab_url)}">${ico('play')} Avvia Simulatore</a>
+      </div>
+    ` : ''}
 
     <div class="steps" data-steps>
       <div class="steps-nav">
@@ -759,4 +771,8 @@ document.addEventListener('click', e => {
 });
 
 initSteps();
+if (location.hash === '#blooderskills' || sessionStorage.getItem('blooder_tab') === 'blooderskill') {
+  sessionStorage.removeItem('blooder_tab');
+  switchSection('blooderskill');
+}
 loadSkills();

@@ -1,6 +1,85 @@
 {
   "skills": [
     {
+      "id": 16,
+      "slug": "billion-context",
+      "name": "Billion Context",
+      "repo_url": "https://github.com/ranxianglei/billion-context",
+      "kind": "skill",
+      "category": "Agenti AI & Automazione",
+      "tagline": "Comprime la memoria delle sessioni di coding riducendo di 5 volte i token, così l’agente lavora per giorni senza perdere il filo.",
+      "simple_explanation": "Quando lavori a lungo sullo stesso progetto con un agente AI, la conversazione si riempie di file letti, log di errore e tentativi vecchi: i costi salgono e il modello inizia a dimenticare le regole date all’inizio. Billion Context organizza la memoria a tre livelli (cattura, distilla, condensa), potando il rumore inutile e tenendo vivi i vincoli essenziali dentro una finestra leggera (~100K token) anche su sessioni che durano giorni.",
+      "specs": {
+        "linguaggio": "TypeScript / Node.js",
+        "sistemi_operativi": "Windows, macOS, Linux",
+        "costo": "100% Gratuito (MIT License)",
+        "supporto_mcp": "Plugin per Claude Code, Codex, OpenCode e Pi",
+        "difficolta": "Facile (npm install)"
+      },
+      "compatible_apps": [
+        "Sessioni di sviluppo lunghe su codebase aziendali grandi",
+        "Refactoring in più tappe dove l’agente non deve dimenticare i vincoli iniziali",
+        "Riduzione fino a 5x dei costi token su API a consumo",
+        "Agenti autonomi che girano per ore senza intervento manuale"
+      ],
+      "tech_keywords": [
+        "context",
+        "compression",
+        "memory",
+        "tokens",
+        "agent",
+        "claude-code",
+        "codex",
+        "pruning",
+        "typescript"
+      ],
+      "cost_saving": "Taglia fino a 5 volte il consumo di token nelle sessioni lunghe ed evita di dover ripartire da zero rispiegando tutto il progetto.",
+      "honest_tradeoffs": "È una compressione intelligente, non magia: se ti serve rileggere parola per parola una riga esatta di un file visto 200 messaggi fa, l’agente dovrà riaprire il file da disco invece di trovarlo già intero in memoria. Su compiti brevi da 10 minuti non serve.",
+      "install_guide": "1. Richiede Node.js installato sul sistema.\n2. Installa il pacchetto globalmente:\n   npm install -g billion-context\n3. Collegalo al tuo agente coding (Claude Code, Codex, OpenCode o Pi) seguendo il comando di aggancio indicato nel repository:\n   https://github.com/ranxianglei/billion-context",
+      "stars": 7197,
+      "created_at": "2026-11-13T14:11:23.623891+00:00"
+    },
+    {
+      "id": 15,
+      "slug": "claude-video",
+      "name": "Claude Video (/watch)",
+      "repo_url": "https://github.com/bradautomates/claude-video",
+      "kind": "skill",
+      "category": "Video & Media",
+      "tagline": "Permette al tuo agente AI di guardare qualsiasi video o tutorial estraendo fotogrammi chiave e parlato sincronizzati.",
+      "simple_explanation": "I normali lettori di video leggono solo i sottotitoli e restano ciechi su ciò che succede sullo schermo. Con /watch passi un link (YouTube o web) oppure un file video dal tuo PC: lo strumento scarica il video con yt-dlp, estrae con FFmpeg solo i fotogrammi visivi che cambiano davvero (senza sprecare token su schermate ferme) e li allinea secondo per secondo con la trascrizione del parlato. Così l’agente vede dove clicca una persona in un tutorial, analizza bug registrati a schermo o trasforma un video-corso in una procedura pronta.",
+      "specs": {
+        "linguaggio": "Python + FFmpeg / yt-dlp",
+        "sistemi_operativi": "Windows, macOS, Linux",
+        "costo": "100% Gratuito (MIT License)",
+        "supporto_mcp": "Skill nativa per Claude Code, Codex, Cursor e Agent Skills CLI",
+        "difficolta": "Facile"
+      },
+      "compatible_apps": [
+        "Estrazione automatica di guide e skill da video-tutorial",
+        "Analisi di bug report registrati a schermo (screen recording)",
+        "Studio di interfacce, flussi concorrenti e demo prodotto da video",
+        "Estrazione e taglio pulito di tracce audio/video e trascrizioni"
+      ],
+      "tech_keywords": [
+        "video",
+        "watch",
+        "ffmpeg",
+        "yt-dlp",
+        "whisper",
+        "frames",
+        "youtube",
+        "multimodal",
+        "tutorial",
+        "skill"
+      ],
+      "cost_saving": "Evita servizi cloud di video-intelligence a pagamento e riduce drasticamente i token eliminando i fotogrammi duplicati.",
+      "honest_tradeoffs": "Funziona negli ambienti agente locali (Claude Code, Codex, Cursor, terminale) dove può eseguire FFmpeg e yt-dlp, non nella semplice chat web del browser. Se un video non ha sottotitoli nativi, serve Whisper locale (gratuito) o una chiave Groq/OpenAI per trascrivere il parlato.",
+      "install_guide": "1. Assicurati di avere FFmpeg e Python installati sul PC.\n2. Per qualsiasi agente compatibile (Cursor, Antigravity, Codex, Claude Code):\n   npx skills add bradautomates/claude-video\n3. Oppure in Claude Desktop (modalità Code) -> Customize -> Plugins -> Add from repository:\n   https://github.com/bradautomates/claude-video\n4. Usa il comando /watch <url-o-file-video> per far analizzare il video.",
+      "stars": 20682,
+      "created_at": "2026-11-13T14:11:23.620694+00:00"
+    },
+    {
       "id": 14,
       "slug": "founder-skill",
       "name": "Founder",
@@ -530,6 +609,7 @@
       "skill_path": "skills/fatturapa-xray/SKILL.md",
       "install_cmd": "npx skills add raffaeleditullo-cloud/Blooder --skill fatturapa-xray",
       "repo_url": "https://github.com/raffaeleditullo-cloud/Blooder/tree/main/skills/fatturapa-xray",
+      "lab_url": "/labs/fatturapa-xray.html",
       "created_at": "2026-11-12T09:18:33.694171+00:00"
     }
   ]

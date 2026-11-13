@@ -3,7 +3,7 @@
 
   <br />
 
-  <img src="https://img.shields.io/badge/Libreria_Skill-12_attive-ff1236?style=for-the-badge&labelColor=140407" alt="Skill attive" />
+  <img src="https://img.shields.io/badge/Libreria_Skill-14_attive-ff1236?style=for-the-badge&labelColor=140407" alt="Skill attive" />
   <img src="https://img.shields.io/badge/Strumenti-1_attivi-ff1236?style=for-the-badge&labelColor=140407" alt="Strumenti attivi" />
   <img src="https://img.shields.io/badge/Blooderskills-1_moduli-10b981?style=for-the-badge&labelColor=140407" alt="Blooderskills" />
   <img src="https://img.shields.io/badge/Licenza-MIT-fbeef0?style=for-the-badge&labelColor=140407" alt="MIT License" />
@@ -38,10 +38,12 @@ npx skills add raffaeleditullo-cloud/Blooder --skill <nome-skill>
 
 ---
 
-## Libreria Skill (12 selezionate)
+## Libreria Skill (14 selezionate)
 
 | Skill | Categoria | Cosa fa in una riga |
 | :--- | :--- | :--- |
+| **[Billion Context](https://github.com/ranxianglei/billion-context)** | `Agenti AI & Automazione` | Comprime la memoria delle sessioni di coding riducendo di 5 volte i token, così l’agente lavora per giorni senza perdere il filo. |
+| **[Claude Video (/watch)](https://github.com/bradautomates/claude-video)** | `Video & Media` | Permette al tuo agente AI di guardare qualsiasi video o tutorial estraendo fotogrammi chiave e parlato sincronizzati. |
 | **[Founder](https://github.com/Jakeschincariol/founder-skill)** | `Business & Strategia` | 11 skill gratuite che mettono alla prova la tua idea di business con un CFO virtuale e 100 clienti simulati prima di investirci un solo euro. |
 | **[Andrej Karpathy Skills](https://github.com/multica-ai/andrej-karpathy-skills)** | `Qualità Codice & Regole` | Il file di 65 righe con le 4 regole ferree di Andrej Karpathy che impedisce all'AI di complicare il codice o rompere file che non doveva toccare. |
 | **[Sepia](https://github.com/Nanako0129/sepia)** | `Marketing & Conversioni` | Elimina l'effetto 'testo scritto da un robot' correggendo la struttura profonda delle frasi secondo lo studio StoryScope di Google DeepMind. |

@@ -1394,6 +1394,46 @@ pre.code-box {
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
+.badge-lab {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: #ffd5da;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.badge-lab .ico {
+  width: 12px;
+  height: 12px;
+}
+
+.lab-cta-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  border-radius: var(--r-box);
+  background: linear-gradient(135deg, rgba(255, 18, 54, 0.16), rgba(19, 4, 7, 0.92));
+  border: 1px solid var(--accent);
+  box-shadow: 0 10px 28px rgba(255, 18, 54, 0.12);
+}
+
+.lab-cta-banner h4 {
+  font-family: var(--display);
+  font-size: 20px;
+  letter-spacing: 0.02em;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+
+.lab-cta-banner p {
+  font-size: 13.5px;
+  color: var(--text-soft);
+}
+
 /* Chi ha disattivato le animazioni nel sistema vede tutto fermo */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blooder Lab — FatturaPA X-Ray (Guida Visiva &amp; Simulatore)</title>
+  <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/labs/lab.css" />
+</head>
+<body>
+  <canvas id="bg-rain" aria-hidden="true"></canvas>
+  <div class="bg-veil" aria-hidden="true"></div>
+
+  <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="14" height="14" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></symbol>
+  </svg>
+
+  <main class="lab-shell">
+    <header class="lab-topbar">
+      <a class="lab-back" href="/#blooderskills" onclick="sessionStorage.setItem('blooder_tab','blooderskill')">
+        <svg class="ico"><use href="#i-arrow-left"/></svg> Torna a Blooderskills
+      </a>
+      <div class="lab-brand-pill">
+        <img src="/logo.svg" alt="Blooder" />
+        <span>Blooder Interactive Lab · Teach + Anatomy</span>
+      </div>
+    </header>
+
+    <section class="lab-hero">
+      <div class="lab-hero-badges">
+        <span class="badge">Fatturazione &amp; Fisco Italia</span>
+        <span class="badge badge-ready">Zero conoscenze richieste</span>
+        <span class="badge badge-lab">Guida in 4 Step + Calcolatore</span>
+      </div>
+      <h1>FATTURAPA X-RAY — SIMULATORE VISIVO</h1>
+      <p>
+        Non serve sapere niente di fatture o commercialisti: tocca il macchinario qui sotto passo dopo passo
+        per vedere con i tuoi occhi cosa succede ai tuoi soldi quando ricevi o mandi una fattura in Italia.
+      </p>
+    </section>
+
+    <!-- Barra dei 4 Step Guidati -->
+    <nav class="mission-stepper" aria-label="Percorso guidato">
+      <button type="button" class="mission-tab active" data-step="0" onclick="goMission(0)">
+        <span class="mission-num">1</span>
+        <span class="mission-tab-label"><small>Lo Scontrino</small>Rincari &amp; File XML</span>
+      </button>
+      <button type="button" class="mission-tab" data-step="1" onclick="goMission(1)">
+        <span class="mission-num">2</span>
+        <span class="mission-tab-label"><small>La Dogana</small>Blocchi Stato (SdI)</span>
+      </button>
+      <button type="button" class="mission-tab" data-step="2" onclick="goMission(2)">
+        <span class="mission-num">3</span>
+        <span class="mission-tab-label"><small>Il Calcolatore</small>Soldi Veri in Tasca</span>
+      </button>
+      <button type="button" class="mission-tab" data-step="3" onclick="goMission(3)">
+        <span class="mission-num">4</span>
+        <span class="mission-tab-label"><small>Prova Finale</small>Scheda Pronta</span>
+      </button>
+    </nav>
+
+    <div class="lab-workbench">
+      <!-- TAVOLA ISOMETRICA INTERATTIVA (ANATOMY) -->
+      <div class="anatomy-plate">
+        <div class="plate-head">
+          <span class="plate-fig-id" id="plate-fig-id">FIG. 01 · SCANNER OTTICO</span>
+          <span class="plate-title" id="plate-title">Banco di Controllo FatturaPA X-Ray</span>
+        </div>
+
+        <svg id="iso-machine" class="plate-stage" viewBox="0 0 680 468" role="img" aria-label="Macchinario isometrico interattivo FatturaPA X-Ray"></svg>
+
+        <div class="plate-foot">
+          <span class="plate-hint" id="plate-hint">Clicca una fattura a destra per farla scorrere sotto il laser.</span>
+          <span class="plate-readout" id="plate-readout">STATO: PRONTO</span>
+        </div>
+
+        <div class="plate-legend">
+          <span class="legend-item"><i class="legend-dot dot-ice"></i> Fogli XML / .p7m</span>
+          <span class="legend-item"><i class="legend-dot dot-amber"></i> Uscite Fornitori</span>
+          <span class="legend-item"><i class="legend-dot dot-red"></i> Tasse / Allarmi Rincaro</span>
+          <span class="legend-item"><i class="legend-dot dot-green"></i> Netto Vero / Via Libera</span>
+        </div>
+      </div>
+
+      <!-- PANNELLO LEZIONE INTERATTIVA (TEACH) -->
+      <aside class="lesson-card">
+
+        <!-- STEP 1: COS'E' L'XML E I RINCARI SILENZIOSI -->
+        <div class="lesson-pane active" id="pane-0">
+          <span class="lesson-kicker">Passo 1 di 4 · Controllo Scontrino Fornitori</span>
+          <h2>Cos'è davvero il file XML (e come ti fregano sui prezzi)</h2>
+          <p class="lesson-explain">
+            Il PDF che vedi sul telefono è solo un disegno. Per la legge italiana la vera fattura è un file
+            <strong>.xml</strong> (a volte chiuso col lucchetto digitale <strong>.p7m</strong>) dove ogni prezzo è scritto in una casella matematica.
+            <strong>Passa queste 3 fatture del fornitore sotto il laser:</strong>
+          </p>
+
+          <div class="sample-deck">
+            <button type="button" class="sample-btn selected" id="sample-0" onclick="runScannerSample(0)">
+              <div>
+                <span class="sample-btn-title">1. Fattura Gennaio (.xml.p7m firmato)</span>
+                <span class="sample-btn-sub">10 Cilindri sicurezza a 28,50 € l'uno</span>
+              </div>
+              <span class="pill-status pill-ok">Prezzo Base</span>
+            </button>
+
+            <button type="button" class="sample-btn" id="sample-1" onclick="runScannerSample(1)">
+              <div>
+                <span class="sample-btn-title">2. Fattura Marzo (nascosta tra 40 righe)</span>
+                <span class="sample-btn-sub">10 Cilindri passati a 33,90 € + Schiuma +19%</span>
+              </div>
+              <span class="pill-status pill-err">Rincaro +18,95%</span>
+            </button>
+
+            <button type="button" class="sample-btn" id="sample-2" onclick="runScannerSample(2)">
+              <div>
+                <span class="sample-btn-title">3. Nota di Credito Reso Merce (Sigla TD04)</span>
+                <span class="sample-btn-sub">Resi 2 cilindri difettosi (-82,72 €)</span>
+              </div>
+              <span class="pill-status pill-amber">Va Sottratta!</span>
+            </button>
+          </div>
+
+          <div class="feedback-box state-ok" id="step1-feedback">
+            <h4>Sbucciatura automatica .p7m completata</h4>
+            <p>La skill apre da sola il lucchetto digitale .p7m e memorizza il prezzo onesto di partenza: <strong>28,50 €</strong> a pezzo. Ora clicca sulla <strong>Fattura di Marzo</strong>!</p>
+          </div>
+
+          <div class="lesson-nav-foot">
+            <span></span>
+            <button type="button" class="btn btn-primary" onclick="goMission(1)">
+              Vai alla Dogana Stato <svg class="ico"><use href="#i-arrow-right"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 2: LA DOGANA DELLO STATO (SDI) -->
+        <div class="lesson-pane" id="pane-1">
+          <span class="lesson-kicker">Passo 2 di 4 · Il Postino Fiscale (SdI)</span>
+          <h2>Perché lo Stato ti rimanda indietro la fattura</h2>
+          <p class="lesson-explain">
+            Quando mandi una fattura a un cliente per farti pagare, passa prima da un cancello automatico dello Stato chiamato
+            <strong>SdI</strong>. Se trova anche solo una casella sbagliata, <strong>abbassa la sbarra rossa e blocca l'incasso</strong>.
+            <br/><strong>Clicca i 3 interruttori qui sotto per riparare la bozza e alzare la sbarra:</strong>
+          </p>
+
+          <div class="switch-list">
+            <button type="button" class="fix-switch" id="sw-dest" onclick="toggleGateFix('dest')">
+              <div>
+                <strong>1. Indirizzo Postale Elettronico Cliente</strong>
+                <span id="sw-dest-desc">Scritto "ABC123" (6 lettere invece di 7) → Scarto immediato!</span>
+              </div>
+              <span class="switch-toggle-pill" id="sw-dest-pill">Ripara</span>
+            </button>
+
+            <button type="button" class="fix-switch" id="sw-natura" onclick="toggleGateFix('natura')">
+              <div>
+                <strong>2. Motivo per cui non metti l'IVA</strong>
+                <span id="sw-natura-desc">Lasciato vuoto o usato vecchio codice "N2" abolito → Bloccata!</span>
+              </div>
+              <span class="switch-toggle-pill" id="sw-natura-pill">Ripara</span>
+            </button>
+
+            <button type="button" class="fix-switch" id="sw-bollo" onclick="toggleGateFix('bollo')">
+              <div>
+                <strong>3. Marca da Bollo da 2,00 € (sopra 77,47 €)</strong>
+                <span id="sw-bollo-desc">Fattura da 650 € senza IVA ma bollo dimenticato → Multa!</span>
+              </div>
+              <span class="switch-toggle-pill" id="sw-bollo-pill">Ripara</span>
+            </button>
+          </div>
+
+          <div class="feedback-box state-err" id="step2-feedback">
+            <h4>Sbarra Abbassata: 3 errori bloccano il pagamento</h4>
+            <p>FatturaPA X-Ray controlla la tua bozza in 1 secondo <strong>prima</strong> di spedirla, così non fai brutte figure col cliente. Ripara tutti e 3 gli errori qui sopra!</p>
+          </div>
+
+          <div class="lesson-nav-foot">
+            <button type="button" class="btn" onclick="goMission(0)">
+              <svg class="ico"><use href="#i-arrow-left"/></svg> Indietro
+            </button>
+            <button type="button" class="btn btn-primary" onclick="goMission(2)">
+              Apri il Calcolatore <svg class="ico"><use href="#i-arrow-right"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 3: SIMULATORE CALCOLATORE SOLDI VERI -->
+        <div class="lesson-pane" id="pane-2">
+          <span class="lesson-kicker">Passo 3 di 4 · Simulatore Interattivo dal Vivo</span>
+          <h2>Quanti soldi sono davvero tuoi da spendere?</h2>
+          <p class="lesson-explain">
+            Vedere 5.000 € sul conto inganna tutti: una parte va ai fornitori e una parte allo Stato.
+            <strong>Muovi i cursori e guarda i 3 serbatoi sul macchinario salire e scendere in tempo reale:</strong>
+          </p>
+
+          <div class="calc-regime-row">
+            <button type="button" class="seg-btn active" id="btn-reg-forf" onclick="setRegime('forfettario')">
+              Regime Forfettario (Piccola P.IVA)
+            </button>
+            <button type="button" class="seg-btn" id="btn-reg-ord" onclick="setRegime('ordinario')">
+              Regime Ordinario (Ditta / Srl)
+            </button>
+          </div>
+
+          <div class="ateco-row" id="ateco-bar">
+            <button type="button" class="ateco-chip active" data-coeff="86" onclick="setAteco(86, this)">Artigiano (86%)</button>
+            <button type="button" class="ateco-chip" data-coeff="78" onclick="setAteco(78, this)">Consulente (78%)</button>
+            <button type="button" class="ateco-chip" data-coeff="67" onclick="setAteco(67, this)">Software (67%)</button>
+            <button type="button" class="ateco-chip" data-coeff="40" onclick="setAteco(40, this)">Commercio (40%)</button>
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-head">
+              <span>Soldi incassati dai clienti</span>
+              <strong id="val-incasso">3.500 €</strong>
+            </div>
+            <input type="range" class="lab-range" id="rng-incasso" min="500" max="15000" step="100" value="3500" oninput="updateCalculator()" />
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-head">
+              <span>Materiali e fornitori pagati (IVA inclusa)</span>
+              <strong id="val-costi">1.400 €</strong>
+            </div>
+            <input type="range" class="lab-range" id="rng-costi" min="0" max="10000" step="50" value="1400" oninput="updateCalculator()" />
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-head">
+              <span>Rincaro silenzioso dei fornitori non scoperto</span>
+              <strong id="val-rincaro">0%</strong>
+            </div>
+            <input type="range" class="lab-range" id="rng-rincaro" min="0" max="30" step="1" value="0" oninput="updateCalculator()" />
+          </div>
+
+          <div class="kpi-trio">
+            <div class="kpi-card kpi-amber">
+              <small>Vasca Fornitori</small>
+              <strong id="kpi-fornitori">1.400 €</strong>
+            </div>
+            <div class="kpi-card kpi-red">
+              <small>Salvadanaio Stato</small>
+              <strong id="kpi-tasse">1.065 €</strong>
+            </div>
+            <div class="kpi-card kpi-green">
+              <small>Netto Vero Tuo</small>
+              <strong id="kpi-netto">1.035 €</strong>
+            </div>
+          </div>
+
+          <div class="feedback-box state-ok" id="step3-feedback">
+            <h4 id="calc-insight-title">Perché nel Forfettario i rincari fanno il doppio del male?</h4>
+            <p id="calc-insight-body">
+              Prova ad alzare il cursore del rincaro fornitori al +15%: lo Stato calcola le tue tasse solo su quanto incassi, quindi ogni euro in più chiesto dal fornitore esce al 100% dalla tua tasca verde!
+            </p>
+          </div>
+
+          <div class="lesson-nav-foot">
+            <button type="button" class="btn" onclick="goMission(1)">
+              <svg class="ico"><use href="#i-arrow-left"/></svg> Indietro
+            </button>
+            <button type="button" class="btn btn-primary" onclick="goMission(3)">
+              Sfida Finale &amp; Uso <svg class="ico"><use href="#i-arrow-right"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 4: MINI-SFIDA RETRIEVAL + DIZIONARIO ZERO-BUROCRAZIA -->
+        <div class="lesson-pane" id="pane-3">
+          <span class="lesson-kicker">Passo 4 di 4 · Ora hai tutto chiaro!</span>
+          <h2>Mini-prova lampo + Dizionario Umano</h2>
+          <p class="lesson-explain">
+            Vediamo se il macchinario ha funzionato! Se un tuo amico artigiano (in Regime Forfettario) riceve una
+            <strong>Nota di Credito (TD04)</strong> da 100 € perché ha restituito merce rotta, cosa fa un'IA normale senza la nostra skill?
+          </p>
+
+          <div class="quiz-options" id="quiz-box">
+            <button type="button" class="quiz-opt" onclick="answerQuiz(this, false)">
+              Chiude il conto in banca del fornitore in automatico
+            </button>
+            <button type="button" class="quiz-opt" onclick="answerQuiz(this, true)">
+              Rischia di sommarla alle spese (+100 €) invece di toglierla (-100 €) perché nel file XML il numero è scritto senza il meno
+            </button>
+            <button type="button" class="quiz-opt" onclick="answerQuiz(this, false)">
+              Paga da sola la marca da bollo da 77,47 € all'Agenzia
+            </button>
+          </div>
+
+          <div class="feedback-box" id="quiz-feedback">
+            <h4>Clicca la risposta giusta qui sopra</h4>
+            <p>Ti basta un click per sbloccare il riepilogo finale pronto all'uso.</p>
+          </div>
+
+          <div class="glossary-mini">
+            <h4>Le 5 sigle tradotte in italiano da bar</h4>
+            <div class="glossary-row"><code>.xml / .p7m</code><span>Il vero scontrino elettronico di legge (il .p7m ha solo la busta firmata).</span></div>
+            <div class="glossary-row"><code>SdI</code><span>Il "postino" dello Stato che controlla e consegna tutte le fatture d'Italia.</span></div>
+            <div class="glossary-row"><code>TD01 / TD04</code><span>TD01 = Fattura normale da pagare · TD04 = Rimborso/Reso da sottrarre.</span></div>
+            <div class="glossary-row"><code>N2.2</code><span>L'etichetta obbligatoria per dire allo Stato "sono Forfettario, niente IVA".</span></div>
+            <div class="glossary-row"><code>77,47 €</code><span>La soglia oltre cui una fattura senza IVA richiede il bollo da 2,00 €.</span></div>
+          </div>
+
+          <div class="lesson-nav-foot">
+            <button type="button" class="btn" onclick="goMission(2)">
+              <svg class="ico"><use href="#i-arrow-left"/></svg> Calcolatore
+            </button>
+            <button type="button" class="btn btn-primary" onclick="copyReadyPrompt()">
+              <svg class="ico"><use href="#i-copy"/></svg> Copia comando Skill
+            </button>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+  </main>
+
+  <div class="toast" id="lab-toast" role="status" aria-live="polite"></div>
+
+  <script src="/fx.js"></script>
+  <script src="/labs/fatturapa-xray.js"></script>
+</body>
+</html>

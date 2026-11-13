@@ -1,0 +1,792 @@
+/* ==========================================================
+   BLOODER LABS — Stile condiviso per Guide Visive & Simulatori
+   Unisce i principi di Teach (passi progressivi + glossario)
+   e Anatomy (tavola tecnica Fig. 01 + macchina isometrica a 4 toni)
+   mantenendo al 100% la palette e tipografia Red Matrix.
+   ========================================================== */
+
+.lab-shell {
+  position: relative;
+  z-index: 1;
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 24px 28px 72px;
+}
+
+.lab-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 18px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.lab-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-soft);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 8px 14px;
+  border-radius: var(--r-btn);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition: border-color 0.18s ease, color 0.18s ease, background 0.18s ease;
+}
+
+.lab-back:hover {
+  color: var(--text);
+  border-color: var(--accent);
+  background: var(--surface-hover);
+}
+
+.lab-brand-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.lab-brand-pill img {
+  width: 24px;
+  height: 24px;
+}
+
+/* ---------- Intestazione Missione (Teach) ---------- */
+.lab-hero {
+  margin-bottom: 24px;
+}
+
+.lab-hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.lab-hero h1 {
+  font-family: var(--display);
+  font-size: 42px;
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: 0.01em;
+  line-height: 1.05;
+  margin-bottom: 8px;
+}
+
+.lab-hero p {
+  color: var(--text-soft);
+  font-size: 16.5px;
+  max-width: 780px;
+}
+
+/* ---------- Barra dei 4 Step Guidati ---------- */
+.mission-stepper {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.mission-tab {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 12px 14px;
+  border-radius: var(--r-box);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-soft);
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.mission-tab:hover {
+  border-color: var(--border-strong);
+  background: var(--surface-hover);
+}
+
+.mission-tab.active {
+  background: linear-gradient(135deg, rgba(255, 18, 54, 0.18), rgba(26, 4, 9, 0.95));
+  border-color: var(--accent);
+  color: var(--text);
+  box-shadow: 0 8px 24px rgba(255, 18, 54, 0.14);
+}
+
+.mission-tab.done:not(.active) {
+  border-color: rgba(16, 185, 129, 0.45);
+}
+
+.mission-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 15px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-strong);
+  flex: none;
+}
+
+.mission-tab.active .mission-num {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.mission-tab.done:not(.active) .mission-num {
+  background: var(--green-soft);
+  border-color: var(--green);
+  color: var(--green);
+}
+
+.mission-tab-label small {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* ---------- Layout Principale: Tavola Anatomy + Guida Teach ---------- */
+.lab-workbench {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(360px, 0.95fr);
+  gap: 20px;
+  align-items: start;
+}
+
+/* ---------- Tavola Tecnica Isometrica (Anatomy Frame) ---------- */
+.anatomy-plate {
+  background: radial-gradient(ellipse 90% 80% at 50% 42%, rgba(45, 7, 15, 0.52), rgba(10, 2, 4, 0.96));
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-card);
+  padding: 16px 18px 14px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  position: sticky;
+  top: 20px;
+}
+
+.plate-head,
+.plate-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.plate-head {
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.plate-fig-id {
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.plate-title {
+  color: var(--text-soft);
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.plate-stage {
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  display: block;
+  margin: 8px 0;
+  user-select: none;
+}
+
+.plate-foot {
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.plate-hint {
+  color: var(--text-soft);
+  font-family: var(--sans);
+  font-size: 12.5px;
+}
+
+.plate-readout {
+  color: #fff;
+  background: rgba(255, 18, 54, 0.14);
+  border: 1px solid rgba(255, 18, 54, 0.4);
+  padding: 3px 10px;
+  border-radius: var(--r-pill);
+  font-weight: 700;
+}
+
+.plate-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border);
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-red { background: var(--accent); }
+.dot-amber { background: var(--amber); }
+.dot-green { background: var(--green); }
+.dot-ice { background: #fbeef0; }
+
+/* ---------- Toni solidi isometrici SVG (4-tone shading Anatomy) ---------- */
+.iso-shadow { fill: rgba(0, 0, 0, 0.55); }
+.iso-lo-top { fill: #24070d; stroke: #460e19; stroke-width: 1; }
+.iso-lo-left { fill: #180408; stroke: #380b14; stroke-width: 1; }
+.iso-lo-right { fill: #110205; stroke: #2e0810; stroke-width: 1; }
+
+.iso-mid-top { fill: #380b15; stroke: #681626; stroke-width: 1; }
+.iso-mid-left { fill: #27070e; stroke: #52101d; stroke-width: 1; }
+.iso-mid-right { fill: #1c0409; stroke: #400c17; stroke-width: 1; }
+
+.iso-hi-top { fill: #541220; stroke: #8f1f37; stroke-width: 1; }
+.iso-hi-left { fill: #3d0c17; stroke: #70172a; stroke-width: 1; }
+.iso-hi-right { fill: #2b0810; stroke: #571120; stroke-width: 1; }
+
+.iso-lit-beam {
+  fill: rgba(255, 18, 54, 0.2);
+  stroke: #ff3d58;
+  stroke-width: 1.4;
+}
+
+.iso-doc-sheet {
+  fill: #fbeef0;
+  stroke: #ff4d63;
+  stroke-width: 1.2;
+}
+
+.iso-doc-ink {
+  stroke: #3d0c17;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+.iso-doc-alert {
+  fill: #ff1236;
+}
+
+.iso-rail {
+  stroke: #7a1b2f;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+}
+
+.iso-tick {
+  stroke: #611927;
+  stroke-width: 1;
+}
+
+.iso-bolt {
+  fill: #0d0204;
+  stroke: #6e1a2b;
+  stroke-width: 1;
+}
+
+.iso-glass {
+  fill: rgba(255, 235, 238, 0.04);
+  stroke: rgba(255, 190, 200, 0.28);
+  stroke-width: 1.2;
+}
+
+.tank-fill-amber { fill: rgba(245, 158, 11, 0.78); stroke: #fbbf24; stroke-width: 1; }
+.tank-fill-red { fill: rgba(255, 18, 54, 0.82); stroke: #ff6b81; stroke-width: 1; }
+.tank-fill-green { fill: rgba(16, 185, 129, 0.84); stroke: #34d399; stroke-width: 1; }
+
+.iso-svg-label {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  fill: #d9bfc3;
+  text-transform: uppercase;
+}
+
+.iso-svg-val {
+  font-family: Consolas, monospace;
+  font-size: 13px;
+  font-weight: 700;
+  fill: #ffffff;
+}
+
+.iso-wire {
+  fill: none;
+  stroke: rgba(255, 190, 200, 0.34);
+  stroke-width: 1.2;
+}
+
+.iso-tag-box {
+  fill: rgba(18, 3, 7, 0.92);
+  stroke: #4d0f1b;
+  stroke-width: 1.1;
+}
+
+.iso-led-off { fill: #330a12; stroke: #591422; stroke-width: 1; }
+.iso-led-ok { fill: #10b981; stroke: #6ee7b7; stroke-width: 1.2; }
+.iso-led-err { fill: #ff1236; stroke: #fda4af; stroke-width: 1.2; }
+.iso-led-warn { fill: #f59e0b; stroke: #fde68a; stroke-width: 1.2; }
+
+.iso-gate-bar {
+  fill: #ff1236;
+  stroke: #ffd5da;
+  stroke-width: 1.2;
+}
+
+.iso-gate-bar-open {
+  fill: #10b981;
+  stroke: #d1fae5;
+  stroke-width: 1.2;
+}
+
+/* ---------- Pannello Destro: Scheda Lezione & Controlli ---------- */
+.lesson-card {
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-card);
+  padding: 22px 22px 20px;
+}
+
+.lesson-pane {
+  display: none;
+}
+
+.lesson-pane.active {
+  display: block;
+}
+
+.lesson-kicker {
+  display: inline-block;
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.lesson-pane h2 {
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.12;
+  margin-bottom: 10px;
+}
+
+.lesson-explain {
+  color: var(--text-soft);
+  font-size: 15px;
+  margin-bottom: 16px;
+}
+
+.lesson-explain strong {
+  color: var(--text);
+}
+
+/* ---------- Controlli Interattivi Step 1 (Fatture da scansionare) ---------- */
+.sample-deck {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-bottom: 16px;
+}
+
+.sample-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: var(--r-btn);
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: var(--sans);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+
+.sample-btn:hover {
+  border-color: var(--border-strong);
+  background: var(--surface-hover);
+}
+
+.sample-btn.selected {
+  border-color: var(--accent);
+  background: rgba(255, 18, 54, 0.12);
+}
+
+.sample-btn-title {
+  font-weight: 700;
+  font-size: 14.5px;
+  display: block;
+}
+
+.sample-btn-sub {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.pill-status {
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 4px 9px;
+  border-radius: var(--r-pill);
+  white-space: nowrap;
+}
+
+.pill-ok { background: var(--green-soft); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+.pill-err { background: var(--accent-soft); color: #ff6b81; border: 1px solid rgba(255, 18, 54, 0.45); }
+.pill-amber { background: var(--amber-soft); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.45); }
+
+/* ---------- Box Risultato Immediato (Feedback Loop Teach) ---------- */
+.feedback-box {
+  padding: 14px 16px;
+  border-radius: var(--r-box);
+  background: var(--surface-alt);
+  border: 1px solid var(--border-strong);
+  margin-bottom: 16px;
+}
+
+.feedback-box.state-err {
+  border-color: var(--accent);
+  background: rgba(255, 18, 54, 0.09);
+}
+
+.feedback-box.state-ok {
+  border-color: var(--green);
+  background: rgba(16, 185, 129, 0.09);
+}
+
+.feedback-box.state-warn {
+  border-color: var(--amber);
+  background: rgba(245, 158, 11, 0.09);
+}
+
+.feedback-box h4 {
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.feedback-box p {
+  font-size: 13.8px;
+  color: var(--text-soft);
+}
+
+/* ---------- Interruttori Dogana SdI Step 2 ---------- */
+.switch-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.fix-switch {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: var(--r-btn);
+  background: var(--surface-alt);
+  border: 1px solid var(--accent);
+  cursor: pointer;
+  color: var(--text);
+  font-family: var(--sans);
+  text-align: left;
+  transition: all 0.18s ease;
+}
+
+.fix-switch.fixed {
+  border-color: var(--green);
+  background: rgba(16, 185, 129, 0.08);
+}
+
+.fix-switch strong {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.fix-switch span {
+  font-size: 12.5px;
+  color: var(--text-soft);
+}
+
+.switch-toggle-pill {
+  padding: 5px 11px;
+  border-radius: var(--r-pill);
+  font-size: 12px;
+  font-weight: 700;
+  background: var(--accent);
+  color: #fff;
+  flex: none;
+}
+
+.fix-switch.fixed .switch-toggle-pill {
+  background: var(--green);
+  color: #042419;
+}
+
+/* ---------- Simulatore Calcolatore Step 3 ---------- */
+.calc-regime-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.seg-btn {
+  padding: 9px 12px;
+  border-radius: var(--r-btn);
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  color: var(--text-soft);
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 13.5px;
+  cursor: pointer;
+}
+
+.seg-btn.active {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.ateco-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.ateco-row.hidden {
+  display: none;
+}
+
+.ateco-chip {
+  padding: 5px 10px;
+  border-radius: var(--r-pill);
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ateco-chip.active {
+  border-color: var(--accent);
+  color: var(--text);
+  background: rgba(255, 18, 54, 0.14);
+}
+
+.slider-group {
+  margin-bottom: 13px;
+}
+
+.slider-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 13.5px;
+  margin-bottom: 5px;
+}
+
+.slider-head span {
+  color: var(--text-soft);
+  font-weight: 600;
+}
+
+.slider-head strong {
+  font-family: var(--mono);
+  font-size: 14.5px;
+  color: var(--text);
+}
+
+.lab-range {
+  width: 100%;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.kpi-trio {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 14px 0;
+}
+
+.kpi-card {
+  padding: 11px 10px;
+  border-radius: var(--r-btn);
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+}
+
+.kpi-card small {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.kpi-card strong {
+  font-family: var(--display);
+  font-size: 23px;
+  font-weight: 700;
+  line-height: 1.05;
+  display: block;
+}
+
+.kpi-amber { border-color: rgba(245, 158, 11, 0.45); }
+.kpi-amber strong { color: #fbbf24; }
+
+.kpi-red { border-color: rgba(255, 18, 54, 0.5); }
+.kpi-red strong { color: #ff5c77; }
+
+.kpi-green { border-color: rgba(16, 185, 129, 0.55); background: rgba(16, 185, 129, 0.08); }
+.kpi-green strong { color: #34d399; }
+
+/* ---------- Quiz & Glossario Tascabile Step 4 (Teach Reference) ---------- */
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.quiz-opt {
+  padding: 11px 13px;
+  border-radius: var(--r-btn);
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.quiz-opt:hover {
+  border-color: var(--border-strong);
+}
+
+.quiz-opt.correct {
+  border-color: var(--green);
+  background: rgba(16, 185, 129, 0.14);
+}
+
+.quiz-opt.wrong {
+  border-color: var(--accent);
+  background: rgba(255, 18, 54, 0.14);
+}
+
+.glossary-mini {
+  margin-top: 16px;
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+}
+
+.glossary-mini h4 {
+  font-family: var(--display);
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.glossary-row {
+  display: grid;
+  grid-template-columns: 112px 1fr;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+  font-size: 13px;
+}
+
+.glossary-row code {
+  color: #ff6b81;
+  font-family: var(--mono);
+  font-weight: 700;
+}
+
+.lesson-nav-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 980px) {
+  .lab-workbench {
+    grid-template-columns: 1fr;
+  }
+
+  .anatomy-plate {
+    position: static;
+  }
+
+  .mission-stepper {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .mission-stepper,
+  .kpi-trio,
+  .calc-regime-row {
+    grid-template-columns: 1fr;
+  }
+
+  .lab-hero h1 {
+    font-size: 32px;
+  }
+}
