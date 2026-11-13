@@ -34,36 +34,41 @@
 6. **Rune** (`anomalyco/rune`) — *Skill*
    - **Come la useremo:** Quando vorremo distribuire un nostro software come **vero programma Desktop nativo (`.exe` su Windows, Mac e Linux)** leggerissimo e renderizzato su GPU (senza Electron e senza obbligare il cliente a installare Python), facendo sì che l'agente AI costruisca, fotografi (`--snap`), legga l'albero UI (`--tree`) e testi la finestra da solo in modalità headless.
 
-### C. Reparto Motore AI, Memoria, Disciplina Codice & Sicurezza (Cervello, Briglie e Scudo)
+### C. Reparto Motore AI, Architettura, Disciplina Codice & Sicurezza (Cervello, Raggi X e Scudo)
 7. **Andrej Karpathy Skills** (`multica-ai/andrej-karpathy-skills`) — *Skill*
    - **Come la useremo:** Come regola fissa nella cartella di ogni progetto che costruiremo per obbligare l'agente AI a rispettare le 4 regole d'oro: chiedere invece di tirare a indovinare, scrivere il minimo codice indispensabile, fare modifiche chirurgiche senza toccare file vicini e verificare tutto prima di dire "fatto".
-8. **Billion Context** (`ranxianglei/billion-context`) — *Skill*
-   - **Come la useremo:** In coppia con **Andrej Karpathy Skills** sulle sessioni di sviluppo lunghe: comprime lo storico a tre livelli (cattura, distilla, condensa) riducendo di 5 volte il consumo di token, così l'agente può lavorare per ore o giorni sullo stesso progetto senza saturare la memoria e senza dimenticare i vincoli iniziali.
-9. **Ruflo** (`ruvnet/ruflo`) — *Skill*
-   - **Come la useremo:** Solo se la piattaforma finale richiederà più agenti AI che lavorano in parallelo sullo stesso compito complesso mantenendo una memoria condivisa.
-10. **PentAGI** (`vxcontrol/pentagi`) — *Skill*
-    - **Come la useremo:** **Prima di pubblicare online la piattaforma finale**, la faremo attaccare in privato dentro una stanza Docker isolata da PentAGI per scovare e chiudere porte lasciate aperte su login, API e database.
+8. **Understand Anything** (`Egonex-AI/Understand-Anything`) — *Skill*
+   - **Come la useremo:** In coppia fissa con **Andrej Karpathy Skills** quando lavoriamo su codebase grandi o già esistenti! Usa Tree-sitter + agenti AI per trasformare anche 200.000 righe di codice in un grafo interattivo e controllare il **Diff Impact** (cosa rischiamo di rompere altrove) *prima* di toccare una singola riga.
+9. **Billion Context** (`ranxianglei/billion-context`) — *Skill*
+   - **Come la useremo:** Sulle sessioni di sviluppo lunghe: comprime lo storico a tre livelli (cattura, distilla, condensa) riducendo di 5 volte il consumo di token, così l'agente può lavorare per ore o giorni sullo stesso progetto senza saturare la memoria e senza dimenticare i vincoli iniziali.
+10. **Paperclip** (`paperclipai/paperclip`) — *Strumento*
+    - **Come lo useremo:** Quando avremo bisogno di far lavorare più agenti in parallelo (*CEO, CTO, Sviluppatori, Marketing* su Claude Code, Codex o Gemini CLI) senza perdere il controllo dei costi: fornisce una dashboard gestionale con **tetto massimo di budget per singolo agente**, **approvazione umana obbligatoria** sulle decisioni chiave e pulsante Stop immediato.
+11. **Strix** (`usestrix/strix`) — *Skill*
+    - **Come la useremo:** **Prima di pubblicare online la piattaforma finale** (o gratis in cloud dentro GitHub Actions / GitHub Codespaces senza appesantire il nostro PC): attacca dinamicamente la nostra app per scovare falle vere (`SQLi`, `XSS`, `SSRF`, permessi) senza falsi allarmi e ci consegna direttamente le patch di codice pronte.
 
 ### D. Reparto Validazione Business, Fiducia & Guide Utente (Strategia e Ponte verso le Persone)
-11. **Founder** (`Jakeschincariol/founder-skill`) — *Skill*
+12. **Founder** (`Jakeschincariol/founder-skill`) — *Skill*
     - **Come la useremo:** **Prima ancora di iniziare a programmare** una piattaforma! La useremo per far giudicare l'idea dal CFO virtuale (calcolo margini netti reali e prezzi sostenibili) e da **100 clienti simulati** con budget e obiezioni diverse, così scartiamo subito le idee in perdita e partiamo solo su ciò che sta in piedi economicamente.
-12. **Marketing Psychology** (`coreyhaines31/marketingskills`) — *Skill*
+13. **Marketing Psychology** (`coreyhaines31/marketingskills`) — *Skill*
     - **Come la useremo:** Per superare lo scoglio più duro (*far fidare gli utenti senza budget pubblicitario*). La useremo per scrivere e revisionare landing page, struttura prezzi, SEO e testi usando oltre 70 modelli psicologici di conversione.
-13. **Sepia** (`Nanako0129/sepia`) — *Skill*
+14. **Sepia** (`Nanako0129/sepia`) — *Skill*
     - **Come la useremo:** In coppia fissa con **Marketing Psychology**! Basata sullo studio *StoryScope* di Google DeepMind e Università del Maryland, ripulisce la struttura profonda di email, landing page, post e comunicazioni eliminando ogni traccia di "testo scritto da un robot" (niente elenchi scontati né frasi astratte, solo prosa concreta e umana).
-14. **Teach** (`mattpocock/skills`) — *Skill*
+15. **Teach** (`mattpocock/skills`) — *Skill*
     - **Come la useremo:** In una cartella dedicata (`/guides`), la useremo per far generare all'agente **mini-lezioni HTML interattive (`lessons/*.html`) e schede pratiche riassuntive (`reference/*.html`)** che spiegano agli utenti come usare la nostra piattaforma passo dopo passo, con estrema semplicità.
-15. **Anatomy** (`wheresryan22/anatomy`) — *Skill*
+16. **Anatomy** (`wheresryan22/anatomy`) — *Skill*
     - **Come la useremo:** In coppia con **Teach** e **Marketing Psychology**! Genera disegni tecnici interattivi e animati (SVG isometrici / WebGL stile *Linear*) da inserire dentro le guide utente e nella home page per far "toccare con mano" visivamente come funziona la piattaforma.
 
 ---
 
 ## 3. Criteri di Filtro per i Prossimi Reel / Link (Anti-Doppioni)
 
-Per mantenere l'arsenale pulito ed evitare confusione, **scartiamo** ciò che duplica cose che abbiamo già o non gira sul nostro sistema:
+Per mantenere l'arsenale pulito ed evitare confusione, **scartiamo o sostituiamo** ciò che duplica cose che abbiamo già o non gira sul nostro sistema:
+- *Sostituite da alternative superiori (Upgrade):*
+  - `PentAGI` (`vxcontrol/pentagi`) → **sostituita da `Strix` (`usestrix/strix`)**: per blindare web app e codice è molto più snella, gira anche gratis nel cloud di GitHub Actions/Codespaces, scarta i falsi positivi e scrive già le patch. *(PentAGI resta utile solo nel caso estremo in cui serva un pesante laboratorio di rete Kali completamente offline con Ollama).*
+  - `Ruflo` (`ruvnet/ruflo`) → **sostituita da `Paperclip` (`paperclipai/paperclip`)**: rispetto agli sciami da terminale, Paperclip aggiunge una vera bacheca gestionale visiva con **tetti di spesa bloccati per singolo agente** e approvazioni umane prima di bruciare token.
 - *Già scartate / ridondanti:*
   - `Last 30 Days` (`mvanhorn/last30days-skill`) → tenuta fuori perché coperta in modo più ampio da **Agent-Reach**.
-  - `Chief of Staff` (`mattpocock/skills`) → coperta sul fronte multi-agente da **Ruflo** (ed è comunque già inclusa nello stesso repo di `Teach` se mai servisse).
+  - `Chief of Staff` (`mattpocock/skills`) → coperta sul fronte multi-agente da **Paperclip** (ed è comunque già inclusa nello stesso repo di `Teach` se mai servisse).
   - `Atticus` (`SaarthurR/atticus-mac`) → scartato perché funziona solo ed esclusivamente su Mac (macOS) e sul fronte controllo PC è già superato dal nostro **Agent Desktop** multipiattaforma (Windows/Mac/Linux).
   - `4 Prompt ASD-STE100` (Karpathy prompts) → scartati come scheda perché sono semplici prompt testuali da chat e tutte le loro funzioni sono già coperte in modo nettamente superiore da **Teach** (pagine HTML didattiche), **Anatomy** (schemi interattivi) e **Sepia** (scrittura pulita e umana).
   - `Awesome Systematic Trading` (`paperswithbacktest/awesome-systematic-trading`) → scartata perché non è una skill per agenti né un software eseguibile, ma una semplice lista `README.md` di link e libri di trading quantitativo/crypto fuori perimetro.
@@ -81,7 +86,7 @@ Per mantenere l'arsenale pulito ed evitare confusione, **scartiamo** ciò che du
 - **Combo "Prova Generale a Rischio Zero":** `Agent-Reach` (ascolta problemi veri su Reddit/forum) + `Founder` (calcola margini reali col CFO e testa l'offerta su 100 clienti simulati prima di scrivere una riga di codice).
 - **Combo "Lancio Perfetto senza Budget":** `Marketing Psychology` (leve psicologiche di fiducia) + `Sepia` (toglie ogni tono artificiale dai testi) + `Anatomy` (illustrazioni interattive sulla pagina) + `Teach` (centro guide intuitivo per chi entra la prima volta).
 - **Combo "Automazione Totale Web + Video + PC":** `Agent-Reach` (legge social/web) + `Claude Video (/watch)` (guarda e trascrive tutorial/video) + `Reverse API Engineer` (estrae API dai siti) + `Agent Desktop` (inserisce o legge dati nei programmi desktop sul PC).
-- **Combo "Prodotto Blindato e Pulito":** Sviluppo disciplinato su sessioni lunghe con `Andrej Karpathy Skills` + `Billion Context` → audit sicurezza con `PentAGI` → rilascio Desktop nativo con `Rune` o app iOS da Windows con `xtool`.
+- **Combo "Prodotto Blindato e Pulito":** Mappa architettura e impatto modifiche con `Understand Anything` → sviluppo disciplinato su sessioni lunghe con `Andrej Karpathy Skills` + `Billion Context` (coordinati da `Paperclip` se servono più agenti con budget bloccato) → test attacco e patch automatiche con `Strix` → rilascio Desktop nativo con `Rune` o app iOS da Windows con `xtool`.
 
 ---
 

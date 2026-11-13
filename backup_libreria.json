@@ -1,6 +1,87 @@
 {
   "skills": [
     {
+      "id": 18,
+      "slug": "strix",
+      "name": "Strix",
+      "repo_url": "https://github.com/usestrix/strix",
+      "kind": "skill",
+      "category": "Sicurezza & Audit",
+      "tagline": "Hacker etico AI autonomo che attacca dinamicamente la tua app, scarta i falsi allarmi con prove reali e scrive già la patch di codice.",
+      "simple_explanation": "Gli scanner tradizionali ti inondano di falsi avvisi teorici senza dirti se una falla è davvero sfruttabile. Strix avvia la tua app in una stanza isolata (Docker o in cloud dentro GitHub Actions/Codespaces), ragiona come un vero attaccante provando SQL Injection, XSS, SSRF e buchi di permessi con exploit reali, e ti consegna sia la prova verificata sia la correzione di codice pronta da applicare.",
+      "specs": {
+        "linguaggio": "Python + Sandbox Docker",
+        "sistemi_operativi": "Windows, macOS, Linux + Cloud (GitHub Actions / Codespaces)",
+        "costo": "Gratuito (Apache-2.0 - paghi solo i token del modello AI collegato)",
+        "supporto_mcp": "Skill nativa (npx skills add usestrix/strix) + CLI + GitHub Actions",
+        "difficolta": "Media (richiede Docker in locale oppure gira gratis su GitHub Cloud)"
+      },
+      "compatible_apps": [
+        "Controllo sicurezza pre-rilascio di Web App, SaaS e API Backend",
+        "Blocco automatico di codice vulnerabile sulle Pull Request (GitHub Actions)",
+        "Verifica reale di login, ruoli utente, API e database senza falsi positivi",
+        "Generazione automatica delle patch di sicurezza e report completi"
+      ],
+      "tech_keywords": [
+        "security",
+        "pentesting",
+        "vulnerability",
+        "sqli",
+        "xss",
+        "ssrf",
+        "docker",
+        "github-actions",
+        "patch",
+        "audit",
+        "strix"
+      ],
+      "cost_saving": "Sostituisce pentest preliminari e piattaforme AppSec commerciali da centinaia o migliaia di euro, scrivendo anche le patch.",
+      "honest_tradeoffs": "Richiede una chiave API di un modello AI capace (Claude, OpenAI, Gemini o OpenRouter) e Docker attivo se lo lanci sul tuo PC (ma puoi evitarlo sul tuo portatile facendolo girare gratis nei server remoti di GitHub Codespaces o GitHub Actions). Va usato esclusivamente su propri progetti o sistemi autorizzati.",
+      "install_guide": "1. Per aggiungerlo come Skill al tuo agente coding:\n   npx skills add usestrix/strix\n\n2. Per installare la CLI (con Python / pip o uv):\n   pip install strix-agent\n\n3. Imposta il modello AI e lancia il test sulla cartella della tua app (con Docker attivo o dentro un GitHub Codespace cloud):\n   strix --target ./mia-app",
+      "stars": 75306,
+      "created_at": "2026-11-13T18:09:19.255329+00:00"
+    },
+    {
+      "id": 17,
+      "slug": "understand-anything",
+      "name": "Understand Anything",
+      "repo_url": "https://github.com/Egonex-AI/Understand-Anything",
+      "kind": "skill",
+      "category": "Qualità Codice & Regole",
+      "tagline": "Trasforma qualsiasi codebase (anche da 200.000 righe senza documentazione) in una mappa visiva interattiva con analisi d’impatto modifiche.",
+      "simple_explanation": "Entrare in un progetto grande file per file è come leggere un dizionario per capire una storia: vedi i singoli pezzi ma perdi i collegamenti. Understand Anything unisce l’analisi deterministica del codice (Tree-sitter) con agenti AI per mappare file, funzioni, classi e processi di business in un grafo interattivo apribile nel browser. Prima di toccare una riga ti mostra il 'Diff Impact' (cosa rischi di rompere altrove), risponde a domande in linguaggio naturale e rianalizza solo i file modificati.",
+      "specs": {
+        "linguaggio": "TypeScript + Tree-sitter (genera JSON + Dashboard Web)",
+        "sistemi_operativi": "Windows (installer PowerShell nativo), macOS, Linux",
+        "costo": "100% Gratuito (MIT License)",
+        "supporto_mcp": "Plugin per Claude Code, Codex, Cursor, Copilot, Gemini CLI + Server MCP",
+        "difficolta": "Facile"
+      },
+      "compatible_apps": [
+        "Radiografia rapida di codebase grandi o esistenti senza documentazione",
+        "Controllo d’impatto (Diff Impact) prima di modificare database, API o moduli condivisi",
+        "Mappatura automatica dei flussi di business dal codice reale",
+        "Onboarding immediato con tour guidati e ricerca per significato"
+      ],
+      "tech_keywords": [
+        "knowledge-graph",
+        "codebase",
+        "tree-sitter",
+        "architecture",
+        "diff-impact",
+        "mcp",
+        "claude-code",
+        "cursor",
+        "gemini-cli",
+        "onboarding"
+      ],
+      "cost_saving": "Risparmia giorni di lettura manuale del codice ed evita regressioni costose quando si modificano progetti complessi.",
+      "honest_tradeoffs": "La prima scansione completa su un progetto molto grande consuma token LLM per generare le spiegazioni semantiche dei nodi (poi però salva il grafo in JSON e aggiorna solo i file toccati). Su micro-script da 2-3 file non serve.",
+      "install_guide": "1. Su Claude Code installa il plugin direttamente:\n   /plugin install understand-anything\n\n2. Su Windows (PowerShell) per Codex, Cursor, Gemini CLI o uso universale:\n   Segui lo script PowerShell ufficiale dal repository:\n   https://github.com/Egonex-AI/Understand-Anything\n\n3. Per esplorare subito nel browser un progetto già analizzato:\n   npx https://github.com/Egonex-AI/Understand-Anything/releases/latest/download/understand-anything-viewer.tgz ./percorso-progetto",
+      "stars": 92519,
+      "created_at": "2026-11-13T18:09:19.248704+00:00"
+    },
+    {
       "id": 16,
       "slug": "billion-context",
       "name": "Billion Context",
@@ -349,44 +430,6 @@
       "created_at": "2026-11-11T12:12:49.484096+00:00"
     },
     {
-      "id": 5,
-      "slug": "ruflo",
-      "name": "Ruflo",
-      "repo_url": "https://github.com/ruvnet/ruflo",
-      "kind": "skill",
-      "category": "Agenti AI & Automazione",
-      "tagline": "Coordinatore multi-agente con memoria condivisa per far lavorare più agenti AI insieme sullo stesso progetto.",
-      "simple_explanation": "Quando chiedi a un singolo agente AI di fare un lavoro molto lungo e complesso, spesso perde il filo o dimentica cosa aveva deciso prima. Ruflo fa da 'direttore dei lavori': divide un compito grande tra più agenti specializzati, mantiene una memoria comune (così non ripetono gli stessi errori) e imposta regole di sicurezza.",
-      "specs": {
-        "linguaggio": "TypeScript / Node.js",
-        "sistemi_operativi": "Windows, macOS, Linux",
-        "costo": "Gratuito (Open Source - attenzione però al consumo di token AI)",
-        "difficolta": "Media"
-      },
-      "compatible_apps": [
-        "Piattaforme che eseguono flussi di lavoro AI complessi in più passaggi",
-        "Sistemi automatici di generazione/revisione codice o report",
-        "Backend multi-agente con memoria a lungo termine (RAG)",
-        "Automazioni aziendali con regole di controllo rigorose"
-      ],
-      "tech_keywords": [
-        "agent",
-        "swarm",
-        "orchestration",
-        "typescript",
-        "node",
-        "rag",
-        "memory",
-        "workflow",
-        "llm"
-      ],
-      "cost_saving": "Evita di dover programmare da zero code di messaggi, memoria condivisa e coordinamento tra agenti AI.",
-      "honest_tradeoffs": "Far lavorare una squadra di 4-5 agenti in contemporanea consuma molti più crediti/token AI rispetto a un singolo agente normale. Per progetti piccoli o semplici è eccessivo (aggiunge complessità inutile); conviene solo quando hai compiti pesanti divisibili in parallelo.",
-      "install_guide": "1. Assicurati di avere Node.js 20+ installato.\n2. Consulta il repository ufficiale https://github.com/ruvnet/ruflo per installare la CLI:\n   npx ruflo@latest init\n3. Definisci i ruoli degli agenti e i limiti di budget prima di avviare un flusso automatico.",
-      "stars": 0,
-      "created_at": "2026-11-11T09:58:19.140839+00:00"
-    },
-    {
       "id": 4,
       "slug": "xtool",
       "name": "xtool",
@@ -421,46 +464,7 @@
       "cost_saving": "Evita l'acquisto obbligatorio di un Mac (800-1.500€) o il noleggio di Mac in cloud per sviluppare e testare su iPhone.",
       "honest_tradeoffs": "Lavora su progetti Swift Package Manager (SwiftPM), non sui vecchi file progetto proprietari di Xcode con interfaccia grafica drag-and-drop, e non include il simulatore grafico dell'iPhone su schermo PC (testi direttamente collegando il tuo vero iPhone via USB).",
       "install_guide": "1. Su Windows attiva WSL2 (Ubuntu) e installa la toolchain Swift + libimobiledevice/usbmuxd.\n2. Segui la guida ufficiale su https://xtool.sh per importare l'SDK Darwin.\n3. Collega il tuo iPhone via USB e autentica il tuo Apple ID con `xtool auth`.\n4. Compila e installa la tua app con `xtool dev` direttamente nella cartella del progetto Swift.",
-      "stars": 0,
-      "created_at": "2026-11-11T09:58:19.140839+00:00"
-    },
-    {
-      "id": 3,
-      "slug": "pentagi",
-      "name": "PentAGI",
-      "repo_url": "https://github.com/vxcontrol/pentagi",
-      "kind": "skill",
-      "category": "Sicurezza & Audit",
-      "tagline": "Squadra autonoma di agenti per testare la sicurezza della tua app in un ambiente Docker isolato.",
-      "simple_explanation": "Quando costruisci un sito o un'applicazione (soprattutto velocemente con l'AI), è facilissimo lasciare porte aperte senza accorgersene. PentAGI avvia una stanza blindata (Docker) con veri strumenti di controllo sicurezza: tu gli indichi il TUO sito di test, lui cerca falle reali e ti consegna un report chiaro su cosa chiudere prima di andare online.",
-      "specs": {
-        "linguaggio": "Go + Interfaccia React",
-        "sistemi_operativi": "Windows (con Docker Desktop / WSL2), macOS, Linux",
-        "costo": "Gratuito (MIT License - paghi solo il modello AI scelto o usi Ollama gratis)",
-        "difficolta": "Media-Alta (richiede Docker)"
-      },
-      "compatible_apps": [
-        "SaaS e Web App con login utenti e pagamenti",
-        "API Backend (Node, Python, Go, PHP) prima della messa online",
-        "Piattaforme e-commerce e portali con database clienti",
-        "Audit interno di sicurezza pre-rilascio"
-      ],
-      "tech_keywords": [
-        "security",
-        "auth",
-        "login",
-        "jwt",
-        "sql",
-        "docker",
-        "backend",
-        "saas",
-        "api",
-        "vulnerability"
-      ],
-      "cost_saving": "Evita scanner di vulnerabilità commerciali da centinaia di euro al mese per i controlli preliminari.",
-      "honest_tradeoffs": "Richiede Docker installato (occupa diversi GB di spazio per gli strumenti Kali Linux) e va usato SOLO su propri progetti o sistemi autorizzati. Non sostituisce al 100% una certificazione legale firmata da un ente umano se richiesta per legge, ma scova subito gli errori più pericolosi.",
-      "install_guide": "1. Installa e avvia Docker Desktop sul tuo PC.\n2. Scarica il progetto:\n   git clone https://github.com/vxcontrol/pentagi.git\n   cd pentagi\n3. Copia il file .env.example in .env, inserisci la tua chiave LLM (o configura Ollama locale) e avvia:\n   docker compose up -d\n4. Usa la modalità 'Assistant' per approvare a mano ogni singolo controllo sulla tua app.",
-      "stars": 0,
+      "stars": 15446,
       "created_at": "2026-11-11T09:58:19.140839+00:00"
     },
     {
@@ -499,7 +503,7 @@
       "cost_saving": "Risparmia giorni di lavoro manuale di reverse-engineering o costosi connettori custom.",
       "honest_tradeoffs": "Il codice generato si basa sulle chiamate interne del sito: se il proprietario del sito aggiorna la struttura o usa protezioni anti-bot molto pesanti (es. CAPTCHA avanzati o token che scadono ogni 2 minuti), dovrai rigenerare il client o gestire il rinnovo sessione. Non sostituisce un contratto API ufficiale per usi bancari.",
       "install_guide": "1. Installa il tool tramite pip o uv:\n   pip install reverse-api-engineer\n2. Se vuoi guidare tu il browser manualmente, aggiungi Playwright:\n   pip install \"reverse-api-engineer[manual]\" && playwright install chromium\n3. Oppure installalo direttamente come skill per il tuo agente coding:\n   npx skills add kalil0321/reverse-api-engineer",
-      "stars": 0,
+      "stars": 3567,
       "created_at": "2026-11-11T09:58:19.140839+00:00"
     },
     {
@@ -538,11 +542,51 @@
       "cost_saving": "Evita abbonamenti a X API (da 100$/mese), Reddit API e servizi di scraping a pagamento (30-100€/mese).",
       "honest_tradeoffs": "Non hai le stesse garanzie di velocità e stabilità al 100% di un'API ufficiale pagata: se un social cambia pagina o mette limiti temporanei, volumi enormi (decine di migliaia di richieste l'ora) possono rallentare. Perfetto per uso normale, prototipi, agenti e volumi piccoli/medi; meno adatto a sistemi enterprise critici.",
       "install_guide": "1. Assicurati di avere Python 3.10+ installato sul PC.\n2. Clona o installa il pacchetto dal repository ufficiale:\n   git clone https://github.com/Panniantong/agent-reach.git\n3. Esegui la diagnostica rapida per verificare cosa funziona subito sul tuo PC:\n   agent-reach doctor\n4. Collegalo come server MCP al tuo agente AI oppure richiamalo via riga di comando dal tuo backend.",
-      "stars": 0,
+      "stars": 111528,
       "created_at": "2026-11-11T09:58:19.140839+00:00"
     }
   ],
   "tools": [
+    {
+      "id": 19,
+      "slug": "paperclip",
+      "name": "Paperclip",
+      "repo_url": "https://github.com/paperclipai/paperclip",
+      "kind": "tool",
+      "category": "Agenti AI & Automazione",
+      "tagline": "Pannello di comando visivo per coordinare squadre di agenti AI (CEO, CTO, Sviluppatori, Marketing) con tetto massimo di spesa e approvazioni umane.",
+      "simple_explanation": "Far lavorare più agenti autonomi in contemporanea da terminale diventa presto un caos costoso dove perdi il conto di chi fa cosa e di quanti soldi bruciano in token. Paperclip è un vero gestionale locale (server Node.js + dashboard web React): assegni un obiettivo, organizzi i tuoi agenti (Claude Code, Codex, Cursor, Gemini CLI, OpenClaw) per ruoli e tieni in mano 3 freni decisivi: tetto mensile di budget per singolo agente, approvazione umana obbligatoria sulle scelte strategiche e tasto Stop immediato.",
+      "specs": {
+        "linguaggio": "TypeScript / Node.js + Interfaccia React",
+        "sistemi_operativi": "Windows, macOS, Linux (anche in Docker)",
+        "costo": "100% Gratuito (MIT License - controlli tu al centesimo i token spesi)",
+        "supporto_mcp": "Adattatori nativi per Claude Code, Codex, Gemini CLI, Cursor, OpenClaw e OpenCode",
+        "difficolta": "Facile (1 comando npx)"
+      },
+      "compatible_apps": [
+        "Gestione coordinata di più agenti AI su progetti grandi da un’unica dashboard",
+        "Controllo rigoroso del budget token per singolo ruolo (Sviluppo, QA, Marketing)",
+        "Flussi di lavoro ricorrenti o notturni con approvazione umana sui passaggi critici",
+        "Sostituzione di 10 finestre terminale sparse con bacheca compiti e storico completo"
+      ],
+      "tech_keywords": [
+        "multi-agent",
+        "orchestration",
+        "dashboard",
+        "budget",
+        "governance",
+        "claude-code",
+        "codex",
+        "gemini-cli",
+        "openclaw",
+        "company"
+      ],
+      "cost_saving": "Impedisce agli agenti autonomi di sforare il budget di nascosto grazie ai tetti di spesa bloccati per ogni singolo agente.",
+      "honest_tradeoffs": "Non è un modello AI gratis: governa gli agenti che già usi (Claude Code, Codex, Gemini CLI, ecc.), quindi consuma i loro crediti entro il limite che fissi tu. Per un compito singolo e veloce basta una normale chat; diventa prezioso quando coordini più lavori o ruoli in parallelo.",
+      "install_guide": "1. Assicurati di avere Node.js 20+ installato sul PC.\n2. Avvia la configurazione guidata e la dashboard locale con un solo comando:\n   npx paperclipai@latest onboard --yes\n\n3. Prima di far partire qualsiasi squadra, imposta subito dalla bacheca:\n   - Budget massimo mensile per agente\n   - Regole di Approvazione umana sulle decisioni chiave",
+      "stars": 113614,
+      "created_at": "2026-11-13T18:09:19.258770+00:00"
+    },
     {
       "id": 7,
       "slug": "agent-desktop",

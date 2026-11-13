@@ -4,7 +4,7 @@
   <br />
 
   <img src="https://img.shields.io/badge/Libreria_Skill-14_attive-ff1236?style=for-the-badge&labelColor=140407" alt="Skill attive" />
-  <img src="https://img.shields.io/badge/Strumenti-1_attivi-ff1236?style=for-the-badge&labelColor=140407" alt="Strumenti attivi" />
+  <img src="https://img.shields.io/badge/Strumenti-2_attivi-ff1236?style=for-the-badge&labelColor=140407" alt="Strumenti attivi" />
   <img src="https://img.shields.io/badge/Blooderskills-1_moduli-10b981?style=for-the-badge&labelColor=140407" alt="Blooderskills" />
   <img src="https://img.shields.io/badge/Licenza-MIT-fbeef0?style=for-the-badge&labelColor=140407" alt="MIT License" />
   <img src="https://img.shields.io/badge/Python-3.10+-ff4d63?style=for-the-badge&labelColor=140407" alt="Python 3.10+" />
@@ -42,6 +42,8 @@ npx skills add raffaeleditullo-cloud/Blooder --skill <nome-skill>
 
 | Skill | Categoria | Cosa fa in una riga |
 | :--- | :--- | :--- |
+| **[Strix](https://github.com/usestrix/strix)** | `Sicurezza & Audit` | Hacker etico AI autonomo che attacca dinamicamente la tua app, scarta i falsi allarmi con prove reali e scrive già la patch di codice. |
+| **[Understand Anything](https://github.com/Egonex-AI/Understand-Anything)** | `Qualità Codice & Regole` | Trasforma qualsiasi codebase (anche da 200.000 righe senza documentazione) in una mappa visiva interattiva con analisi d’impatto modifiche. |
 | **[Billion Context](https://github.com/ranxianglei/billion-context)** | `Agenti AI & Automazione` | Comprime la memoria delle sessioni di coding riducendo di 5 volte i token, così l’agente lavora per giorni senza perdere il filo. |
 | **[Claude Video (/watch)](https://github.com/bradautomates/claude-video)** | `Video & Media` | Permette al tuo agente AI di guardare qualsiasi video o tutorial estraendo fotogrammi chiave e parlato sincronizzati. |
 | **[Founder](https://github.com/Jakeschincariol/founder-skill)** | `Business & Strategia` | 11 skill gratuite che mettono alla prova la tua idea di business con un CFO virtuale e 100 clienti simulati prima di investirci un solo euro. |
@@ -51,18 +53,17 @@ npx skills add raffaeleditullo-cloud/Blooder --skill <nome-skill>
 | **[Anatomy](https://github.com/wheresryan22/anatomy)** | `Guide & Documentazione` | Costruisce illustrazioni tecniche interattive e diagrammi animati (in SVG e WebGL) per far capire visivamente come funziona un sistema. |
 | **[Teach](https://github.com/mattpocock/skills)** | `Guide & Documentazione` | Genera mini-lezioni HTML interattive e schede pratiche riassuntive per spiegare un concetto o una piattaforma un passo alla volta. |
 | **[Marketing Psychology](https://github.com/coreyhaines31/marketingskills)** | `Marketing & Conversioni` | Applica oltre 70 modelli psicologici reali e playbook di conversione per far fidare gli utenti e migliorare landing page, prezzi e SEO. |
-| **[Ruflo](https://github.com/ruvnet/ruflo)** | `Agenti AI & Automazione` | Coordinatore multi-agente con memoria condivisa per far lavorare più agenti AI insieme sullo stesso progetto. |
 | **[xtool](https://github.com/xtool-org/xtool)** | `Mobile & iOS` | Compila, firma e installa vere app iPhone (iOS in Swift) direttamente da Windows o Linux, senza avere un Mac. |
-| **[PentAGI](https://github.com/vxcontrol/pentagi)** | `Sicurezza & Audit` | Squadra autonoma di agenti per testare la sicurezza della tua app in un ambiente Docker isolato. |
 | **[Reverse API Engineer](https://github.com/kalil0321/reverse-api-engineer)** | `Integrazioni & API` | Osserva il traffico di un sito web nel browser e genera automaticamente il codice pulito per collegarti ai suoi dati. |
 | **[Agent-Reach](https://github.com/Panniantong/agent-reach)** | `Dati Web & Ricerca` | Dà ai tuoi agenti AI accesso gratuito a X/Twitter, Reddit, YouTube, GitHub e forum senza pagare API. |
 
 ---
 
-## Strumenti Operativi (1 selezionati)
+## Strumenti Operativi (2 selezionati)
 
 | Strumento | Categoria | Cosa fa in una riga |
 | :--- | :--- | :--- |
+| **[Paperclip](https://github.com/paperclipai/paperclip)** | `Agenti AI & Automazione` | Pannello di comando visivo per coordinare squadre di agenti AI (CEO, CTO, Sviluppatori, Marketing) con tetto massimo di spesa e approvazioni umane. |
 | **[Agent Desktop](https://github.com/vercel-labs/agent-desktop)** | `Automazione Desktop` | Permette a Claude Code e agli agenti AI di usare i programmi del tuo PC leggendo pulsanti e campi direttamente dal sistema, senza muovere il mouse. |
 
 ---
