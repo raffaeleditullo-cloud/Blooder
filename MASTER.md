@@ -91,5 +91,12 @@ Per mantenere l'arsenale pulito ed evitare confusione, **scartiamo** ciò che du
 - **Prima Blooderskill pubblicata e collaudata (`skills/fatturapa-xray/`) + Laboratorio Visivo:**
   - **`FatturaPA X-Ray`** — motore deterministico Python zero-dipendenze (`scripts/xray_fatture.py`) + guida operativa fiscale italiana (`SKILL.md`) + **Laboratorio Visivo Interattivo** (`static/labs/fatturapa-xray.html`, `Teach` + `Anatomy` in stile *Red Matrix*).
 - **Prossimo passo concordato:**
-  1. Progettare e collaudare l'architettura del **Motore Vocale Locale con Recitazione** su RTX 5060 (8 GB VRAM) e la relativa **Blooderskill** di regia/addestramento;
-  2. Proseguire con la selezione chirurgica di skill e strumenti ad alto impatto.
+  1. Proseguire con la selezione chirurgica di skill e strumenti ad alto impatto per arricchire l'arsenale di Blooder;
+  2. Ideare e sviluppare nuove **Blooderskills** originali sui settori ad alto valore.
+
+---
+
+## 6. Cose da Fare Più Avanti (Progetti Parcheggiati)
+
+- **Motore Vocale Locale con Recitazione & Blooderskill `voice-forge-director`** *(piano completo salvato in locale in `_privato/PIANO_MOTORE_VOCALE_LOCALE.md`)*:
+  - Architettura gratuita in locale per RTX 5060 (8 GB VRAM, `cu128`) progettata per unire **recitazione espressiva italiana** e **timbro vocale identico** senza abbonamenti cloud: test A/B su 1 personaggio pilota tra **Strada A** (`OpenAudio S1-mini` per recitazione a tag + `RVC v2 RMVPE` per maschera vocale) e **Strada B** (`GPT-SoVITS v4` fine-tuned 48 kHz con switch automatico dei campioni emotivi), con verifica automatica `Faster-Whisper` anti-glitch e catena di mastering `FFmpeg` a `-15 LUFS`.
