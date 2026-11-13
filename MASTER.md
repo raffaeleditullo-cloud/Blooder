@@ -7,6 +7,7 @@
 ## 1. Architettura e Regole Fisse di Blooder
 
 - **Avvio rapido:** doppio click su `avvia_blooder.bat` (`http://127.0.0.1:8765`).
+- **Attivazione operativa delle skill nel progetto:** `python attiva_arsenale.py` scarica e monta in `.agents/vendor_skills/` le vere skill della libreria (registrate in `.agents/skills.json` insieme alle nostre `skills/`), governate sempre da `AGENTS.md` e `.agents/skills/blooder-regia/SKILL.md`.
 - **Salvataggio e pubblicazione rapida:** doppio click su `salva_progetto.bat` (esegue `sync_libreria.py`: verifica integrità DB SQLite, scansiona i file contro chiavi/segreti, esporta `backup_libreria.json`, genera il `README.md` vetrina con loghi e tabelle, esporta le Blooderskills in `skills/<nome>/SKILL.md` e sincronizza su GitHub `raffaeleditullo-cloud/Blooder`).
 - **Base grafica unica ("Red Matrix"):** definita in `static/` (`index.html`, `styles.css`, `app.js`, `fx.js`, `logo.svg`, `logo-full.svg`, `hero-banner.svg`, font locali `Barlow` / `Barlow Condensed`). Non va mai rigenerata da zero né alterata con colori fuori tema o stili `style=""` inline.
 - **Tre sezioni distinte nella barra laterale:**

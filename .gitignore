@@ -1,6 +1,7 @@
 __pycache__/
 *.pyc
 _privato/
+.agents/vendor_skills/
 .env
 .env.*
 *.env
