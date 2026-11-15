@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tiny Clash · Cavalieri Blu vs Legione Rossa</title>
+  <style>
+    * { box-sizing: border-box; user-select: none; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #0d121c;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      color: #fff;
+      overflow: hidden;
+    }
+    #game-wrap {
+      position: relative;
+      width: min(1080px, 96vw);
+      aspect-ratio: 16 / 9;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 24px 70px rgba(0,0,0,0.75), 0 0 0 4px #2c3852;
+      background: #4bb9f8;
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      cursor: pointer;
+      image-rendering: pixelated;
+    }
+    .hint {
+      margin-top: 10px;
+      font-size: 13px;
+      color: #9cb0d1;
+      letter-spacing: 0.2px;
+    }
+    .hint b { color: #ffd54f; }
+  </style>
+</head>
+<body>
+  <div id="game-wrap">
+    <canvas id="game" width="1280" height="720"></canvas>
+  </div>
+  <div class="hint">
+    Comandi: clicca una carta (o premi <b>1-5</b>) per schierare un'unit&agrave; &middot; <b>M</b> per audio &middot; Asset: <b>Tiny Swords</b>
+  </div>
+
+<script>
+(() => {
+  const canvas = document.getElementById('game');
+  const ctx = canvas.getContext('2d');
+  ctx.imageSmoothingEnabled = false;
+
+  const W = 1280, H = 720;
+  const GROUND_Y = 488;
+  const LEFT_TOWER_X = 128;
+  const RIGHT_TOWER_X = 1152;
+  const TS = 'assets/tiny_swords/Tiny Swords (Free Pack)';
+
+  // --- Caricamento Sprite Sheet Reali (Tiny Swords) ---
+  const ASSET_PATHS = {
+    bg: 'assets/bg_arena.png',
+    blueTower: `${TS}/Buildings/Blue Buildings/Tower.png`,
+    redTower: `${TS}/Buildings/Red Buildings/Tower.png`,
+    arrow: `${TS}/Units/Blue Units/Archer/Arrow.png`,
+    explosion: `${TS}/Particle FX/Explosion_01.png`,
+    dust: `${TS}/Particle FX/Dust_01.png`,
+
+    // Blue Units
+    b_pawn_run: `${TS}/Units/Blue Units/Pawn/Pawn_Run Axe.png`,
+    b_pawn_atk: `${TS}/Units/Blue Units/Pawn/Pawn_Interact Axe.png`,
+    b_war_run: `${TS}/Units/Blue Units/Warrior/Warrior_Run.png`,
+    b_war_atk: `${TS}/Units/Blue Units/Warrior/Warrior_Attack1.png`,
+    b_arc_run: `${TS}/Units/Blue Units/Archer/Archer_Run.png`,
+    b_arc_atk: `${TS}/Units/Blue Units/Archer/Archer_Shoot.png`,
+    b_lan_run: `${TS}/Units/Blue Units/Lancer/Lancer_Run.png`,
+    b_lan_atk: `${TS}/Units/Blue Units/Lancer/Lancer_Right_Attack.png`,
+    b_monk_run: `${TS}/Units/Blue Units/Monk/Run.png`,
+    b_monk_atk: `${TS}/Units/Blue Units/Monk/Heal.png`,
+
+    // Red Units
+    r_pawn_run: `${TS}/Units/Red Units/Pawn/Pawn_Run Axe.png`,
+    r_pawn_atk: `${TS}/Units/Red Units/Pawn/Pawn_Interact Axe.png`,
+    r_war_run: `${TS}/Units/Red Units/Warrior/Warrior_Run.png`,
+    r_war_atk: `${TS}/Units/Red Units/Warrior/Warrior_Attack1.png`,
+    r_arc_run: `${TS}/Units/Red Units/Archer/Archer_Run.png`,
+    r_arc_atk: `${TS}/Units/Red Units/Archer/Archer_Shoot.png`,
+    r_lan_run: `${TS}/Units/Red Units/Lancer/Lancer_Run.png`,
+    r_lan_atk: `${TS}/Units/Red Units/Lancer/Lancer_Right_Attack.png`
+  };
+
+  const imgs = {};
+  for (const [k, src] of Object.entries(ASSET_PATHS)) {
+    const im = new Image();
+    im.src = encodeURI(src);
+    imgs[k] = im;
+  }
+
+  // --- Audio procedurale leggero ---
+  let audioCtx = null;
+  let muted = false;
+  function ensureAudio() {
+    if (!audioCtx) {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (AC) audioCtx = new AC();
+    }
+    if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+  }
+  function playTone(freq, dur, type = 'triangle', vol = 0.08, slide = 0) {
+    if (muted || !audioCtx) return;
+    const now = audioCtx.currentTime;
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, now);
+    if (slide) osc.frequency.exponentialRampToValueAtTime(Math.max(40, freq + slide), now + dur);
+    gain.gain.setValueAtTime(vol, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + dur);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start(now);
+    osc.stop(now + dur);
+  }
+  const sfx = {
+    spawn: () => playTone(320, 0.11, 'triangle', 0.09, 140),
+    hit: () => playTone(160, 0.07, 'square', 0.04, -60),
+    arrow: () => playTone(520, 0.09, 'sine', 0.04, -200),
+    boom: () => playTone(95, 0.28, 'sawtooth', 0.12, -55),
+    win: () => { playTone(523, 0.14, 'triangle', 0.1); setTimeout(() => playTone(659, 0.14, 'triangle', 0.1), 120); setTimeout(() => playTone(784, 0.25, 'triangle', 0.11), 240); },
+    lose: () => { playTone(300, 0.18, 'sawtooth', 0.08, -80); setTimeout(() => playTone(210, 0.28, 'sawtooth', 0.08, -80), 170); }
+  };
+
+  // --- Catalogo Unità con animazioni Run + Attack vere ---
+  const PLAYER_CARDS = [
+    { id: 'pawn',    name: 'Ascia',     cost: 2, hp: 95,  dmg: 14, speed: 74, range: 44,  rate: 0.75, drawSize: 135, footOff: 26, runKey: 'b_pawn_run', runF: 6, atkKey: 'b_pawn_atk', atkF: 6, role: 'melee',  towerMult: 1 },
+    { id: 'warrior', name: 'Guerriero', cost: 4, hp: 180, dmg: 22, speed: 62, range: 48,  rate: 0.85, drawSize: 142, footOff: 28, runKey: 'b_war_run',  runF: 6, atkKey: 'b_war_atk',  atkF: 4, role: 'melee',  towerMult: 1.1 },
+    { id: 'archer',  name: 'Arciere',   cost: 5, hp: 90,  dmg: 20, speed: 56, range: 230, rate: 1.05, drawSize: 138, footOff: 26, runKey: 'b_arc_run',  runF: 4, atkKey: 'b_arc_atk',  atkF: 8, role: 'ranged', towerMult: 1 },
+    { id: 'monk',    name: 'Chierico',  cost: 6, hp: 135, dmg: 16, speed: 58, range: 145, rate: 1.25, drawSize: 138, footOff: 26, runKey: 'b_monk_run', runF: 4, atkKey: 'b_monk_atk', atkF: 11,role: 'healer', heal: 22, towerMult: 1 },
+    { id: 'lancer',  name: 'Lanciere',  cost: 7, hp: 290, dmg: 34, speed: 78, range: 68,  rate: 1.0,  drawSize: 195, footOff: 44, runKey: 'b_lan_run',  runF: 6, atkKey: 'b_lan_atk',  atkF: 3, role: 'siege',  towerMult: 1.8 },
+    { id: 'paladin', name: 'Paladino',  cost: 10,hp: 520, dmg: 48, speed: 46, range: 58,  rate: 1.25, drawSize: 175, footOff: 34, runKey: 'b_war_run',  runF: 6, atkKey: 'b_war_atk',  atkF: 4, role: 'tank',   aoe: 65, towerMult: 1.5 }
+  ];
+
+  const ENEMY_TYPES = [
+    { id: 'r_pawn',   name: 'Predone',   cost: 2, hp: 90,  dmg: 13, speed: 72, range: 44,  rate: 0.78, drawSize: 135, footOff: 26, runKey: 'r_pawn_run', runF: 6, atkKey: 'r_pawn_atk', atkF: 6, role: 'melee',  towerMult: 1 },
+    { id: 'r_war',    name: 'Bruto',     cost: 4, hp: 170, dmg: 20, speed: 60, range: 48,  rate: 0.88, drawSize: 142, footOff: 28, runKey: 'r_war_run',  runF: 6, atkKey: 'r_war_atk',  atkF: 4, role: 'melee',  towerMult: 1.1 },
+    { id: 'r_arc',    name: 'Arciere',   cost: 5, hp: 85,  dmg: 18, speed: 56, range: 220, rate: 1.1,  drawSize: 138, footOff: 26, runKey: 'r_arc_run',  runF: 4, atkKey: 'r_arc_atk',  atkF: 8, role: 'ranged', towerMult: 1 },
+    { id: 'r_lancer', name: 'Lanciere',  cost: 7, hp: 270, dmg: 32, speed: 74, range: 66,  rate: 1.05, drawSize: 195, footOff: 44, runKey: 'r_lan_run',  runF: 6, atkKey: 'r_lan_atk',  atkF: 3, role: 'siege',  towerMult: 1.6 }
+  ];
+
+  const state = {
+    screen: 'menu',
+    round: 1,
+    gold: 100,
+    mana: 5,
+    maxMana: 12,
+    manaRate: 1.05,
+    enemyMana: 4,
+    enemyTimer: 1.2,
+    playerTower: { hp: 800, maxHp: 800, cd: 0 },
+    enemyTower:  { hp: 800, maxHp: 800, cd: 0 },
+    hand: [],
+    nextCard: null,
+    units: [],
+    projectiles: [],
+    fxAnims: [],
+    popups: [],
+    shake: 0,
+    time: 0,
+    winner: null,
+    buttons: []
+  };
+
+  function shuffle(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function startMatch(roundNum = state.round) {
+    state.round = roundNum;
+    state.screen = 'play';
+    state.mana = 5;
+    state.enemyMana = 3 + roundNum * 0.5;
+    state.enemyTimer = 1.1;
+    const baseHp = 800 + (roundNum - 1) * 180;
+    state.playerTower = { hp: 800, maxHp: 800, cd: 0 };
+    state.enemyTower = { hp: baseHp, maxHp: baseHp, cd: 0 };
+    const deck = shuffle(PLAYER_CARDS);
+    state.hand = deck.slice(0, 5);
+    state.nextCard = deck[5];
+    state.units = [];
+    state.projectiles = [];
+    state.fxAnims = [];
+    state.popups = [];
+    state.shake = 0;
+    state.winner = null;
+  }
+
+  function spawnUnit(side, template) {
+    const isPlayer = side === 'player';
+    const scale = isPlayer ? 1 : (1 + (state.round - 1) * 0.12);
+    state.units.push({
+      side,
+      ...template,
+      x: isPlayer ? LEFT_TOWER_X + 66 : RIGHT_TOWER_X - 66,
+      y: GROUND_Y,
+      maxHp: template.hp * scale,
+      hp: template.hp * scale,
+      cd: 0,
+      atkTimer: 0,
+      atkDur: 0.42,
+      animTime: Math.random() * 2,
+      hitFlash: 0
+    });
+    spawnFx('dust', isPlayer ? LEFT_TOWER_X + 66 : RIGHT_TOWER_X - 66, GROUND_Y - 12, 8, 70, 0.45);
+  }
+
+  function deployHandSlot(idx) {
+    if (state.screen !== 'play') return;
+    const card = state.hand[idx];
+    if (!card || state.mana < card.cost) return;
+    state.mana -= card.cost;
+    spawnUnit('player', card);
+    sfx.spawn();
+    const used = state.hand[idx];
+    state.hand[idx] = state.nextCard;
+    state.nextCard = used;
+  }
+
+  function spawnFx(key, x, y, frames, size, dur = 0.5) {
+    state.fxAnims.push({ key, x, y, frames, size, t: 0, dur });
+  }
+
+  function addPopup(x, y, text, color = '#fff') {
+    state.popups.push({ x, y, text, color, life: 0.78, maxLife: 0.78 });
+  }
+
+  function spawnArrow(fromX, fromY, target, dmg, side) {
+    const tx = target.isTower ? (side === 'player' ? RIGHT_TOWER_X : LEFT_TOWER_X) : target.x;
+    const ty = target.isTower ? GROUND_Y - 85 : GROUND_Y - 40;
+    const dist = Math.abs(tx - fromX);
+    const flight = Math.max(0.24, Math.min(0.6, dist / 540));
+    state.projectiles.push({
+      x: fromX, y: fromY,
+      sx: fromX, sy: fromY,
+      tx, ty,
+      t: 0, dur: flight,
+      arc: Math.min(95, dist * 0.22),
+      dmg, side, target
+    });
+    sfx.arrow();
+  }
+
+  function dealDamage(target, amount, isTower = false) {
+    if (isTower) {
+      target.hp = Math.max(0, target.hp - amount);
+      const tx = target === state.enemyTower ? RIGHT_TOWER_X : LEFT_TOWER_X;
+      addPopup(tx + (Math.random() - 0.5) * 20, GROUND_Y - 175, `-${Math.round(amount)}`, '#ffd54f');
+    } else {
+      target.hp -= amount;
+      target.hitFlash = 0.1;
+      addPopup(target.x + (Math.random() - 0.5) * 14, target.y - 82, `${Math.round(amount)}`, '#ffffff');
+    }
+  }
+
+  function updateTower(tower, side, tx, dt) {
+    tower.cd = Math.max(0, tower.cd - dt);
+    if (tower.cd > 0) return;
+    const target = state.units.find(u => u.side !== side && u.hp > 0 && Math.abs(u.x - tx) <= 285);
+    if (target) {
+      tower.cd = 1.25;
+      spawnArrow(tx, GROUND_Y - 138, target, 14, side);
+    }
+  }
+
+  function update(dt) {
+    state.time += dt;
+    if (state.shake > 0) state.shake = Math.max(0, state.shake - dt * 28);
+    if (state.screen !== 'play') return;
+
+    state.mana = Math.min(state.maxMana, state.mana + state.manaRate * dt);
+    state.enemyMana = Math.min(state.maxMana, state.enemyMana + (0.95 + state.round * 0.14) * dt);
+
+    state.enemyTimer -= dt;
+    if (state.enemyTimer <= 0) {
+      state.enemyTimer = Math.max(0.85, 2.0 - state.round * 0.18) + Math.random() * 1.1;
+      const affordable = ENEMY_TYPES.filter(u => u.cost <= state.enemyMana);
+      if (affordable.length > 0) {
+        const pick = affordable[Math.floor(Math.random() * affordable.length)];
+        state.enemyMana -= pick.cost;
+        spawnUnit('enemy', pick);
+      }
+    }
+
+    updateTower(state.playerTower, 'player', LEFT_TOWER_X, dt);
+    updateTower(state.enemyTower, 'enemy', RIGHT_TOWER_X, dt);
+
+    for (const u of state.units) {
+      if (u.hp <= 0) continue;
+      u.animTime += dt;
+      if (u.hitFlash > 0) u.hitFlash -= dt;
+      if (u.atkTimer > 0) u.atkTimer = Math.max(0, u.atkTimer - dt);
+      if (u.cd > 0) u.cd -= dt;
+
+      const isPlayer = u.side === 'player';
+      const dir = isPlayer ? 1 : -1;
+      const enemyTowerX = isPlayer ? RIGHT_TOWER_X : LEFT_TOWER_X;
+      const enemyTowerObj = isPlayer ? state.enemyTower : state.playerTower;
+
+      let closest = null;
+      let minDist = Infinity;
+      for (const other of state.units) {
+        if (other.side === u.side || other.hp <= 0) continue;
+        const d = (other.x - u.x) * dir;
+        if (d >= -20 && d < minDist) {
+          minDist = d;
+          closest = other;
+        }
+      }
+      const distTower = (enemyTowerX - u.x) * dir - 48;
+
+      if (closest && minDist <= u.range) {
+        if (u.cd <= 0) {
+          u.cd = u.rate;
+          u.atkTimer = u.atkDur;
+          if (u.role === 'ranged') {
+            spawnArrow(u.x, u.y - 46, closest, u.dmg, u.side);
+          } else if (u.role === 'healer') {
+            for (const ally of state.units) {
+              if (ally.side === u.side && ally.hp > 0 && Math.abs(ally.x - u.x) <= 130) {
+                ally.hp = Math.min(ally.maxHp, ally.hp + u.heal);
+                addPopup(ally.x, ally.y - 80, `+${u.heal}`, '#69f0ae');
+              }
+            }
+            dealDamage(closest, u.dmg);
+            sfx.spawn();
+          } else if (u.aoe) {
+            spawnFx('explosion', closest.x, GROUND_Y - 36, 8, 120, 0.45);
+            for (const other of state.units) {
+              if (other.side !== u.side && other.hp > 0 && Math.abs(other.x - u.x) <= u.range + u.aoe * 0.5) {
+                dealDamage(other, u.dmg);
+              }
+            }
+            sfx.boom();
+            state.shake = 5;
+          } else {
+            dealDamage(closest, u.dmg);
+            sfx.hit();
+          }
+        }
+      } else if (distTower <= u.range) {
+        if (u.cd <= 0) {
+          u.cd = u.rate;
+          u.atkTimer = u.atkDur;
+          const tDmg = u.dmg * (u.towerMult || 1);
+          if (u.role === 'ranged') {
+            spawnArrow(u.x, u.y - 46, { isTower: true }, tDmg, u.side);
+          } else {
+            dealDamage(enemyTowerObj, tDmg, true);
+            sfx.hit();
+            if (u.role === 'siege' || u.role === 'tank') {
+              spawnFx('explosion', enemyTowerX + (isPlayer ? -20 : 20), GROUND_Y - 50, 8, 110, 0.4);
+              state.shake = 5.5;
+            }
+          }
+        }
+      } else {
+        u.x += dir * u.speed * dt;
+      }
+    }
+
+    state.units = state.units.filter(u => {
+      if (u.hp <= 0) {
+        spawnFx('explosion', u.x, GROUND_Y - 36, 8, 115, 0.45);
+        return false;
+      }
+      return true;
+    });
+
+    for (const p of state.projectiles) {
+      p.t += dt;
+      const k = Math.min(1, p.t / p.dur);
+      p.x = p.sx + (p.tx - p.sx) * k;
+      p.y = p.sy + (p.ty - p.sy) * k - Math.sin(k * Math.PI) * p.arc;
+      if (k >= 1) {
+        p.done = true;
+        if (p.target.isTower) {
+          const tow = p.side === 'player' ? state.enemyTower : state.playerTower;
+          if (tow.hp > 0) dealDamage(tow, p.dmg, true);
+        } else if (p.target.hp > 0) {
+          dealDamage(p.target, p.dmg);
+        }
+      }
+    }
+    state.projectiles = state.projectiles.filter(p => !p.done);
+
+    for (const fx of state.fxAnims) fx.t += dt;
+    state.fxAnims = state.fxAnims.filter(fx => fx.t < fx.dur);
+
+    for (const pp of state.popups) {
+      pp.y -= 38 * dt;
+      pp.life -= dt;
+    }
+    state.popups = state.popups.filter(pp => pp.life > 0);
+
+    if (state.enemyTower.hp <= 0) {
+      state.screen = 'end';
+      state.winner = 'player';
+      state.gold += 50 + state.round * 25;
+      state.shake = 12;
+      sfx.win();
+    } else if (state.playerTower.hp <= 0) {
+      state.screen = 'end';
+      state.winner = 'enemy';
+      state.gold += 15;
+      state.shake = 12;
+      sfx.lose();
+    }
+  }
+
+  // --- Rendering ---
+  function drawBackground() {
+    if (imgs.bg.complete && imgs.bg.naturalWidth > 0) {
+      ctx.drawImage(imgs.bg, 0, 0, W, H);
+    } else {
+      ctx.fillStyle = '#6ed0ff';
+      ctx.fillRect(0, 0, W, H);
+    }
+  }
+
+  function drawTower(x, isPlayer, hp, maxHp) {
+    const im = isPlayer ? imgs.blueTower : imgs.redTower;
+    ctx.save();
+    ctx.translate(x, GROUND_Y + 12);
+
+    ctx.fillStyle = 'rgba(0,0,0,0.28)';
+    ctx.beginPath();
+    ctx.ellipse(0, -4, 62, 12, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    const th = 215;
+    if (im.complete && im.naturalWidth > 0) {
+      const tw = th * (im.naturalWidth / im.naturalHeight);
+      ctx.drawImage(im, -tw / 2, -th, tw, th);
+    }
+
+    const bw = 104, bh = 12;
+    ctx.fillStyle = '#141821';
+    ctx.beginPath();
+    ctx.roundRect(-bw / 2, -th - 16, bw, bh, 4);
+    ctx.fill();
+    ctx.fillStyle = isPlayer ? '#4caf50' : '#f44336';
+    ctx.fillRect(-bw / 2 + 2, -th - 14, (bw - 4) * Math.max(0, hp / maxHp), bh - 4);
+    ctx.restore();
+  }
+
+  function drawUnit(u) {
+    const isAttacking = u.atkTimer > 0;
+    const sheet = imgs[isAttacking ? u.atkKey : u.runKey];
+    const totalF = isAttacking ? u.atkF : u.runF;
+
+    let frame = 0;
+    if (isAttacking) {
+      const progress = 1 - u.atkTimer / u.atkDur;
+      frame = Math.min(totalF - 1, Math.floor(progress * totalF));
+    } else {
+      frame = Math.floor(u.animTime * 11) % totalF;
+    }
+
+    ctx.save();
+    ctx.translate(u.x, u.y);
+
+    // Ombra a terra
+    ctx.fillStyle = 'rgba(0,0,0,0.25)';
+    ctx.beginPath();
+    ctx.ellipse(0, 2, 24, 6, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    if (u.side === 'enemy') ctx.scale(-1, 1);
+
+    if (sheet && sheet.complete && sheet.naturalWidth > 0) {
+      const fw = sheet.naturalWidth / totalF;
+      const fh = sheet.naturalHeight;
+      if (u.hitFlash > 0) ctx.filter = 'brightness(2.2)';
+      ctx.drawImage(
+        sheet,
+        frame * fw, 0, fw, fh,
+        -u.drawSize / 2, -u.drawSize + u.footOff, u.drawSize, u.drawSize
+      );
+      ctx.filter = 'none';
+    }
+    ctx.restore();
+
+    // Barra vita unità
+    const bw = 44;
+    const bx = u.x - bw / 2;
+    const by = u.y - 78;
+    ctx.fillStyle = '#141821';
+    ctx.fillRect(bx, by, bw, 7);
+    ctx.fillStyle = u.side === 'player' ? '#4caf50' : '#ef5350';
+    ctx.fillRect(bx + 1, by + 1, (bw - 2) * Math.max(0, u.hp / u.maxHp), 5);
+  }
+
+  function drawCardPortrait(card, cx, cy, size) {
+    const sheet = imgs[card.runKey];
+    if (!sheet || !sheet.complete || sheet.naturalWidth === 0) return;
+    const fw = sheet.naturalWidth / card.runF;
+    const fh = sheet.naturalHeight;
+    ctx.drawImage(sheet, 0, 0, fw, fh, cx - size / 2, cy - size / 2, size, size);
+  }
+
+  function drawHUD() {
+    state.buttons = [];
+
+    ctx.fillStyle = 'rgba(15, 21, 34, 0.86)';
+    ctx.beginPath();
+    ctx.roundRect(18, 14, 224, 46, 10);
+    ctx.roundRect(W - 242, 14, 224, 46, 10);
+    ctx.fill();
+
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 16px Segoe UI';
+    ctx.textAlign = 'left';
+    ctx.fillText(`Blu · Round ${state.round}`, 32, 35);
+    ctx.fillStyle = '#ffd54f';
+    ctx.font = 'bold 14px Segoe UI';
+    ctx.fillText(`Oro: ${state.gold}`, 32, 53);
+
+    ctx.textAlign = 'right';
+    ctx.fillStyle = '#ff8a80';
+    ctx.font = 'bold 16px Segoe UI';
+    ctx.fillText('Legione Rossa (Bot)', W - 32, 42);
+
+    const barW = 420, barX = (W - barW) / 2, barY = 22;
+    ctx.fillStyle = '#141821';
+    ctx.beginPath();
+    ctx.roundRect(barX - 4, barY - 4, barW + 8, 22, 8);
+    ctx.fill();
+    const pRatio = state.playerTower.hp / state.playerTower.maxHp;
+    const eRatio = state.enemyTower.hp / state.enemyTower.maxHp;
+    ctx.fillStyle = '#66bb6a';
+    ctx.fillRect(barX, barY, (barW / 2 - 4) * pRatio, 14);
+    ctx.fillStyle = '#ef5350';
+    const ew = (barW / 2 - 4) * eRatio;
+    ctx.fillRect(barX + barW - ew, barY, ew, 14);
+
+    const trayW = 696, trayH = 168, trayX = (W - trayW) / 2, trayY = H - trayH - 14;
+    ctx.fillStyle = '#5c4028';
+    ctx.strokeStyle = '#2a190c';
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.roundRect(trayX, trayY, trayW, trayH, 16);
+    ctx.fill();
+    ctx.stroke();
+
+    if (state.nextCard) {
+      ctx.fillStyle = '#3b2818';
+      ctx.beginPath();
+      ctx.roundRect(trayX - 98, trayY + 28, 84, 106, 10);
+      ctx.fill();
+      ctx.stroke();
+      ctx.fillStyle = '#d7ccc8';
+      ctx.font = 'bold 11px Segoe UI';
+      ctx.textAlign = 'center';
+      ctx.fillText('PROSSIMA', trayX - 56, trayY + 46);
+      drawCardPortrait(state.nextCard, trayX - 56, trayY + 82, 84);
+      ctx.fillStyle = '#fff';
+      ctx.font = 'bold 12px Segoe UI';
+      ctx.fillText(state.nextCard.name, trayX - 56, trayY + 124);
+    }
+
+    const cardW = 114, cardH = 112, gap = 14;
+    const startX = trayX + (trayW - (5 * cardW + 4 * gap)) / 2;
+    state.hand.forEach((card, i) => {
+      const cx = startX + i * (cardW + gap);
+      const cy = trayY + 14;
+      const canBuy = state.mana >= card.cost;
+
+      ctx.fillStyle = canBuy ? '#fff8e1' : '#767676';
+      ctx.strokeStyle = canBuy ? '#ffb300' : '#424242';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.roundRect(cx, cy, cardW, cardH, 10);
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.save();
+      ctx.globalAlpha = canBuy ? 1 : 0.45;
+      drawCardPortrait(card, cx + cardW / 2, cy + 46, 104);
+      ctx.restore();
+
+      ctx.fillStyle = '#263238';
+      ctx.font = 'bold 13px Segoe UI';
+      ctx.textAlign = 'center';
+      ctx.fillText(card.name, cx + cardW / 2, cy + 91);
+      ctx.fillStyle = '#546e7a';
+      ctx.font = '11px Segoe UI';
+      ctx.fillText(`[${i + 1}]`, cx + cardW / 2, cy + 106);
+
+      ctx.fillStyle = canBuy ? '#ab47bc' : '#4a148c';
+      ctx.beginPath();
+      ctx.arc(cx + 14, cy + 14, 14, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = '#fff';
+      ctx.font = 'bold 14px Segoe UI';
+      ctx.fillText(card.cost, cx + 14, cy + 19);
+
+      state.buttons.push({ x: cx, y: cy, w: cardW, h: cardH, action: () => deployHandSlot(i) });
+    });
+
+    const mW = trayW - 60, mX = trayX + 44, mY = trayY + 136;
+    ctx.fillStyle = '#21142b';
+    ctx.beginPath();
+    ctx.roundRect(mX, mY, mW, 18, 9);
+    ctx.fill();
+    ctx.fillStyle = '#d500f9';
+    ctx.beginPath();
+    ctx.roundRect(mX + 2, mY + 2, (mW - 4) * (state.mana / state.maxMana), 14, 7);
+    ctx.fill();
+
+    ctx.fillStyle = '#aa00ff';
+    ctx.beginPath();
+    ctx.arc(trayX + 28, mY + 9, 18, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 16px Segoe UI';
+    ctx.textAlign = 'center';
+    ctx.fillText(Math.floor(state.mana), trayX + 28, mY + 15);
+  }
+
+  function drawMenu() {
+    drawBackground();
+    drawTower(LEFT_TOWER_X, true, 1, 1);
+    drawTower(RIGHT_TOWER_X, false, 1, 1);
+
+    ctx.fillStyle = 'rgba(10, 16, 28, 0.5)';
+    ctx.fillRect(0, 0, W, H);
+
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#ffd54f';
+    ctx.font = '900 64px Segoe UI';
+    ctx.fillText('TINY CLASH · BLU VS ROSSI', W / 2, 198);
+
+    ctx.fillStyle = '#e0f7fa';
+    ctx.font = '600 22px Segoe UI';
+    ctx.fillText('Personaggi animati frame-by-frame · Difendi la torre e conquista il castello!', W / 2, 246);
+
+    const bx = W / 2 - 140, by = 310, bw = 280, bh = 74;
+    ctx.fillStyle = '#e53935';
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.roundRect(bx, by, bw, bh, 16);
+    ctx.fill();
+    ctx.stroke();
+    ctx.fillStyle = '#fff';
+    ctx.font = '900 32px Segoe UI';
+    ctx.fillText('FIGHT!', W / 2, by + 48);
+
+    state.buttons = [{ x: bx, y: by, w: bw, h: bh, action: () => startMatch(1) }];
+  }
+
+  function drawEnd() {
+    ctx.fillStyle = 'rgba(10, 14, 24, 0.72)';
+    ctx.fillRect(0, 0, W, H);
+    const won = state.winner === 'player';
+
+    ctx.textAlign = 'center';
+    ctx.fillStyle = won ? '#66bb6a' : '#ef5350';
+    ctx.font = '900 64px Segoe UI';
+    ctx.fillText(won ? 'VITTORIA!' : 'SCONFITTA!', W / 2, 240);
+
+    ctx.fillStyle = '#ffd54f';
+    ctx.font = 'bold 26px Segoe UI';
+    ctx.fillText(won ? `Round ${state.round} completato · Oro totale: ${state.gold}` : `Riprova il Round ${state.round}!`, W / 2, 295);
+
+    const bx = W / 2 - 150, by = 350, bw = 300, bh = 68;
+    ctx.fillStyle = won ? '#43a047' : '#e53935';
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.roundRect(bx, by, bw, bh, 14);
+    ctx.fill();
+    ctx.stroke();
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 24px Segoe UI';
+    ctx.fillText(won ? `PROSSIMO ROUND (${state.round + 1})` : 'RIGIOCA ROUND', W / 2, by + 43);
+
+    state.buttons = [{
+      x: bx, y: by, w: bw, h: bh,
+      action: () => startMatch(won ? state.round + 1 : state.round)
+    }];
+  }
+
+  function render() {
+    ctx.save();
+    if (state.shake > 0) {
+      ctx.translate((Math.random() - 0.5) * state.shake, (Math.random() - 0.5) * state.shake);
+    }
+
+    if (state.screen === 'menu') {
+      drawMenu();
+    } else {
+      drawBackground();
+      drawTower(LEFT_TOWER_X, true, state.playerTower.hp, state.playerTower.maxHp);
+      drawTower(RIGHT_TOWER_X, false, state.enemyTower.hp, state.enemyTower.maxHp);
+
+      for (const u of state.units) drawUnit(u);
+
+      // Frecce reali di Tiny Swords orientate
+      for (const p of state.projectiles) {
+        const im = imgs.arrow;
+        if (im.complete && im.naturalWidth > 0) {
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          if (p.side === 'enemy') ctx.scale(-1, 1);
+          ctx.drawImage(im, -20, -20, 40, 40);
+          ctx.restore();
+        }
+      }
+
+      // Effetti animati Tiny Swords (Explosion_01, Dust_01)
+      for (const fx of state.fxAnims) {
+        const im = imgs[fx.key];
+        if (im && im.complete && im.naturalWidth > 0) {
+          const fw = im.naturalWidth / fx.frames;
+          const fh = im.naturalHeight;
+          const idx = Math.min(fx.frames - 1, Math.floor((fx.t / fx.dur) * fx.frames));
+          ctx.drawImage(im, idx * fw, 0, fw, fh, fx.x - fx.size / 2, fx.y - fx.size / 2, fx.size, fx.size);
+        }
+      }
+
+      // Numeri danno
+      ctx.font = '900 18px Segoe UI';
+      ctx.textAlign = 'center';
+      for (const pp of state.popups) {
+        ctx.globalAlpha = Math.max(0, pp.life / pp.maxLife);
+        ctx.fillStyle = '#000';
+        ctx.fillText(pp.text, pp.x + 1.5, pp.y + 1.5);
+        ctx.fillStyle = pp.color;
+        ctx.fillText(pp.text, pp.x, pp.y);
+      }
+      ctx.globalAlpha = 1;
+
+      drawHUD();
+      if (state.screen === 'end') drawEnd();
+    }
+    ctx.restore();
+  }
+
+  canvas.addEventListener('click', (e) => {
+    ensureAudio();
+    const rect = canvas.getBoundingClientRect();
+    const mx = (e.clientX - rect.left) * (W / rect.width);
+    const my = (e.clientY - rect.top) * (H / rect.height);
+    for (const b of state.buttons) {
+      if (mx >= b.x && mx <= b.x + b.w && my >= b.y && my <= b.y + b.h) {
+        b.action();
+        break;
+      }
+    }
+  });
+
+  window.addEventListener('keydown', (e) => {
+    ensureAudio();
+    if (e.key >= '1' && e.key <= '5') deployHandSlot(Number(e.key) - 1);
+    if (e.key.toLowerCase() === 'm') muted = !muted;
+  });
+
+  let last = performance.now();
+  function loop(now) {
+    const dt = Math.min(0.05, (now - last) / 1000);
+    last = now;
+    update(dt);
+    render();
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

@@ -17,7 +17,8 @@ Prima di prendere una decisione tecnica o strategica, giudicare nuovi link/Reel,
 - **Psicologia Conversioni & Fiducia Utenti:** `.agents/vendor_skills/marketing-psychology/SKILL.md` e `cro/SKILL.md`
 - **Guide Didattiche, Siti Cinema & Motion Video:** `.agents/vendor_skills/teach/SKILL.md`, `anatomy/SKILL.md`, `motionmaxxing/SKILL.md` + `skills/scroll-cinema-web/SKILL.md`
 - **Sicurezza Codice & Patch Vulnerabilità:** `.agents/vendor_skills/find-security-vulnerabilities-in-code/SKILL.md` (*Strix*)
-- **Analisi Video, Ricerca Web & API:** `.agents/vendor_skills/watch/SKILL.md`, `agent-reach/SKILL.md`, `reverse-api-engineer/SKILL.md`
+- **Analisi Video, Ricerca Web, Scraping & API:** `.agents/vendor_skills/watch/SKILL.md`, `agent-reach/SKILL.md`, `scrapling/SKILL.md`, `reverse-api-engineer/SKILL.md`
+- **3D, Gaming 2D & Audio Video:** `.agents/skills/blender-officina/SKILL.md`, `.agents/vendor_skills/pixelfx/SKILL.md`, `sound-design/SKILL.md` *(vedi anche `docs/GUIDA_SKILL_APPROVATE.md`)*
 - **Blooderskills Verticali Originali:** `skills/` (`fatturapa-xray`, `scroll-cinema-web`, `service-as-software-it`)
 
 *(Se la cartella `.agents/vendor_skills/` non è ancora presente su disco, esegui `python attiva_arsenale.py`).*
