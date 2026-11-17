@@ -3,7 +3,7 @@
 
   <br />
 
-  <img src="https://img.shields.io/badge/Libreria_Skill-16_attive-ff1236?style=for-the-badge&labelColor=140407" alt="Skill attive" />
+  <img src="https://img.shields.io/badge/Libreria_Skill-17_attive-ff1236?style=for-the-badge&labelColor=140407" alt="Skill attive" />
   <img src="https://img.shields.io/badge/Strumenti-2_attivi-ff1236?style=for-the-badge&labelColor=140407" alt="Strumenti attivi" />
   <img src="https://img.shields.io/badge/Blooderskills-4_moduli-10b981?style=for-the-badge&labelColor=140407" alt="Blooderskills" />
   <img src="https://img.shields.io/badge/Licenza-MIT-fbeef0?style=for-the-badge&labelColor=140407" alt="MIT License" />
@@ -41,10 +41,11 @@ npx skills add raffaeleditullo-cloud/Blooder --skill <nome-skill>
 
 ---
 
-## Libreria Skill (16 selezionate)
+## Libreria Skill (17 selezionate)
 
 | Skill | Categoria | Cosa fa in una riga |
 | :--- | :--- | :--- |
+| **[CLI-Anything](https://github.com/HKUDS/CLI-Anything)** | `Agenti AI & Automazione` | Trasforma qualsiasi software desktop o repository in una CLI con output JSON e SKILL.md pronto per l'agente, senza dover installare un server MCP per ogni app. |
 | **[i-have-adhd (Formato QA Diretto)](https://github.com/ayghri/i-have-adhd)** | `Qualità Codice & Regole` | Impone agli agenti di Controllo Qualità e revisione di andare dritti all’errore, alla riga esatta e al comando di verifica, tagliando zero chiacchiere. |
 | **[motionmaxxing](https://github.com/Tejashmakwana/motionmaxxing)** | `Video & Media` | Trasforma un sito o un brand in video promozionali animati da vero motion designer in locale (HTML + GSAP + FFmpeg), eliminando le slide piatte da AI. |
 | **[Strix](https://github.com/usestrix/strix)** | `Sicurezza & Audit` | Hacker etico AI autonomo che attacca dinamicamente la tua app, scarta i falsi allarmi con prove reali e scrive già la patch di codice. |

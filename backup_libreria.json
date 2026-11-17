@@ -1,6 +1,39 @@
 {
   "skills": [
     {
+      "id": 22,
+      "slug": "cli-anything",
+      "name": "CLI-Anything",
+      "repo_url": "https://github.com/HKUDS/CLI-Anything",
+      "kind": "skill",
+      "category": "Agenti AI & Automazione",
+      "tagline": "Trasforma qualsiasi software desktop o repository in una CLI con output JSON e SKILL.md pronto per l'agente, senza dover installare un server MCP per ogni app.",
+      "simple_explanation": "Al posto di far cliccare il mouse sullo schermo o cercare un MCP dedicato per ogni programma, passi a /cli-anything il software o il repository (es. Shotcut, LibreOffice, GIMP, draw.io): analizza le funzioni interne e crea una riga di comando pulita con output JSON e istruzioni SKILL.md per Claude Code o Antigravity.",
+      "specs": {
+        "Linguaggio": "Python (Click) + Markdown (SKILL.md)",
+        "Hub": "cli-anything-hub (PyPI) + meta-skill",
+        "Pipeline": "7 fasi: Analyze -> Design -> Implement -> Test -> Document -> Publish"
+      },
+      "compatible_apps": [
+        "Software desktop e media (Shotcut, Blender, GIMP, LibreOffice, draw.io)",
+        "Automazioni locali senza server MCP dedicati",
+        "Tool aziendali interni da rendere comandabili via terminale e JSON"
+      ],
+      "tech_keywords": [
+        "cli",
+        "mcp-alternative",
+        "json",
+        "python",
+        "click",
+        "automation"
+      ],
+      "cost_saving": "Evita di mantenere decine di server MCP o automazioni GUI fragili basate su screenshot.",
+      "honest_tradeoffs": "Richiede Python sul PC e una prima fase di generazione/installazione dell'harness per ogni software nuovo.",
+      "install_guide": "1. Installa la meta-skill nel tuo agente:\n   npx skills add HKUDS/CLI-Anything --skill cli-hub-meta-skill -g -y\n\n2. Oppure installa il gestore CLI Hub via Python:\n   pip install cli-anything-hub\n   cli-hub search <nome-programma>\n   cli-hub install <nome-programma>",
+      "stars": 0,
+      "created_at": "2026-11-17T07:46:02.066218+00:00"
+    },
+    {
       "id": 21,
       "slug": "i-have-adhd",
       "name": "i-have-adhd (Formato QA Diretto)",
