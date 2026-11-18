@@ -4,7 +4,7 @@
   <br />
 
   <img src="https://img.shields.io/badge/Libreria_Skill-17_attive-ff1236?style=for-the-badge&labelColor=140407" alt="Skill attive" />
-  <img src="https://img.shields.io/badge/Strumenti-2_attivi-ff1236?style=for-the-badge&labelColor=140407" alt="Strumenti attivi" />
+  <img src="https://img.shields.io/badge/Strumenti-3_attivi-ff1236?style=for-the-badge&labelColor=140407" alt="Strumenti attivi" />
   <img src="https://img.shields.io/badge/Blooderskills-4_moduli-10b981?style=for-the-badge&labelColor=140407" alt="Blooderskills" />
   <img src="https://img.shields.io/badge/Licenza-MIT-fbeef0?style=for-the-badge&labelColor=140407" alt="MIT License" />
   <img src="https://img.shields.io/badge/Python-3.10+-ff4d63?style=for-the-badge&labelColor=140407" alt="Python 3.10+" />
@@ -65,10 +65,11 @@ npx skills add raffaeleditullo-cloud/Blooder --skill <nome-skill>
 
 ---
 
-## Strumenti Operativi (2 selezionati)
+## Strumenti Operativi (3 selezionati)
 
 | Strumento | Categoria | Cosa fa in una riga |
 | :--- | :--- | :--- |
+| **[RAG-Anything](https://github.com/HKUDS/RAG-Anything)** | `Agenti AI & Automazione` | Motore RAG multimodale open-source (basato su LightRAG) che legge PDF, DOCX, tabelle complesse, formule e grafici costruendo un Knowledge Graph + indice vettoriale. |
 | **[Paperclip](https://github.com/paperclipai/paperclip)** | `Agenti AI & Automazione` | Pannello di comando visivo per coordinare squadre di agenti AI (CEO, CTO, Sviluppatori, Marketing) con tetto massimo di spesa e approvazioni umane. |
 | **[Agent Desktop](https://github.com/vercel-labs/agent-desktop)** | `Automazione Desktop` | Permette a Claude Code e agli agenti AI di usare i programmi del tuo PC leggendo pulsanti e campi direttamente dal sistema, senza muovere il mouse. |
 

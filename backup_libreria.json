@@ -660,6 +660,39 @@
   ],
   "tools": [
     {
+      "id": 23,
+      "slug": "rag-anything",
+      "name": "RAG-Anything",
+      "repo_url": "https://github.com/HKUDS/RAG-Anything",
+      "kind": "tool",
+      "category": "Agenti AI & Automazione",
+      "tagline": "Motore RAG multimodale open-source (basato su LightRAG) che legge PDF, DOCX, tabelle complesse, formule e grafici costruendo un Knowledge Graph + indice vettoriale.",
+      "simple_explanation": "A differenza dei RAG classici che spezzano i testi alla cieca rompendo le tabelle, RAG-Anything analizza documenti complessi (PDF, Word, immagini, tabelle) in 4 fasi costruendo un grafo della conoscenza per rispondere con precisione anche su listini, bandi e tabelle sanitarie.",
+      "specs": {
+        "Licenza": "MIT (Open-Source)",
+        "Linguaggio": "Python 3.10+ (PyPI raganything)",
+        "Base": "LightRAG + Knowledge Graph + Vector DB"
+      },
+      "compatible_apps": [
+        "Knowledge Base aziendali con PDF ricchi di tabelle (es. piani Fondo Sani, bandi)",
+        "Sistemi chat interni stile ChatGPT collegati a documenti tecnici",
+        "Pipeline documentali con grafici, immagini e formule"
+      ],
+      "tech_keywords": [
+        "rag",
+        "lightrag",
+        "knowledge-graph",
+        "pdf",
+        "multimodal",
+        "python"
+      ],
+      "cost_saving": "Alternativa open-source locale ai servizi RAG gestiti a pagamento per documenti multimodali.",
+      "honest_tradeoffs": "Non include una UI stile ChatGPT pronta (serve collegarlo a Next.js o Open WebUI) e richiede dipendenze Python per parsing PDF/immagini.",
+      "install_guide": "1. Installa via Python:\n   pip install raganything\n\n2. Oppure clona il repository ufficiale:\n   git clone https://github.com/HKUDS/RAG-Anything",
+      "stars": 0,
+      "created_at": "2026-11-17T22:33:11.513597+00:00"
+    },
+    {
       "id": 19,
       "slug": "paperclip",
       "name": "Paperclip",
