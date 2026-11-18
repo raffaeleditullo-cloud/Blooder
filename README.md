@@ -5,7 +5,7 @@
 
   <img src="https://img.shields.io/badge/Libreria_Skill-17_attive-ff1236?style=for-the-badge&labelColor=140407" alt="Skill attive" />
   <img src="https://img.shields.io/badge/Strumenti-3_attivi-ff1236?style=for-the-badge&labelColor=140407" alt="Strumenti attivi" />
-  <img src="https://img.shields.io/badge/Blooderskills-4_moduli-10b981?style=for-the-badge&labelColor=140407" alt="Blooderskills" />
+  <img src="https://img.shields.io/badge/Blooderskills-5_moduli-10b981?style=for-the-badge&labelColor=140407" alt="Blooderskills" />
   <img src="https://img.shields.io/badge/Licenza-MIT-fbeef0?style=for-the-badge&labelColor=140407" alt="MIT License" />
   <img src="https://img.shields.io/badge/Python-3.10+-ff4d63?style=for-the-badge&labelColor=140407" alt="Python 3.10+" />
 </div>
@@ -34,6 +34,7 @@ npx skills add raffaeleditullo-cloud/Blooder --skill <nome-skill>
 
 | Modulo | Settore Piattaforma | Potenzia | Stato | Descrizione |
 | :--- | :--- | :--- | :--- | :--- |
+| **[`Meta & Design Creative Studio`](skills/meta-creative-studio/SKILL.md)** | `Marketing, Design & Meta Ads` | ui-ux-pro-max, 21st-dev, scroll-cinema-web, anatomy, motionmaxxing, marketing-psychology, cro, sepia | Collaudata | Dal brief zero-file a idee creative, design Claude (post/siti Lovable & WordPress) e setup completo Meta Ads |
 | **[`blooder-reel-kit`](skills/blooder-reel-kit/SKILL.md)** | `Video & Media` | motionmaxxing, sound-design, sepia | Collaudata | Kit visivo 9:16 vettoriale Red Matrix con camera 3D continua, sottotitoli WordBoundary e suoni CC0 gratuiti da Openverse API. |
 | **[`Service-as-a-Software Italia`](skills/service-as-software-it/SKILL.md)** | `Strategia Business, Prezzi & Servizi AI (Italia)` | Founder, Sepia, Marketing Psychology | Collaudata | Calcola al centesimo (con tasse e INPS reali italiani) quando conviene vendere il Servizio Finito erogato con l'AI invece del classico abbonamento SaaS da 39€/mese. |
 | **[`Scroll Cinema Web`](skills/scroll-cinema-web/SKILL.md)** | `Web Design & Landing Page Cinematografiche` | motionmaxxing, Anatomy, Marketing Psychology, Sepia | Collaudata | Trasforma un breve video AI in un sito web interattivo a 60fps controllato dallo scroll del mouse (stile Apple) con taglio automatico WebP Desktop/Mobile. |

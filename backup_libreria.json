@@ -775,6 +775,36 @@
   ],
   "blooderskills": [
     {
+      "id": 6,
+      "slug": "meta-creative-studio",
+      "name": "Meta & Design Creative Studio",
+      "sector": "Marketing, Design & Meta Ads",
+      "base_skills": [
+        "ui-ux-pro-max",
+        "21st-dev",
+        "scroll-cinema-web",
+        "anatomy",
+        "motionmaxxing",
+        "marketing-psychology",
+        "cro",
+        "sepia"
+      ],
+      "status": "collaudata",
+      "tagline": "Dal brief zero-file a idee creative, design Claude (post/siti Lovable & WordPress) e setup completo Meta Ads",
+      "missing_piece": "Colma il vuoto tra un brief vago senza file e la messa online: sblocca 3 angoli creativi, applica design avanzato Claude (ui-ux-pro-max, 21st-dev, scroll-cinema-web, anatomy) per visual e siti Lovable/WordPress, e calcola setup Meta Ads e UTM.",
+      "use_cases": [
+        "Sblocco idee e visual 4:5 e 9:16 da brief vago",
+        "Design siti/landing Lovable e WordPress con stack Claude",
+        "Setup guidato Meta Ads Manager + UTM + checklist pre-lancio"
+      ],
+      "skill_markdown": "---\nname: meta-creative-studio\ndescription: \"Trasforma un brief breve o vago in idee creative concrete, design avanzato con Claude (visual social 4:5 e 9:16, siti Lovable e WordPress con ui-ux-pro-max, 21st-dev, scroll-cinema-web e anatomy) e configurazione completa passo-passo di campagne Meta Ads con UTM e checklist pre-lancio.\"\n---\n\n# Meta & Design Creative Studio — Dal Brief Zero-File a Visual, Siti & Meta Ads\n\n> **Modulo Originale Blooderskill** | Potenzia: `ui-ux-pro-max`, `21st-dev`, `scroll-cinema-web`, `anatomy`, `motionmaxxing`, `marketing-psychology`, `cro`, `sepia`\n\n## 1. Sblocco Creativo dal Brief (Sempre 3 Angoli Diversi)\nQuando parti solo da un brief (nessun file in ingresso) e manca l'idea, genera subito **3 concept completi**:\n1. **Angolo 1 — Problema Reale (Stop-Scroll):** parte dal fastidio quotidiano del target.\n2. **Angolo 2 — Risultato Concreto (Prima -> Dopo):** mostra cosa cambia in pratica.\n3. **Angolo 3 — Prova / Offerta Diretta:** numeri, caso reale o invito chiaro all'azione.\n\nPer ogni concept consegna:\n- **Idea Visual + Testo in Grafica:** max 6-8 parole leggibili su mobile + prompt/layout visivo.\n- **Hook + Body + CTA (stile `sepia`):** linguaggio umano, zero frasi fatte AI.\n- **Formati da esportare:** Feed `1080x1350` (4:5), Stories/Reels `1080x1920` (9:16), Carosello `1080x1080` (1:1).\n\n## 2. Design Avanzato con Claude (Visual & Siti di Livello)\nUsa lo stack visivo di Blooder direttamente con Claude per superare i soliti template:\n- **`ui-ux-pro-max` + `21st-dev`:** palette coerenti, tipografia forte, bento grid, card moderne e codice pronto da incollare in **Lovable** o **WordPress**.\n- **`scroll-cinema-web`:** landing cinematografiche 60fps controllate dallo scroll.\n- **`anatomy`:** diagrammi isometrici tecnici in SVG al posto delle solite icone stock.\n- **`motionmaxxing` + `blooder-reel-kit`:** trasforma un visual statico in un Reel 9:16 animato.\n\n## 3. Siti Web & Landing (Lovable & WordPress)\n- **Lovable:** genera un Prompt Unico Strutturato (Hero sopra la piega -> Problema -> Soluzione -> Prove -> Offerta -> FAQ -> Form + pagina `/grazie` per evento Lead).\n- **WordPress (Elementor / Gutenberg):** blueprint sezione per sezione + checklist tecnica (slug corto, Meta Title <=60ch, immagini WebP <200KB, test form reale, verifica mobile 375px).\n\n## 4. Generatore Deterministico Piano Meta Ads (`scripts/meta_campaign_plan.py`)\n```bash\npython skills/meta-creative-studio/scripts/meta_campaign_plan.py --nome \"Campagna Autunno\" --obiettivo lead --budget-giornaliero 20 --giorni 14 --url \"https://tuosito.it/offerta\" --piattaforma-sito lovable\n```\n- Mai usare **Traffico** se vuoi contatti o vendite: scegli **Contatti (`lead`)** o **Vendite (`vendite`)**.\n- Controlla sempre Localita, Pixel/Dataset, Evento di conversione e incolla gli **URL con UTM** generati dallo script.",
+      "skill_path": "skills/meta-creative-studio/SKILL.md",
+      "install_cmd": "npx skills add raffaeleditullo-cloud/Blooder --skill meta-creative-studio",
+      "repo_url": "https://github.com/raffaeleditullo-cloud/Blooder/tree/main/skills/meta-creative-studio",
+      "lab_url": "",
+      "created_at": "2026-11-18T14:10:08.360266+00:00"
+    },
+    {
       "id": 5,
       "slug": "blooder-reel-kit",
       "name": "blooder-reel-kit",
