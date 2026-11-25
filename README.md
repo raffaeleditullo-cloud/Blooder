@@ -3,9 +3,9 @@
 
   <br />
 
-  <img src="https://img.shields.io/badge/Libreria_Skill-17_attive-ff1236?style=for-the-badge&labelColor=140407" alt="Skill attive" />
-  <img src="https://img.shields.io/badge/Strumenti-3_attivi-ff1236?style=for-the-badge&labelColor=140407" alt="Strumenti attivi" />
-  <img src="https://img.shields.io/badge/Blooderskills-5_moduli-10b981?style=for-the-badge&labelColor=140407" alt="Blooderskills" />
+  <img src="https://img.shields.io/badge/Libreria_Skill-20_attive-ff1236?style=for-the-badge&labelColor=140407" alt="Skill attive" />
+  <img src="https://img.shields.io/badge/Strumenti-7_attivi-ff1236?style=for-the-badge&labelColor=140407" alt="Strumenti attivi" />
+  <img src="https://img.shields.io/badge/Blooderskills-6_moduli-10b981?style=for-the-badge&labelColor=140407" alt="Blooderskills" />
   <img src="https://img.shields.io/badge/Licenza-MIT-fbeef0?style=for-the-badge&labelColor=140407" alt="MIT License" />
   <img src="https://img.shields.io/badge/Python-3.10+-ff4d63?style=for-the-badge&labelColor=140407" alt="Python 3.10+" />
 </div>
@@ -34,6 +34,7 @@ npx skills add raffaeleditullo-cloud/Blooder --skill <nome-skill>
 
 | Modulo | Settore Piattaforma | Potenzia | Stato | Descrizione |
 | :--- | :--- | :--- | :--- | :--- |
+| **[`Noir Hook Studio (4-Second Engine)`](skills/noir-hook-studio/SKILL.md)** | `Contenuti, Personal Branding & Video` | blooder-reel-kit, li-post, li-human, sepia, marketing-psychology | Collaudata | Motore editoriale Dark Noir e Regola dei 4 Secondi: da 1 fatto reale genera Post LinkedIn (ore 15:00) + Storyboard Reel 9:16 pronti. |
 | **[`Meta & Design Creative Studio`](skills/meta-creative-studio/SKILL.md)** | `Marketing, Design & Meta Ads` | ui-ux-pro-max, 21st-dev, scroll-cinema-web, anatomy, motionmaxxing, marketing-psychology, cro, sepia | Collaudata | Dal brief zero-file a idee creative, design Claude (post/siti Lovable & WordPress) e setup completo Meta Ads |
 | **[`blooder-reel-kit`](skills/blooder-reel-kit/SKILL.md)** | `Video & Media` | motionmaxxing, sound-design, sepia | Collaudata | Kit visivo 9:16 vettoriale Red Matrix con camera 3D continua, sottotitoli WordBoundary e suoni CC0 gratuiti da Openverse API. |
 | **[`Service-as-a-Software Italia`](skills/service-as-software-it/SKILL.md)** | `Strategia Business, Prezzi & Servizi AI (Italia)` | Founder, Sepia, Marketing Psychology | Collaudata | Calcola al centesimo (con tasse e INPS reali italiani) quando conviene vendere il Servizio Finito erogato con l'AI invece del classico abbonamento SaaS da 39€/mese. |
@@ -42,10 +43,13 @@ npx skills add raffaeleditullo-cloud/Blooder --skill <nome-skill>
 
 ---
 
-## Libreria Skill (17 selezionate)
+## Libreria Skill (20 selezionate)
 
 | Skill | Categoria | Cosa fa in una riga |
 | :--- | :--- | :--- |
+| **[Career-Ops](https://github.com/career-ops-hq/career-ops)** | `Carriera & Personal Branding` | Assistente AI locale per ricerca lavoro: valuta gli annunci da 1 a 5 sul tuo CV, adatta il curriculum ATS e prepara le risposte. |
+| **[LinkedIn Agent Skill (11 Skill)](https://github.com/Jakeschincariol/linkedin-agent-skill)** | `Marketing & Conversioni` | 11 skill gratuite per gestire LinkedIn: ottimizzazione profilo, piano settimanale, post con 21 hook e commenti. |
+| **[SkillSpector (NVIDIA)](https://github.com/NVIDIA/SkillSpector)** | `Sicurezza & Audit` | Scanner open-source di NVIDIA che controlla skill AI, plugin e server MCP prima che tocchino il tuo PC. |
 | **[CLI-Anything](https://github.com/HKUDS/CLI-Anything)** | `Agenti AI & Automazione` | Trasforma qualsiasi software desktop o repository in una CLI con output JSON e SKILL.md pronto per l'agente, senza dover installare un server MCP per ogni app. |
 | **[i-have-adhd (Formato QA Diretto)](https://github.com/ayghri/i-have-adhd)** | `Qualità Codice & Regole` | Impone agli agenti di Controllo Qualità e revisione di andare dritti all’errore, alla riga esatta e al comando di verifica, tagliando zero chiacchiere. |
 | **[motionmaxxing](https://github.com/Tejashmakwana/motionmaxxing)** | `Video & Media` | Trasforma un sito o un brand in video promozionali animati da vero motion designer in locale (HTML + GSAP + FFmpeg), eliminando le slide piatte da AI. |
@@ -66,10 +70,14 @@ npx skills add raffaeleditullo-cloud/Blooder --skill <nome-skill>
 
 ---
 
-## Strumenti Operativi (3 selezionati)
+## Strumenti Operativi (7 selezionati)
 
 | Strumento | Categoria | Cosa fa in una riga |
 | :--- | :--- | :--- |
+| **[OpenSanctions](https://github.com/opensanctions/opensanctions)** | `Dati Web & Ricerca` | Database aperto su sanzioni internazionali, persone esposte politicamente (PEP) e legami societari da fonti pubbliche ufficiali. |
+| **[DeerFlow 2.0 (ByteDance)](https://github.com/bytedance/deer-flow)** | `Agenti AI & Automazione` | SuperAgent harness open-source di ByteDance che orchestra sub-agenti, memoria, sandbox e skill estensibili per ricerche e coding. |
+| **[OpenBB](https://github.com/OpenBB-finance/OpenBB)** | `Dati Web & Ricerca` | Piattaforma open-source di dati finanziari, macroeconomici e aziendali in Python: tutte le fonti di mercato in un solo posto. |
+| **[Codebase Memory MCP](https://github.com/DeusData/codebase-memory-mcp)** | `Qualità Codice & Regole` | Server MCP locale che mappa tutto il tuo repository in un grafo SQLite (tree-sitter), tagliando fino a 4x i token e le ricerche a vuoto. |
 | **[RAG-Anything](https://github.com/HKUDS/RAG-Anything)** | `Agenti AI & Automazione` | Motore RAG multimodale open-source (basato su LightRAG) che legge PDF, DOCX, tabelle complesse, formule e grafici costruendo un Knowledge Graph + indice vettoriale. |
 | **[Paperclip](https://github.com/paperclipai/paperclip)** | `Agenti AI & Automazione` | Pannello di comando visivo per coordinare squadre di agenti AI (CEO, CTO, Sviluppatori, Marketing) con tetto massimo di spesa e approvazioni umane. |
 | **[Agent Desktop](https://github.com/vercel-labs/agent-desktop)** | `Automazione Desktop` | Permette a Claude Code e agli agenti AI di usare i programmi del tuo PC leggendo pulsanti e campi direttamente dal sistema, senza muovere il mouse. |

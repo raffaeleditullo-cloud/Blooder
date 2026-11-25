@@ -96,6 +96,33 @@ ARSENAL_SOURCES: list[tuple[str, str, list[tuple[str, str]]]] = [
         "main",
         [("skills/i-have-adhd", "i-have-adhd")],
     ),
+    (
+        "NVIDIA/SkillSpector",
+        "main",
+        [("skills/skill-inspector", "skill-inspector")],
+    ),
+    (
+        "Jakeschincariol/linkedin-agent-skill",
+        "main",
+        [
+            ("skills/li-profile", "li-profile"),
+            ("skills/li-audit", "li-audit"),
+            ("skills/li-plan", "li-plan"),
+            ("skills/li-post", "li-post"),
+            ("skills/li-comment", "li-comment"),
+            ("skills/li-reply", "li-reply"),
+            ("skills/li-carousel", "li-carousel"),
+            ("skills/li-dm", "li-dm"),
+            ("skills/li-inbox", "li-inbox"),
+            ("skills/li-repurpose", "li-repurpose"),
+            ("skills/li-human", "li-human"),
+        ],
+    ),
+    (
+        "career-ops-hq/career-ops",
+        "main",
+        [(".agents/skills/career-ops", "career-ops")],
+    ),
 ]
 
 SKIP_ROOT_DIRS_FOR_FULL_REPO = {".github", "tests", "evals", "docs"}

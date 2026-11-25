@@ -1,6 +1,117 @@
 {
   "skills": [
     {
+      "id": 26,
+      "slug": "career-ops",
+      "name": "Career-Ops",
+      "repo_url": "https://github.com/career-ops-hq/career-ops",
+      "kind": "skill",
+      "category": "Carriera & Personal Branding",
+      "tagline": "Assistente AI locale per ricerca lavoro: valuta gli annunci da 1 a 5 sul tuo CV, adatta il curriculum ATS e prepara le risposte.",
+      "simple_explanation": "Invece di mandare CV a caso, dai a Career-Ops il tuo curriculum e gli annunci che ti interessano. Lui assegna un voto da 1 a 5 a ogni offerta (sotto il 4 ti consiglia di lasciare perdere), riconosce annunci poco trasparenti, adatta il CV per superare i filtri automatici ATS e prepara le risposte ai moduli. Non invia mai nulla da solo: il clic finale resta sempre tuo.",
+      "specs": {
+        "linguaggio": "SKILL.md + CLI locale (Go / Node / Claude Code)",
+        "sistemi_operativi": "Windows, macOS, Linux",
+        "costo": "Gratuito (MIT, consuma solo i token del tuo agente AI)",
+        "supporto_mcp": "Compatibile con Antigravity, Claude Code, Codex, Cursor",
+        "difficolta": "Media"
+      },
+      "compatible_apps": [
+        "Ricerca lavoro mirata su LinkedIn e portali tech",
+        "Adattamento rapido del CV in formato ATS per ogni posizione",
+        "Preparazione colloqui tecnici e gestione pipeline candidature"
+      ],
+      "tech_keywords": [
+        "career",
+        "cv",
+        "resume",
+        "ats",
+        "linkedin",
+        "job-search",
+        "interview",
+        "claude-code"
+      ],
+      "cost_saving": "Sostituisce piattaforme AI per CV e job-tracking a pagamento (20-50 euro/mese).",
+      "honest_tradeoffs": "Pensato per uso individuale (candidati) piu che per reparti aziendali. L analisi in blocco di molti annunci consuma token e le utility CLI complete richiedono setup iniziale rispetto all uso della sola SKILL.md.",
+      "install_guide": "1. In Blooder la skill operativa si monta con:\n   python attiva_arsenale.py\n2. Per la dashboard completa locale clona il repository:\n   git clone https://github.com/career-ops-hq/career-ops.git\n3. Fornisci il tuo CV (es. CV_Raffaele_Di_Tullo_2026.pdf) e chiedi di valutare un annuncio LinkedIn.",
+      "stars": 84283,
+      "created_at": "2026-11-23T09:34:51.034607+00:00"
+    },
+    {
+      "id": 25,
+      "slug": "linkedin-agent-skill",
+      "name": "LinkedIn Agent Skill (11 Skill)",
+      "repo_url": "https://github.com/Jakeschincariol/linkedin-agent-skill",
+      "kind": "skill",
+      "category": "Marketing & Conversioni",
+      "tagline": "11 skill gratuite per gestire LinkedIn: ottimizzazione profilo, piano settimanale, post con 21 hook e commenti.",
+      "simple_explanation": "E come avere un consulente LinkedIn dentro il tuo agente AI. Include 11 moduli pronti: analizza e migliora il tuo profilo (/li-profile, /li-audit), prepara il piano settimanale (/li-plan), scrive post partendo da 21 formule di ganci (/li-post), bozze di commenti (/li-comment), risposte (/li-reply), caroselli e DM. Prepara tutto in bozza senza pubblicare mai in automatico, cosi decidi sempre tu e non rischi ban.",
+      "specs": {
+        "linguaggio": "Markdown (SKILL.md modulari)",
+        "sistemi_operativi": "Windows, macOS, Linux",
+        "costo": "100% Gratuito (MIT, nessuna API key richiesta)",
+        "supporto_mcp": "Compatibile con Antigravity, Claude Code, Codex, Cursor",
+        "difficolta": "Facile"
+      },
+      "compatible_apps": [
+        "Ottimizzazione profilo LinkedIn e posizionamento personale",
+        "Piano editoriale settimanale per founder, freelance e tecnici commerciali",
+        "Scrittura post, caroselli e commenti mirati senza tono robotico"
+      ],
+      "tech_keywords": [
+        "linkedin",
+        "personal-branding",
+        "copywriting",
+        "social",
+        "content",
+        "hooks",
+        "profile"
+      ],
+      "cost_saving": "Evita tool LinkedIn a pagamento (30-80 euro/mese) e consulenze base di personal branding.",
+      "honest_tradeoffs": "Va prima compilato il file del proprio tono di voce (voice.md) per evitare bozze generiche. La sotto-skill /li-human e piu semplice rispetto a Sepia: per rifinire testi lunghi conviene affiancare Sepia.",
+      "install_guide": "1. In Blooder e gia inclusa nell arsenale locale:\n   python attiva_arsenale.py\n2. Oppure clona il repo ufficiale:\n   git clone https://github.com/Jakeschincariol/linkedin-agent-skill.git\n3. Inizia chiedendo all agente di usare /li-profile o /li-audit sul tuo profilo LinkedIn attuale.",
+      "stars": 3854,
+      "created_at": "2026-11-23T09:34:51.032776+00:00"
+    },
+    {
+      "id": 24,
+      "slug": "skillspector",
+      "name": "SkillSpector (NVIDIA)",
+      "repo_url": "https://github.com/NVIDIA/SkillSpector",
+      "kind": "skill",
+      "category": "Sicurezza & Audit",
+      "tagline": "Scanner open-source di NVIDIA che controlla skill AI, plugin e server MCP prima che tocchino il tuo PC.",
+      "simple_explanation": "Ogni skill che scarichi da GitHub o da un Reel puo contenere comandi nascosti o istruzioni pericolose. SkillSpector funziona come un metal detector prima dell ingresso: analizza SKILL.md, script e server MCP alla ricerca di prompt injection, furto dati, tool poisoning e vulnerabilita note (OSV.dev), dandoti un punteggio di rischio 0-100 prima di installare qualsiasi cosa.",
+      "specs": {
+        "linguaggio": "Python 3.12+ / CLI + SKILL.md",
+        "sistemi_operativi": "Windows, macOS, Linux",
+        "costo": "Gratuito (Apache-2.0, analisi statica 100% locale)",
+        "supporto_mcp": "Si (scansiona server MCP e skill Claude/Codex/Cursor)",
+        "difficolta": "Facile (1 comando con uv)"
+      },
+      "compatible_apps": [
+        "Validazione di nuove skill prima di aggiungerle a Blooder",
+        "Audit di sicurezza su server MCP e plugin aziendali",
+        "Controllo automatico pre-installazione in Claude Code e Antigravity"
+      ],
+      "tech_keywords": [
+        "security",
+        "nvidia",
+        "scanner",
+        "mcp",
+        "skill",
+        "prompt-injection",
+        "audit",
+        "osv",
+        "sarif"
+      ],
+      "cost_saving": "Evita incidenti di sicurezza, furto di API key e servizi di audit supply-chain a pagamento.",
+      "honest_tradeoffs": "Richiede Python 3.12 o 3.13 (consigliato uv). L analisi statica e gratuita e veloce, mentre l analisi semantica approfondita opzionale usa un modello LLM e consuma token.",
+      "install_guide": "1. Installa lo scanner CLI con uv:\n   uv tool install --python 3.13 git+https://github.com/NVIDIA/SkillSpector.git\n2. Oppure monta la skill in Blooder con:\n   python attiva_arsenale.py\n3. Scansiona una cartella o un repo prima di usarlo:\n   skillspector scan <percorso-o-url-repo>",
+      "stars": 27347,
+      "created_at": "2026-11-23T09:34:51.027903+00:00"
+    },
+    {
       "id": 22,
       "slug": "cli-anything",
       "name": "CLI-Anything",
@@ -660,6 +771,153 @@
   ],
   "tools": [
     {
+      "id": 30,
+      "slug": "opensanctions",
+      "name": "OpenSanctions",
+      "repo_url": "https://github.com/opensanctions/opensanctions",
+      "kind": "tool",
+      "category": "Dati Web & Ricerca",
+      "tagline": "Database aperto su sanzioni internazionali, persone esposte politicamente (PEP) e legami societari da fonti pubbliche ufficiali.",
+      "simple_explanation": "Raccoglie, normalizza e collega registri pubblici ufficiali da tutto il mondo (liste sanzioni, persone esposte politicamente, cariche e società collegate) in un unico formato interrogabile. Utilissimo per monitoraggio politico, giornalismo sui dati e verifiche di due diligence / compliance B2B.",
+      "specs": {
+        "linguaggio": "Python + Dataset JSON/CSV + API",
+        "sistemi_operativi": "Windows, macOS, Linux",
+        "costo": "Open Source (MIT) e dataset gratuiti per ricerca/uso non commerciale; API commerciale a pagamento",
+        "supporto_mcp": "Integrabile via API/Python in agenti AI",
+        "difficolta": "Media"
+      },
+      "compatible_apps": [
+        "Piattaforme di monitoraggio politico-istituzionale",
+        "Verifica fonti e inchieste basate su dati pubblici",
+        "Due diligence, antiriciclaggio (AML) e compliance B2B"
+      ],
+      "tech_keywords": [
+        "osint",
+        "sanctions",
+        "pep",
+        "compliance",
+        "aml",
+        "politics",
+        "open-data",
+        "python"
+      ],
+      "cost_saving": "Evita abbonamenti enterprise a banche dati compliance/KYC proprietarie (migliaia di euro/anno) per ricerca e prototipi.",
+      "honest_tradeoffs": "Per uso commerciale aziendale continuativo o screening ad alto volume richiede licenza commerciale; i dataset sono grandi e vanno filtrati per Paese/entità.",
+      "install_guide": "1. Clona il repository o scarica i dataset pubblici filtrati:\n   git clone https://github.com/opensanctions/opensanctions.git\n2. Consulta la documentazione su opensanctions.org per i dataset JSON/CSV o l'endpoint API.\n3. Collegalo ai tuoi script Python di monitoraggio o ricerca dati.",
+      "stars": 884,
+      "created_at": "2026-11-25T11:12:16.177189+00:00"
+    },
+    {
+      "id": 29,
+      "slug": "deer-flow",
+      "name": "DeerFlow 2.0 (ByteDance)",
+      "repo_url": "https://github.com/bytedance/deer-flow",
+      "kind": "tool",
+      "category": "Agenti AI & Automazione",
+      "tagline": "SuperAgent harness open-source di ByteDance che orchestra sub-agenti, memoria, sandbox e skill estensibili per ricerche e coding.",
+      "simple_explanation": "DeerFlow 2.0 è un'architettura completa per far lavorare più agenti AI insieme su compiti lunghi e complessi: divide il lavoro tra sub-agenti, esegue codice in sandbox isolate, mantiene la memoria tra i passaggi e carica skill modulari. Utilissimo sia come motore di ricerca approfondita sia come riferimento architetturale per sistemi multi-agente.",
+      "specs": {
+        "linguaggio": "Python + Web UI",
+        "sistemi_operativi": "Windows, macOS, Linux (consigliato Docker)",
+        "costo": "100% Open Source (MIT — consuma solo i token del modello LLM collegato)",
+        "supporto_mcp": "Sì (architettura a skill estensibili, tool e sandbox)",
+        "difficolta": "Media / Avanzata"
+      },
+      "compatible_apps": [
+        "Ricerche approfondite multi-step con fonti verificate",
+        "Orchestrazione multi-agente con sandbox sicure per esecuzione codice",
+        "Studio architetturale per piattaforme basate su skill e governance (es. Blooder + HEXAD)"
+      ],
+      "tech_keywords": [
+        "multi-agent",
+        "superagent",
+        "sandbox",
+        "skills",
+        "memory",
+        "python",
+        "bytedance",
+        "research"
+      ],
+      "cost_saving": "Alternativa open-source self-hosted a piattaforme di Deep Research e orchestrazione agenti a pagamento.",
+      "honest_tradeoffs": "È un framework completo e più pesante rispetto a una singola SKILL.md: richiede setup dedicato (Python/Docker) e consuma più token LLM sulle ricerche lunghe multi-agente.",
+      "install_guide": "1. Clona il repository ufficiale:\n   git clone https://github.com/bytedance/deer-flow.git\n2. Configura le variabili nel file `.env` con il tuo provider LLM.\n3. Avvia lo stack seguendo il README (Docker o ambiente Python locale).",
+      "stars": 85788,
+      "created_at": "2026-11-25T11:07:06.582269+00:00"
+    },
+    {
+      "id": 28,
+      "slug": "openbb",
+      "name": "OpenBB",
+      "repo_url": "https://github.com/OpenBB-finance/OpenBB",
+      "kind": "tool",
+      "category": "Dati Web & Ricerca",
+      "tagline": "Piattaforma open-source di dati finanziari, macroeconomici e aziendali in Python: tutte le fonti di mercato in un solo posto.",
+      "simple_explanation": "Quando devi verificare dati economici, indici macro, bilanci o serie storiche di mercato senza aprire dieci siti diversi o pagare terminali finanziari da migliaia di euro, OpenBB unifica in Python (e via API/estensioni) provider di dati pubblici e finanziari pronti da interrogare anche da agenti AI o per contenuti editoriali basati su numeri reali.",
+      "specs": {
+        "linguaggio": "Python (SDK + REST API + Workspace)",
+        "sistemi_operativi": "Windows, macOS, Linux",
+        "costo": "Core Open Source gratuito (alcuni provider dati esterni richiedono API key gratuite o a pagamento)",
+        "supporto_mcp": "Integrabile via Python/API in agenti AI",
+        "difficolta": "Media"
+      },
+      "compatible_apps": [
+        "Analisi macroeconomica e verifica fonti per contenuti editoriali e inchieste",
+        "Dashboard finanziarie e monitoraggio mercati/aziende",
+        "Agenti AI di ricerca economica e reportistica"
+      ],
+      "tech_keywords": [
+        "finance",
+        "macro",
+        "python",
+        "data",
+        "economy",
+        "markets",
+        "analytics",
+        "openbb"
+      ],
+      "cost_saving": "Alternativa open-source a piattaforme dati finanziari a pagamento (centinaia o migliaia di euro/mese).",
+      "honest_tradeoffs": "Il pacchetto Python completo è corposo e diversi provider di dati finanziari in tempo reale richiedono comunque una propria API key gratuita o a pagamento.",
+      "install_guide": "1. Crea un ambiente virtuale Python 3.10+ e installa il pacchetto:\n   pip install openbb\n2. Importa `from openbb import obb` nei tuoi script Python o avvia l'API locale.\n3. Configura solo i provider dati gratuiti che ti servono (es. FRED, Yahoo Finance, OECD).",
+      "stars": 75722,
+      "created_at": "2026-11-25T11:07:06.579268+00:00"
+    },
+    {
+      "id": 27,
+      "slug": "codebase-memory-mcp",
+      "name": "Codebase Memory MCP",
+      "repo_url": "https://github.com/DeusData/codebase-memory-mcp",
+      "kind": "tool",
+      "category": "Qualità Codice & Regole",
+      "tagline": "Server MCP locale che mappa tutto il tuo repository in un grafo SQLite (tree-sitter), tagliando fino a 4x i token e le ricerche a vuoto.",
+      "simple_explanation": "Invece di far rileggere decine di file interi a Claude Code o Antigravity ogni volta che devi modificare un progetto, Codebase Memory MCP analizza il codice in locale (oltre 150 linguaggi) e salva funzioni, classi, dipendenze e rotte dentro un grafo SQLite persistente interrogabile via MCP, senza nessuna API key e senza mandare il codice nel cloud.",
+      "specs": {
+        "linguaggio": "MCP Server locale (tree-sitter + SQLite)",
+        "sistemi_operativi": "Windows, macOS, Linux",
+        "costo": "100% Gratuito (Open Source, zero API key)",
+        "supporto_mcp": "Sì (nativo per Claude Code, Antigravity, Cursor, Codex)",
+        "difficolta": "Facile"
+      },
+      "compatible_apps": [
+        "Progetti complessi con molti file (CRM, SaaS, piattaforme aziendali)",
+        "Riduzione costi token su Claude Code, Cursor e Antigravity",
+        "Analisi rapida di dipendenze e call-chain prima di rifattorizzare"
+      ],
+      "tech_keywords": [
+        "mcp",
+        "sqlite",
+        "tree-sitter",
+        "knowledge-graph",
+        "codebase",
+        "tokens",
+        "claude-code"
+      ],
+      "cost_saving": "Riduce fino al 60-75% i token consumati in lettura file durante sessioni lunghe di sviluppo AI.",
+      "honest_tradeoffs": "Richiede l'indicizzazione iniziale del repository e l'aggiunta del server MCP nella configurazione del proprio editor/CLI; su mini-progetti di 2-3 file è superfluo.",
+      "install_guide": "1. Clona o installa il server MCP dal repository ufficiale:\n   git clone https://github.com/DeusData/codebase-memory-mcp.git\n2. Segui il README per registrare il server MCP in Claude Code o Antigravity.\n3. Indicizza il repository locale e lascia che l'agente interroghi il grafo invece di leggere ogni file da zero.",
+      "stars": 49153,
+      "created_at": "2026-11-25T11:07:06.573267+00:00"
+    },
+    {
       "id": 23,
       "slug": "rag-anything",
       "name": "RAG-Anything",
@@ -774,6 +1032,33 @@
     }
   ],
   "blooderskills": [
+    {
+      "id": 7,
+      "slug": "noir-hook-studio",
+      "name": "Noir Hook Studio (4-Second Engine)",
+      "sector": "Contenuti, Personal Branding & Video",
+      "base_skills": [
+        "blooder-reel-kit",
+        "li-post",
+        "li-human",
+        "sepia",
+        "marketing-psychology"
+      ],
+      "status": "collaudata",
+      "tagline": "Motore editoriale Dark Noir e Regola dei 4 Secondi: da 1 fatto reale genera Post LinkedIn (ore 15:00) + Storyboard Reel 9:16 pronti.",
+      "missing_piece": "Mancava il ponte editoriale a monte di blooder-reel-kit per trasformare notizie reali su dati, finanza, vendite e AI in contenuti investigativi ad alta ritenzione senza tono da professore.",
+      "use_cases": [
+        "Format quotidiano LinkedIn ore 15:00 (Dati, Privacy, Finanza, Lavoro, AI)",
+        "Reel 9:16 investigativi stile Dark Noir / Red Matrix per Instagram, TikTok e Shorts",
+        "Script di apertura B2B (Regola dei 4 Secondi) per telefonate e outreach commerciale"
+      ],
+      "skill_markdown": "---\nname: noir-hook-studio\ndescription: \"Motore editoriale Dark Noir e Regola dei 4 Secondi per creare contenuti investigativi ad alta ritenzione (Dati, Privacy, Finanza, Lavoro, Vendite, AI) pronti in doppio formato: Post/Carosello LinkedIn + Storyboard Reel 9:16 compatibile con blooder-reel-kit.\"\n---\n# Noir Hook Studio — Regola dei 4 Secondi & Informazione Dark Noir\n\nUsa questa Blooderskill quando devi trasformare un fatto reale (privacy/dati, finanza/stipendi, vendite/lavoro, algoritmi/AI) in un contenuto che **sveglia le persone senza salire in cattedra**, pronto sia per **LinkedIn (ore 15:00)** sia come **Reel 9:16** (Instagram, TikTok, Shorts).\n\n## Principi Fondamentali (Zero Tono da Professore)\n1. **Parti dal mondo di chi ascolta, mai dal tuo:** nei primi 4 secondi chi legge/guarda decide se ascoltarti o scorrere via. Niente presentazioni, niente sigle lunghe, niente \"ciao a tutti\".\n2. **Un solo fatto verificato + numeri reali:** cita sempre fonti, leggi o dati concreti (mai numeri inventati).\n3. **Zero superiorità:** parla da persona lucida allo stesso livello di chi ascolta, non da guru o docente.\n4. **Umanizzazione obbligatoria:** prima di consegnare qualsiasi testo, elimina em dash, parole da brochure AI e frasi fatte (`li-human` + `sepia`).\n\n## Struttura a 5 Atti (45–60s Reel / 900–1.300 caratteri LinkedIn)\n1. **0–4s — Hook Shock Reale (Categoria Pill in alto: `DATI` / `FINANZA` / `VENDITA` / `AI`):** una frase secca su una cosa che succede oggi a chi guarda (es. *\"Ti hanno appena venduto all'asta in un decimo di secondo\"* / *\"Ti riattaccano prima che tu finisca di presentarti\"*).\n2. **4–15s — Il Meccanismo Nascosto:** spiega in parole da bar cosa succede davvero dietro le quinte (senza paroloni tecnici).\n3. **15–35s — La Prova / I 3 Punti Secchi:** massimo 3 fatti o mosse concrete, con almeno un numero reale o un confronto visivo chiaro.\n4. **35–50s — Il Ribaltamento (The Turn):** una frase breve che cambia la prospettiva del lettore.\n5. **50–60s — Chiusura + Domanda Vera:** una sola domanda specifica a cui chiunque può rispondere nei commenti (mai *\"Cosa ne pensi?\"* o *\"Sei d'accordo?\"*).\n\n## Direzione Visiva Dark Noir (Compatibile con `blooder-reel-kit`)\n- **Sfondo:** nero profondo (`#0B0D12`) con dot-grid sottile e fascio di luce verticale (spotlight).\n- **Tipografia:** sans-serif condensata maiuscola ad alto contrasto (bianco `#FFFFFF` sulle parole chiave, grigio `#8E96A4` sul contesto).\n- **Accento:** rosso vivo minimale (`#FF1236`) su etichetta categoria in alto, linea orizzontale sottile, quadranti/timer circolari o numeri chiave.\n- **Zero sovraccarico:** 1 concetto per schermata, numeri grandi in evidenza, sottotitoli centrati in basso.\n\n## Output Obbligatorio (Doppio Formato da 1 Ricerca)\n1. **Post LinkedIn (ore 15:00):** testo pronto da copiare (verificato con `li-human`) + concept immagine Dark Noir 4:5 (zero muri di testo).\n2. **Script + Storyboard Reel 9:16:** tabella `[Secondi | Testo su schermo | Voce narrante | Scena / Effetto]` pronta da passare a `blooder-reel-kit` o `motionmaxxing`.",
+      "skill_path": "skills/noir-hook-studio/SKILL.md",
+      "install_cmd": "npx skills add raffaeleditullo-cloud/Blooder --skill noir-hook-studio",
+      "repo_url": "https://github.com/raffaeleditullo-cloud/Blooder/tree/main/skills/noir-hook-studio",
+      "lab_url": "",
+      "created_at": "2026-11-23T15:53:32.360530+00:00"
+    },
     {
       "id": 6,
       "slug": "meta-creative-studio",
